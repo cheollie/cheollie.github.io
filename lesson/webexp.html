@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>cheollie | random</title>
+    <link href="../style.css" rel="stylesheet" type="text/css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+    <link rel="manifest" href="icons/site.webmanifest">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="cheollie 🌻">
+    <meta property="og:title" content="cheollie | random">
+    <meta property="og:description"
+        content="bunch of random stuff :D right now cheollie's' music corner operates here so you can check out my weekly music recommendations. enjoy!">
+    <meta content="#fde6a4" data-react-helmet="true" name="theme-color" />
+    <meta property="og:url" content="https://cheollie.github.io">
+    <meta property="og:image" content="https://avatars.githubusercontent.com/u/80985676?v=4">
+</head>
+
+<body>
+
+    <main id="random" class="main">
+        <div class="content">
+            <div class="content-vc">
+                <h1 class="title" style="margin-bottom:5px;">array/arraylist</h1>
+                <p class="body" style="margin-top:0;">object oriented programming is cool</p>
+                <hr style="margin-bottom:15px; height:1px; background:black; border: none;">
+                <div class="scrolly-body">
+
+                    <div style="line-height: 11px;">
+                        <div class="page-body">
+                            <p id="a0639c81-74bb-4622-9c64-f6d6669ecc9a" class="">In the modern digital world, websites
+                                are the base of online communication. However, security vulnerabilities are present when
+                                creating these websites, and sometimes they do not get caught. This little article will
+                                inform you about common vulnerabilities in websites.</p>
+                            <p id="3d4b9e3d-53d1-462e-895c-52edd7753fa0" class="">This is for educational purposes only
+                                — where I have used them only in CTF challenges.</p>
+                            <h2 id="6bf5fd2c-7487-479e-8bcc-44d8597fcdde" class="">SQL Injection </h2>
+                            <p id="6d622bb1-cbbd-40d9-9e89-d46ed4bbbe93" class="">used when the site uses SQL, a
+                                language used to obtain information from databases</p>
+                            <p id="f2db8215-a433-4513-8f60-807bb7232245" class="">when input is not sanitized when
+                                placed into a SQL query, it can cause unintended and malicious behavior </p>
+                            <p id="fe125abb-fd53-46cc-a0c0-390b066d2f30" class="">one of the most common and basic
+                                examples is login without password</p>
+                            <pre id="9530d7a7-321e-4f45-859e-2a2f9025f30f"
+                                class="code"><code>SELECT * FROM users WHERE username='$username' AND password = '$password'</code></pre>
+                            <p id="d4df9b82-2683-4828-a72e-2b7e3ae466fa" class=""><code>$username</code> and
+                                <code>$password</code> are variables for whatever is inputted by the user</p>
+                            <p id="bc8072d7-9d31-4527-a4c5-c037be7d824c" class="">so if i input username as
+                                <code>coolperson</code> and password as <code>123456</code>, the query is</p>
+                            <pre id="8d137840-6627-4614-a56e-5e0f26bea1b7"
+                                class="code"><code>SELECT * FROM users WHERE username='coolperson' AND password = '123456'</code></pre>
+                            <p id="b3b0725c-3719-4322-bfd9-3ed36a53eae6" class="">but what if you put characters that
+                                would be confused as part of the command in your input? what if username was
+                                <code>coolperson'--</code> (<code>--</code>, <code>/*</code> comments out the rest of
+                                the line in SQL) the command would be</p>
+                            <pre id="4c3bee7d-7043-4dc4-9d5d-476d590a93fb"
+                                class="code"><code>SELECT * FROM users WHERE username='coolperson'--' AND password = '123456'</code></pre>
+                            <p id="3b86b41c-c72c-41ca-9944-cd51d8f3bf4b" class="">you can see the rest of the command is
+                                ignored because of the comment and the quotation mark at the end of our input was
+                                interpreted as the end of the string — so this would login if <code>coolperson</code>
+                                was a user in the database</p>
+                            <p id="cec810d0-4361-4a4c-ab41-c909adadb5ac" class="">but what if we don't know what user is
+                                in the database — using knowledge gained from here and other programming knowledge, what
+                                inputs do you think would return a result despite not knowing any usernames or
+                                passwords?</p>
+                            <ul id="ea4f67c8-595f-4954-bcc5-ccb7140140d5" class="toggle">
+                                <li>
+                                    <details open="">
+                                        <summary>answer</summary>
+                                        <pre id="93a9233d-c896-47b5-9699-d38df365e6a2"
+                                            class="code"><code>SELECT * FROM users WHERE username='' OR 1=1 --' AND password = '123456'</code></pre>
+                                        <p id="c2c56f40-d059-41ac-b0c4-7e51e5563cb8" class="">the <code>'</code> closes
+                                            off the username string, <code>OR</code> will return true if either
+                                            <code>username=''</code> or <code>1=1</code> is true, and since
+                                            <code>1=1</code> is always true, it will return true; <code>--</code>
+                                            comments the rest of the command out</p>
+                                    </details>
+                                </li>
+                            </ul>
+                            <p id="4a644f44-c88c-4c17-8137-478a80853760" class="">using SQL injection, we can force
+                                databases to return data not meant to be returned!</p>
+                            <p id="acf3d8af-1ae6-4700-a642-fdf4b9b547b5" class="">As this is the basics, further
+                                manipulation can be done with other keywords/operations such as:</p>
+                            <ul id="a8c65081-509f-49ee-ae85-ff2ad0b837c1" class="bulleted-list">
+                                <li style="list-style-type:disc"><code>||</code> string concatination</li>
+                            </ul>
+                            <ul id="695ffe8f-acda-4f13-bda2-990b63893062" class="bulleted-list">
+                                <li style="list-style-type:disc"><code>UNION</code> </li>
+                            </ul>
+                            <ul id="3f27a977-9d37-4b12-b5b9-0488975b01da" class="bulleted-list">
+                                <li style="list-style-type:disc"><code>LIKE</code></li>
+                            </ul>
+                            <h2 id="5b3bcff3-1ce3-4c6c-a009-6b076a0e68ef" class="">Cross Site Scripting (XSS)</h2>
+                            <p id="9aa563b9-fdee-4a57-b22e-73a9ab4d7f10" class="">Cross Site Scripting or XSS is making
+                                JavaScript run on another site. </p>
+                            <h2 id="13169f51-dbdc-4824-938b-c38613f4117b" class="">XML External Execution (XXE)</h2>
+                            <h2 id="902dbee7-1816-40f3-858f-f56e17642ea1" class="">Directory Traversal + LFI</h2>
+                            <h2 id="c0310d75-73da-432c-b4d8-b8c7366a35ac" class="">Command Injection</h2>
+                            <h2 id="94f8063e-ac26-4d25-a9db-419c263522b4" class="">Cross Site Request Forgery (CSRF)
+                            </h2>
+                            <h2 id="3125b376-32c1-4e03-a207-3ef3198bf7e4" class="">Server Side Request Forgery (SSRF)
+                            </h2>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <img id="kek" style="display:none"
+        src="https://media.discordapp.net/attachments/816411423844466760/886395353224605737/acatwalk.gif" alt="">
+    <!-- KEK -->
+    <nav id="navbar">
+        <div id="subnavbarleft">
+            <a class="navbar-title-text" href="/ics/"><span class="semibold" style="font-size:27px;">🌻 <b>::</b>
+                </span><span class="selected heavybold">cheollie</span><span class="semibold"
+                    style="font-size:17px;">(ics
+                    version)</span></a>
+        </div>
+        <div id="subnavbarright">
+            <a class="navbar-subtitle-text nav-underline" href="/ics/about">about</a>
+            <a class="navbar-subtitle-text nav-underline" href="/ics/projects">projects</a>
+            <a class="navbar-subtitle-text nav-underline" href="/ics/contact">contact</a>
+            <a class="navbar-subtitle-text nav-underline" href="/ics/lessons">lessons</a>
+        </div>
+    </nav>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

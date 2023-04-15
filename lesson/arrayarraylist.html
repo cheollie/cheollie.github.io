@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>cheollie | random</title>
+    <link href="../style.css" rel="stylesheet" type="text/css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+    <link rel="manifest" href="icons/site.webmanifest">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="cheollie 🌻">
+    <meta property="og:title" content="cheollie | random">
+    <meta property="og:description"
+        content="bunch of random stuff :D right now cheollie's' music corner operates here so you can check out my weekly music recommendations. enjoy!">
+    <meta content="#fde6a4" data-react-helmet="true" name="theme-color" />
+    <meta property="og:url" content="https://cheollie.github.io">
+    <meta property="og:image" content="https://avatars.githubusercontent.com/u/80985676?v=4">
+</head>
+
+<body>
+
+    <main id="random" class="main">
+        <div class="content">
+            <div class="content-vc">
+                <h1 class="title" style="margin-bottom:5px;">oop</h1>
+                <p class="body" style="margin-top:0;">object oriented programming is cool</p>
+                <hr style="margin-bottom:15px; height:1px; background:black; border: none;">
+                <div class="scrolly-body">
+
+                    <div style="line-height: 11px;">
+                        <article id="013feaf4-48f7-47c9-a14c-1f2d4933c7bb" class="page sans">
+                            <div class="page-body">
+                                <p id="a2f9a658-f8aa-424e-82ba-7962abf7e4fe" class="">&lt;add code and images&gt;</p>
+                                <h3 id="1cb28251-4e97-4c47-b440-bf96bd60cf88" class="">Arrays</h3>
+                                <p id="0642c38b-40c9-40af-90b7-c0c65be1af65" class="">An array is a collection of
+                                    elements of the same data type stored in consecutive memory locations. In Java,
+                                    arrays are mutable but have a fixed size. Each element of an array can be accessed
+                                    through its index.</p>
+                                <p id="7dbb2708-f4fe-454a-8f66-8badb43f1ae5" class=""><strong>Declaration and
+                                        Initialization</strong></p>
+                                <p id="80a4d78f-8e16-4bd3-9285-76d2a523903e" class="">Arrays can be declared using the
+                                    following syntax:</p>
+                                <pre id="1aa7a8e4-b2f7-4412-bfce-6dc93977f336"
+                                    class="code code-wrap"><code>dataType[] arrayName = new dataType[arraySize];</code></pre>
+                                <p id="274230fc-f837-4dc4-8cc2-01a693b09a71" class="">For example, to declare an integer
+                                    array with five elements:</p>
+                                <pre id="434629d3-c7e2-4801-9a93-da57030b7f34"
+                                    class="code code-wrap"><code>int[] arr = new int[5];</code></pre>
+                                <p id="aa8c4f9c-ba4b-44dc-abc1-cf303e03a5ac" class="">Unless specified, the default
+                                    values for the elements in an array are 0 for integer, double, float, and long
+                                    types, false for boolean types, and null for objects.</p>
+                                <pre id="794f047f-d865-4ecb-96da-12d81613e553" class="code code-wrap"><code>int[] arr = new int[5]; // creates an integer array with 5 elements
+                System.out.println(arr[0]); // outputs 0</code></pre>
+                                <p id="59ceeeb9-69f1-4c90-abcb-3e58a2ec7065" class=""><strong>Accessing and Changing
+                                        Elements</strong></p>
+                                <p id="4d4cb9b0-2003-41c7-9980-b633df453e83" class="">Elements in an array can be
+                                    accessed and changed using their indices:</p>
+                                <pre id="855ef744-8ac2-461d-95ac-fd50e8081e41" class="code code-wrap"><code>int[] arr = {1, 2, 3, 4, 5}; // creates an integer array with 5 elements
+                System.out.println(arr[2]); // outputs 3
+                arr[2] = 6;
+                System.out.println(arr[2]); // outputs 6</code></pre>
+                                <p id="9e5c5f85-1793-4e3b-b11f-c9882e15ec8a" class=""><strong>Methods and
+                                        Attributes</strong></p>
+                                <p id="6ab01592-e39b-4432-ac11-59b79e5d79f7" class="">Arrays in Java have several
+                                    methods and attributes, including:</p>
+                                <ul id="9a424d5d-b183-4c92-8bac-54dcc2295bbe" class="bulleted-list">
+                                    <li style="list-style-type:disc"><code>length</code>: returns the length of the
+                                        array</li>
+                                </ul>
+                                <pre id="51fd0e4f-1615-4503-b75c-549df8202b67" class="code code-wrap"><code>int[] arr = {1, 2, 3, 4, 5}; // creates an integer array with 5 elements
+                System.out.println(arr.length); // outputs 5</code></pre>
+                                <h3 id="25b059ae-6ed7-401c-917f-5fe5ba7db301" class="">2D Arrays</h3>
+                                <p id="c1b9e185-789b-4fab-99c3-ee7f15f68509" class="">A 2D array is an array of arrays.
+                                    There are two types of 2D arrays: ragged arrays and rectangular arrays. A ragged
+                                    array has rows of different lengths, while a rectangular array has rows of the same
+                                    length.</p>
+                                <pre id="19317517-9be6-4051-a896-4f7b7aa580f2" class="code code-wrap"><code>// ragged array
+                int[][] raggedArray = {{1}, {2, 3}, {4, 5, 6}};
+                
+                // rectangular array
+                int[][] rectArray = {{1, 2}, {3, 4}, {5, 6}};</code></pre>
+                                <h3 id="a869de95-78cf-4b30-b3ef-9aa97338e35d" class="">2D Arrays</h3>
+                                <p id="e164bfe9-05cc-4cdd-86c2-e47fef79962b" class="">A 2D array is an array of arrays.
+                                    There are two types of 2D arrays: ragged arrays and rectangular arrays. A ragged
+                                    array has rows of different lengths, while a rectangular array has rows of the same
+                                    length. Another type of array that is related to 2D arrays is a parallel array. A
+                                    parallel array is a set of two or more arrays that are related in some way; for
+                                    example, two arrays could represent the x and y coordinates of a set of points.</p>
+                                <pre id="57926c62-31a8-439b-bd2a-5da45262d15f" class="code code-wrap"><code>// ragged array
+                int[][] raggedArray = {{1}, {2, 3}, {4, 5, 6}};
+                
+                // rectangular array
+                int[][] rectArray = {{1, 2}, {3, 4}, {5, 6}};
+                
+                // parallel arrays
+                int[] xCoords = {1, 2, 3};
+                int[] yCoords = {4, 5, 6};</code></pre>
+                                <h3 id="f7695b0e-f4a8-4434-97ae-c8cae2b33c23" class="">Arraylists</h3>
+                                <p id="3fdf8ff7-da8d-44a2-a779-750270ca9966" class="">An ArrayList is a part of the
+                                    <code>java.util</code> package and is used to create dynamic arrays that can hold
+                                    objects of one type. Unlike arrays, ArrayLists are mutable and can grow or shrink in
+                                    size.</p>
+                                <p id="1aa6c56d-3362-4a34-bdd4-6fd60c5bfc94" class=""><strong>Declaration</strong></p>
+                                <pre id="19a56385-86a4-43c5-aaa1-faa0e8e107f5"
+                                    class="code code-wrap"><code>ArrayList&lt;dataType&gt; arrayListName = new ArrayList&lt;&gt;();</code></pre>
+                                <p id="3336a50f-27de-4d68-82d6-aa70d351f46b" class="">For example, to declare an
+                                    ArrayList of integers:</p>
+                                <pre id="68396b32-6f88-4c81-a5dd-ea5d694b3bd7"
+                                    class="code code-wrap"><code>ArrayList&lt;Integer&gt; arrayList = new ArrayList&lt;&gt;();</code></pre>
+                                <p id="4dc49f7a-4759-4ed7-a554-671e5d267c53" class=""><strong>Methods</strong></p>
+                                <p id="e585673a-5c09-4714-8053-2b676f4dd271" class="">ArrayLists have methods for
+                                    accessing, changing, adding, and removing elements.</p>
+                                <pre id="76d1d368-2c6e-4a7c-9c4c-c27158669b6c" class="code code-wrap"><code>// adding elements
+                ArrayList&lt;Integer&gt; arrayList = new ArrayList&lt;&gt;();
+                arrayList.add(1);
+                arrayList.add(2);
+                arrayList.add(3);
+                
+                // accessing elements
+                System.out.println(arrayList.get(0)); // outputs 1
+                
+                // changing elements
+                arrayList.set(0, 4);
+                System.out.println(arrayList.get(0)); // outputs 4
+                
+                // removing elements
+                arrayList.remove(0);
+                System.out.println(arrayList.get(0)); // outputs 2</code></pre>
+                                <p id="e2a9f3b9-741a-4f82-b34b-5909847bc1f6" class=""><strong>Errors</strong></p>
+                                <p id="6571db7f-78ea-430e-8f37-1ffc7322d4e4" class="">One common error when using
+                                    ArrayLists is an <code>IndexOutOfBoundsException</code>, which occurs when trying to
+                                    access an element outside of the ArrayList's bounds.</p>
+                                <h3 id="e3f5aedb-fa91-4786-8518-fa4127a01190" class="">Real-Life Examples</h3>
+                                <p id="9c0c22e7-e876-4a63-a67e-3e8a942d8f08" class="">Arrays and ArrayLists are used in
+                                    many real-life applications. For example, an array could be used to represent a list
+                                    of temperatures throughout a day, with each element representing a temperature at a
+                                    specific time. An ArrayList could be used to store a list of items in a shopping
+                                    cart, with each element representing a different item.</p>
+                                <hr id="dd41972b-91a0-4841-a655-4acc39a057c5">
+                                <p id="b79e99cb-cced-42c0-b479-c52237a2fc43" class=""><strong>Sources Used:</strong></p>
+                                <ul id="512e30ad-148e-41f3-bee3-c745f7f0d993" class="bulleted-list">
+                                    <li style="list-style-type:disc">ICS4 Class Material</li>
+                                </ul>
+                                <ul id="8411bdc1-93cc-4511-9721-e0884a1338fc" class="bulleted-list">
+                                    <li style="list-style-type:disc">Oracle. (n.d.). Arrays. Retrieved from <a
+                                            href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/arrays.html">https://docs.oracle.com/javase/tutorial/java/nutsandbolts/arrays.html</a>
+                                    </li>
+                                </ul>
+                                <ul id="adbea8b4-874e-4796-81f3-dc2da86551b8" class="bulleted-list">
+                                    <li style="list-style-type:disc">Oracle. (n.d.). ArrayList. Retrieved from <a
+                                            href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html</a>
+                                    </li>
+                                </ul>
+                                <p id="d053bc5c-9d20-432b-8810-096ee387cbea" class="">
+                                </p>
+                            </div>
+                        </article>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <img id="kek" style="display:none"
+        src="https://media.discordapp.net/attachments/816411423844466760/886395353224605737/acatwalk.gif" alt="">
+    <!-- KEK -->
+    <nav id="navbar">
+        <div id="subnavbarleft">
+            <a class="navbar-title-text" href="/ics/"><span class="semibold" style="font-size:27px;">🌻 <b>::</b>
+                </span><span class="selected heavybold">cheollie</span><span class="semibold"
+                    style="font-size:17px;">(ics
+                    version)</span></a>
+        </div>
+        <div id="subnavbarright">
+            <a class="navbar-subtitle-text nav-underline" href="/ics/about">about</a>
+            <a class="navbar-subtitle-text nav-underline" href="/ics/projects">projects</a>
+            <a class="navbar-subtitle-text nav-underline" href="/ics/contact">contact</a>
+            <a class="navbar-subtitle-text nav-underline" href="/ics/lessons">lessons</a>
+        </div>
+    </nav>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
