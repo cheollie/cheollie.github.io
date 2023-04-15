@@ -1,0 +1,339 @@
+/*
+pls send help
+how to css
+reee
+*/
+  
+/* DEFAULT ---------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@850&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap');
+
+::selection{
+  background-color: #fde6a46b;
+}
+a{
+  text-decoration: none;
+}
+*{
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  color: #000000;
+}
+body{
+  height: 100%;
+  margin: 0;
+  width: 100%;
+  overflow: hidden;
+}
+code{
+  font-size:.9em;
+  background:rgba(148, 147, 144, 0.2);
+  opacity:.7;
+  border-radius: 2px;
+  margin:.1em 0;
+  padding:.1em .2em;
+}
+.semibold{
+  font-weight: 500;
+}
+.heavybold{
+  font-weight: 850;
+}
+.short-br{
+  content: "";
+  margin: -0.5em;
+  display: block;
+}
+img{
+  display: block;
+  margin: 0 auto;
+}
+
+/* CUSTOM SCROLLBAR ------------------------------------- */
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 15px;
+  padding: 10px;
+  background: rgb(228, 228, 228); 
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: darkgrey; 
+  border-radius: 15px;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: grey; 
+}
+
+/* NAVBAR ---------------------------------------------- */
+#navbar{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  height: 100px;
+  width: 100%;
+  display: table; 
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  transition: background 0.15s ease-out;
+  background: linear-gradient(270deg, white 0%, #fde6a4 100%);
+}
+/*#navbar:hover{
+  background: linear-gradient(270deg, #fde6a4 0%, #fde6a4 100%);  
+}*/
+#subnavbarright{
+  display: table-cell; vertical-align: middle;  text-align:right;
+  padding-right: 30px;
+}
+#subnavbarleft{
+  display: table-cell; vertical-align: middle;
+  padding-left: 30px;
+}
+.navbar-title-text{
+  font-size: 30px;
+}
+.navbar-subtitle-text{
+  font-size: 20px;
+  margin: 10px;
+}
+.nav-underline{
+  background-image: linear-gradient(120deg, black 0%, black 100%);
+  background-repeat: no-repeat;
+  background-size: 90% 0;
+  background-position: 50% 95%;
+  transition: background-size 0.15s ease-out;
+  padding: 5px;
+}
+.nav-underline:hover{
+  background-size: 90% 4%;
+}
+.selected{
+  background-image: linear-gradient(120deg, black 0%, black 100%);
+  background-repeat: no-repeat;
+  background-size: 90% 4%;
+  background-position: 50% 95%;
+  padding: 5px;
+}
+
+@media screen and (max-width: 800px){
+  #subnavbarright{
+    display: block;
+    text-align: center;
+    padding:0;
+    padding-bottom: 16px;
+  }
+  #subnavbarleft{
+    display: block;
+    text-align: center;
+    padding-top:16px;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 8px;
+  }
+  .navbar-subtitle-text{
+    font-size: 20px;
+    margin: 6px;
+  }  
+  .nav-underline{
+    background-image: linear-gradient(120deg, black 0%, black 100%);
+    background-repeat: no-repeat;
+    background-size: 95% 0;
+    background-position: 50% 95%;
+    transition: background-size 0.15s ease-out;
+    padding: 2.5px;
+  }
+  .nav-underline:hover{
+    background-size: 95% 4%;
+  }
+  .selected{
+    background-image: linear-gradient(120deg, black 0%, black 100%);
+    background-repeat: no-repeat;
+    background-size: 95% 4%;
+    background-position: 50% 95%;
+    padding: 2.5px;
+  }
+}
+
+/* PRESET FORMATTING ----------------------- */
+.main{
+  position: absolute;
+  top: 100px;
+  width: 100%;
+  display: flex;  
+  height: calc(100%-100px);
+  height: -moz-calc(100% - 100px);
+  height: -webkit-calc(100% - 100px);
+  justify-content: left;
+}
+.content{
+  position: absolute;
+  display: table;
+  padding-right: 100px;
+  padding-left: 100px;
+  margin: 0 auto;
+  height: 100%;
+  width: calc(100%-200px);
+  width: -moz-calc(100% - 200px);
+  width: -webkit-calc(100% - 200px);
+}
+.content-vc{
+  display: table-cell; 
+  vertical-align: middle; 
+  padding: 30px 0;
+}
+.title{
+  font-size: 29px;
+  margin-bottom: 10px;
+}
+.body{
+  font-size: 19px;
+  margin: 10px 0;
+}
+@media screen and (max-width: 800px){
+  .content{
+    position: absolute;
+    display: table;
+    padding-right: 45px;
+    padding-left: 45px;
+    margin: 0 auto;
+    height: 100%;
+    width: calc(100%-90px);
+    width: -moz-calc(100% - 90px);
+    width: -webkit-calc(100% - 90px);
+  }
+}
+
+/* HIGHLIGHTS AND UNDERLINES ----------------------- */
+.links{
+  background-image: linear-gradient(120deg, #fde6a4 0%, #fde6a4 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 6%;
+  background-position: 50% 95%;
+  transition: background-size 0.15s ease-out;
+  padding: 2px;
+}
+.links:hover{
+  background-image: linear-gradient(120deg, #fde6a4 0%, #fde6a4 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 45%;
+  background-position: 50% 95%;
+  padding: 2px;
+}
+.highlight{
+  background-image: linear-gradient(120deg, #fde6a4 0%, #fde6a4 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 40%;
+  background-position: 50% 95%;
+  transition: background-size 0.15s ease-out;
+}
+.underline{
+  background-image: linear-gradient(120deg, black 0%, black 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 5%;
+  background-position: 50% 95%;
+}
+.hover-underline{
+  color: #837756;
+}
+
+/* HOME PAGE ------------------------------------ */
+.home-content.content{
+  position: absolute;
+  display: table;
+  padding-right: 200px;
+  padding-left: 200px;
+  margin: 0 auto;
+  height: 100%;
+  width: calc(100%-400px);
+  width: -moz-calc(100% - 400px);
+  width: -webkit-calc(100% - 400px);
+  text-align: center;
+}
+.home-content-vc{
+  padding: 50px 0;
+}
+.home-title{
+  font-size: 29px;
+  margin: 10px 0;
+  background-color: #fde6a4;
+  padding: 5px;
+  border-radius: 5px;
+  border: solid black 1px;
+  font-weight: 600;
+  transition: ease 0.25s;
+} /*
+.home-title:hover{
+  box-shadow: 3px 3px #fff0c8;
+  transform: translate(-3px, -3px);
+}*/
+.home-bg{
+  -webkit-background-clip: text;
+  display: flex;
+  background: #fde6a4;
+  background: 
+    radial-gradient( white, fde6a4);
+}
+@media screen and (max-width: 800px){
+  .home-content.content{
+    position: absolute;
+    display: table;
+    padding-right: 70px;
+    padding-left: 70px;
+    margin: 0 auto;
+    height: 100%;
+    width: calc(100%-140px);
+    width: -moz-calc(100% - 140px);
+    width: -webkit-calc(100% - 140px);
+  }
+}
+
+/* CONTACT PAGE ------------------------------------ */
+.contact-body{
+  line-height: 150%;
+}
+
+/* RANDOM PAGE ------------------------------------ */
+.scrolly-body{
+  font-size: 19px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-right: 10px;
+  overflow: auto;
+  height: calc(100%-130px);
+  height: -moz-calc(100% - 130px);
+  height: -webkit-calc(100% - 130px);
+  min-width: 100%;
+}
+ul .random-body{
+  margin-top: 0;
+}
+p .random-body{
+  margin-bottom:0;
+}
+
+/*404*/
+.hot-choc{
+  height:100px;
+  opacity: 90%;
+}
+
+
+/*kek*/
+@keyframes kekanimation{
+  from{left:-10%;bottom:0;}
+  to{left:100%;bottom:0;}
+}
+#kek{
+  position:absolute;
+  animation: kekanimation 8s linear;
+  display:none;
+  left: -100%;
+  bottom:0;
+}
+
