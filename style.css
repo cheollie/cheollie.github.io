@@ -69,6 +69,32 @@ pre {
   overflow-x: scroll;
 }
 
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.35);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+  width: 100%;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
 /* CUSTOM SCROLLBAR ------------------------------------- */
 /* width */
 ::-webkit-scrollbar {
@@ -529,3 +555,4 @@ pre button:hover {
   box-shadow: 2px 2px 0 0 rgba(0, 0, 0, 0.7);
   transform: translate(-0.1em, -0.1em);
 }
+

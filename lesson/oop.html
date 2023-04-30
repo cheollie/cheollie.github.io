@@ -133,16 +133,16 @@
   public void getName(String newName){
     name = newName;
   }
-}</code></pre><h3 id="a8e54e6e-8df8-49c1-9b55-5b511a576810" class=""><strong>static methods</strong></h3><ul id="1020b749-e49a-4c12-954e-1a045bebc0e8" class="bulleted-list"><li style="list-style-type:disc">not part of the object it creates therefore it can be executed without an object being created </li></ul><h3 id="b6bfee7e-9370-48e2-85a1-2c89f58c1291" class=""><strong>dot notation</strong></h3><ul id="c97ee911-4e73-455b-9b00-9236ee5b8dc9" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">how variables and methods of an object (called members) can be accessed</span> </li></ul><hr id="c546571c-4c61-45eb-be3e-cadc43090cba"><p id="58083b15-830b-4592-9d43-2b99a3d3dc05" class="">Now that we have a class, let’s try making an instance of our Hedgehog class and run some of its methods.</p><h3 id="fac851f9-b8a7-4430-9070-eae7c43f51fa" class="">UML</h3><ul id="3e52273d-dde3-40e2-99a1-a79bb2205ef1" class="bulleted-list"><li style="list-style-type:disc">used to show the structure of a class</li></ul><ul id="885562a1-e8bf-43f3-aecc-4f1a17e2893a" class="bulleted-list"><li style="list-style-type:disc">format:<table id="54965f11-41fd-4013-93a0-50f4766e194f" class="simple-table"><tbody><tr id="159b4f31-7c7a-4145-8845-992dde03f5f5"><td id="BY=p" class="" style="width:461px">name of a class</td></tr><tr id="62207e1d-564a-44d1-8053-5b10110297cd"><td id="BY=p" class="" style="width:461px">+/- attributes/variables : datatype</td></tr><tr id="b7734a64-c44c-493f-af53-a80865b8f972"><td id="BY=p" class="" style="width:461px">+- methods (parameter name: parameter datatype, …) : return_datatype</td></tr></tbody></table></li></ul><hr id="ff128bd0-1b3b-4abb-8e51-daaef6d466e0"><p id="fbeb7b87-2ba7-412d-8db1-a00d5181679c" class="">Let’s make a UML for our wonderful Hedgehog class!</p><table id="ce202e24-bcf2-41e1-b54f-646ca09fb2dd" class="simple-table"><tbody><tr id="0d1f545c-4ec3-4c0b-9104-67f5a1060dc2"><td id="]i@t" class="" style="width:418.40000915527344px"><strong>Hedgehog</strong></td></tr><tr id="9872f174-f3e6-486f-a6ab-b8d5555d4b46"><td id="]i@t" class="" style="width:418.40000915527344px">-name : String
+}</code></pre><h3 id="a8e54e6e-8df8-49c1-9b55-5b511a576810" class=""><strong>static methods</strong></h3><ul id="1020b749-e49a-4c12-954e-1a045bebc0e8" class="bulleted-list"><li style="list-style-type:disc">not part of the object it creates therefore it can be executed without an object being created </li></ul><h3 id="b6bfee7e-9370-48e2-85a1-2c89f58c1291" class=""><strong>dot notation</strong></h3><ul id="c97ee911-4e73-455b-9b00-9236ee5b8dc9" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">how variables and methods of an object (called members) can be accessed</span> </li></ul><hr id="c546571c-4c61-45eb-be3e-cadc43090cba"><p id="58083b15-830b-4592-9d43-2b99a3d3dc05" class="">Now that we have a class, let’s try making an instance of our Hedgehog class and run some of its methods.</p><h3 id="fac851f9-b8a7-4430-9070-eae7c43f51fa" class="">UML</h3><ul id="3e52273d-dde3-40e2-99a1-a79bb2205ef1" class="bulleted-list"><li style="list-style-type:disc">used to show the structure of a class</li></ul><ul id="885562a1-e8bf-43f3-aecc-4f1a17e2893a" class="bulleted-list"><li style="list-style-type:disc">format:<table id="54965f11-41fd-4013-93a0-50f4766e194f" class="simple-table"><tbody><tr id="159b4f31-7c7a-4145-8845-992dde03f5f5"><td id="BY=p" class="">name of a class</td></tr><tr id="62207e1d-564a-44d1-8053-5b10110297cd"><td id="BY=p" class="">+/- attributes/variables : datatype</td></tr><tr id="b7734a64-c44c-493f-af53-a80865b8f972"><td id="BY=p" class="">+- methods (parameter name: parameter datatype, …) : return_datatype</td></tr></tbody></table></li></ul><hr id="ff128bd0-1b3b-4abb-8e51-daaef6d466e0"><p id="fbeb7b87-2ba7-412d-8db1-a00d5181679c" class="">Let’s make a UML for our wonderful Hedgehog class!</p><table id="ce202e24-bcf2-41e1-b54f-646ca09fb2dd" class="simple-table"><tbody><tr id="0d1f545c-4ec3-4c0b-9104-67f5a1060dc2"><td id="]i@t" class=""><strong>Hedgehog</strong></td></tr><tr id="9872f174-f3e6-486f-a6ab-b8d5555d4b46"><td id="]i@t" class="">-name : String
 -age : int
--isBalled : boolean</td></tr><tr id="9369e038-f374-43f9-a88f-50315b6a8c13"><td id="]i@t" class="" style="width:418.40000915527344px">+Hedgehog(String, int)
-+ball() : void
-+unball() : void
-+roll() : void
-+getAge() : int
-+getName() : String
-+getIsBalled() : boolean
-+setAge(newAge: int) : void
+-isBalled : boolean</td></tr><tr id="9369e038-f374-43f9-a88f-50315b6a8c13"><td id="]i@t" class="">+Hedgehog(String, int)<br>
++ball() : void<br>
++unball() : void<br>
++roll() : void<br>
++getAge() : int<br>
++getName() : String<br>
++getIsBalled() : boolean<br>
++setAge(newAge: int) : void<br>
 +setName(newName: String) : void</td></tr></tbody></table></div></article>
 
 </div>
