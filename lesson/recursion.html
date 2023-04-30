@@ -40,24 +40,24 @@
         <hr style="margin-bottom:15px; height:1px; background:black; border: none;">
         <div class="scrolly-body">
 
-          <div style="">
-            <article id="9f841c0b-aab6-4f2e-b404-49ec1897a17e" class="page sans"><div class="page-body"><h2 id="48114b73-61dd-446c-b071-817b0b4de489" class="">Overview</h2><p id="d0b0984f-1b5c-4fa9-961f-38e98a397121" class="">Recursion is a programming technique that involves a function calling itself. It is a powerful tool for solving complex problems that can be broken down into smaller, more manageable sub-problems. Recursion can be used to solve problems in various fields such as computer science, mathematics, and physics.</p><p id="dc1ca09a-4002-41a7-a0c9-070c825b1b75" class="">The structure of recursion involves a base case and a recursive case. The base case is the simplest form of the problem that can be solved directly, while the recursive case involves breaking down the problem into smaller sub-problems and calling the function recursively until the base case is reached.</p><h2 id="36aaa4a5-e9e7-4fd8-bed3-565e9906e86e" class="">Explanation</h2><p id="8148f4d5-0140-46df-846d-2f0d3dca13e5" class="">A common example of recursion is the calculation of the factorial of a number. The factorial of a positive integer n is the product of all positive integers from 1 to n. The factorial can be calculated using a recursive function as follows:</p><pre id="28c95e5f-373d-4487-81f7-39a24040fc09" class="code code-wrap"><code>public static int factorial(int n){    
-              if (n == 1)    
-                return 1;    
-              else    
-                return(n * factorial(n-1));    
-            }</code></pre><p id="7ffffd29-3bf1-4465-9a6c-fe53561f02c5" class="">In this example, the factorial function calls itself with n-1 as the argument until it reaches the base case of n=1.</p><h2 id="b935ab7d-49b3-417d-bcd6-1d1eb9706afb" class="">Application</h2><pre id="318d10b0-d74a-4ba4-98fe-60b3497c2126" class="code"><code>public static int minCost(int[][] grid, int row, int col) {
-                    if (row == grid.length-1 &amp;&amp; col == 0) {
-                        return grid[row][col]; // base case (bottom left corner)
-                    }
-                    if (row == grid.length-1) {
-                        return grid[row][col] + minCost(grid, row, col - 1); // bottom-most column
-                    }
-                    if (col == 0) {
-                        return grid[row][col] + minCost(grid, row + 1, col); // left-most row
-                    } 
-                    return grid[row][col] + Math.min(minCost(grid, row + 1, col), minCost(grid, row, col - 1));
-                }</code></pre><p id="e87410bb-27b1-4a20-9a8d-12b0f09d7a70" class="">This was made for an in class assignment. As we needed to find the minimum cost path in a grid, my thought process was to take a 2D array representing the grid and the starting row and column as arguments. It checks the base case of being in the bottom left corner and returns the value of that cell. Otherwise, it determines the minimum cost of moving to the cell to the right or the cell below and returns the sum of the current cell's value and the minimum of those two values. Gradually going back to the starting cell, this way the path used would be minimal.</p><h2 id="a48cc0d5-741a-4a0c-a783-59c7054ca7e1" class="">Common Mistakes</h2><p id="2e69e72d-a624-497f-89bd-fe584cea010d" class="">Common mistakes made in recursion include not defining a base case or defining an incorrect base case, which can lead to infinite recursion and stack overflow errors. It is important to carefully test and debug recursive functions to ensure they are functioning correctly. </p><h2 id="c608016f-6784-48c0-9ec7-63d4dfb537bc" class="">Sources</h2><ul id="04360264-821d-47cd-875f-a96e8be2ffc4" class="bulleted-list"><li style="list-style-type:disc">ICS4 Class Material.</li></ul><ul id="e4a50040-12b3-49da-9309-f4fd54676628" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.javatpoint.com/factorial-program-in-java">https://www.javatpoint.com/factorial-program-in-java</a></li></ul><ul id="c0852f2d-0400-4447-b722-4f006d1ed063" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.w3schools.com/java/java_recursion.asp">https://www.w3schools.com/java/java_recursion.asp</a></li></ul></div></article>
+<div style="">
+<article id="9f841c0b-aab6-4f2e-b404-49ec1897a17e" class="page sans"><div class="page-body"><h2 id="48114b73-61dd-446c-b071-817b0b4de489" class="">Overview</h2><p id="d0b0984f-1b5c-4fa9-961f-38e98a397121" class="">Recursion is a programming technique that involves a function calling itself. It is a powerful tool for solving complex problems that can be broken down into smaller, more manageable sub-problems. Recursion can be used to solve problems in various fields such as computer science, mathematics, and physics.</p><p id="dc1ca09a-4002-41a7-a0c9-070c825b1b75" class="">The structure of recursion involves a base case and a recursive case. The base case is the simplest form of the problem that can be solved directly, while the recursive case involves breaking down the problem into smaller sub-problems and calling the function recursively until the base case is reached.</p><h2 id="36aaa4a5-e9e7-4fd8-bed3-565e9906e86e" class="">Explanation</h2><p id="8148f4d5-0140-46df-846d-2f0d3dca13e5" class="">A common example of recursion is the calculation of the factorial of a number. The factorial of a positive integer n is the product of all positive integers from 1 to n. The factorial can be calculated using a recursive function as follows:</p><pre id="28c95e5f-373d-4487-81f7-39a24040fc09" class="code code-wrap"><code class="language-java">public static int factorial(int n){    
+  if (n == 1)    
+    return 1;    
+  else    
+    return(n * factorial(n-1));    
+}</code></pre><p id="7ffffd29-3bf1-4465-9a6c-fe53561f02c5" class="">In this example, the factorial function calls itself with n-1 as the argument until it reaches the base case of n=1.</p><h2 id="b935ab7d-49b3-417d-bcd6-1d1eb9706afb" class="">Application</h2><pre id="318d10b0-d74a-4ba4-98fe-60b3497c2126" class="code"><code class="language-java">public static int minCost(int[][] grid, int row, int col) {
+    if (row == grid.length-1 &amp;&amp; col == 0) {
+        return grid[row][col]; // base case (bottom left corner)
+    }
+    if (row == grid.length-1) {
+        return grid[row][col] + minCost(grid, row, col - 1); // bottom-most column
+    }
+    if (col == 0) {
+        return grid[row][col] + minCost(grid, row + 1, col); // left-most row
+    } 
+    return grid[row][col] + Math.min(minCost(grid, row + 1, col), minCost(grid, row, col - 1));
+}</code></pre><p id="e87410bb-27b1-4a20-9a8d-12b0f09d7a70" class="">This was made for an in class assignment. As we needed to find the minimum cost path in a grid, my thought process was to take a 2D array representing the grid and the starting row and column as arguments. It checks the base case of being in the bottom left corner and returns the value of that cell. Otherwise, it determines the minimum cost of moving to the cell to the right or the cell below and returns the sum of the current cell's value and the minimum of those two values. Gradually going back to the starting cell, this way the path used would be minimal.</p><h2 id="a48cc0d5-741a-4a0c-a783-59c7054ca7e1" class="">Common Mistakes</h2><p id="2e69e72d-a624-497f-89bd-fe584cea010d" class="">Common mistakes made in recursion include not defining a base case or defining an incorrect base case, which can lead to infinite recursion and stack overflow errors. It is important to carefully test and debug recursive functions to ensure they are functioning correctly. </p><h2 id="c608016f-6784-48c0-9ec7-63d4dfb537bc" class="">Sources</h2><ul id="04360264-821d-47cd-875f-a96e8be2ffc4" class="bulleted-list"><li style="list-style-type:disc">ICS4 Class Material.</li></ul><ul id="e4a50040-12b3-49da-9309-f4fd54676628" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.javatpoint.com/factorial-program-in-java">https://www.javatpoint.com/factorial-program-in-java</a></li></ul><ul id="c0852f2d-0400-4447-b722-4f006d1ed063" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.w3schools.com/java/java_recursion.asp">https://www.w3schools.com/java/java_recursion.asp</a></li></ul></div></article>
 
           </div>
         </div>

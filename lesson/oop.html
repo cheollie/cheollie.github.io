@@ -41,111 +41,111 @@
 
           <div style="">
             <article id="ad5b78b5-8bbc-474a-8513-7d65aed4d16a" class="page sans">
-              <div class="page-body"><h3 id="c6682648-d16c-48b2-860f-6d96576ef6ed" class="">overview:</h3><p id="df7fa8cb-1c26-4075-bd38-740bfa5e3385" class="">What is OOP? Object Oriented Programming, or OOP, is a way of programming that focuses on representing real-world objects and concepts in code. Classes are descriptions of a kind of object or "blueprint", while objects are made from a class and have characteristics such as identity, state, and behavior. </p><h3 id="b5972729-a42c-40d1-9abd-38980a71d434" class=""><strong>class</strong>: </h3><ul id="61678d80-bf26-48e0-af30-2497e8d0ccf4" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">a description of a </span><span style="border-bottom:0.05em solid">k</span><span style="border-bottom:0.05em solid">ind of object; “blueprint”</span></li></ul><hr id="a682de6f-17ba-40fc-abb9-8369065c47b0"><p id="7f9eebd9-55d2-4c77-9453-d00c51c5085e" class="">Let’s make a class.</p><pre id="7823d171-decb-442e-9262-a1a69ef05448" class="code"><code>public class Hedgehog {
+  <div class="page-body"><h3 id="c6682648-d16c-48b2-860f-6d96576ef6ed" class="">overview:</h3><p id="df7fa8cb-1c26-4075-bd38-740bfa5e3385" class="">What is OOP? Object Oriented Programming, or OOP, is a way of programming that focuses on representing real-world objects and concepts in code. Classes are descriptions of a kind of object or "blueprint", while objects are made from a class and have characteristics such as identity, state, and behavior. </p><h3 id="b5972729-a42c-40d1-9abd-38980a71d434" class=""><strong>class</strong>: </h3><ul id="61678d80-bf26-48e0-af30-2497e8d0ccf4" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">a description of a </span><span style="border-bottom:0.05em solid">k</span><span style="border-bottom:0.05em solid">ind of object; “blueprint”</span></li></ul><hr id="a682de6f-17ba-40fc-abb9-8369065c47b0"><p id="7f9eebd9-55d2-4c77-9453-d00c51c5085e" class="">Let’s make a class.</p><pre id="7823d171-decb-442e-9262-a1a69ef05448" class="code"><code class="language-java">public class Hedgehog {
 
-            }</code></pre><p id="885536b7-ae5e-411f-88e1-e166705a2baf" class="">Wonderful! Now we have a “blueprint” for Hedgehogs.  </p><h3 id="99cd912d-23ff-4adf-9328-0ba8902cc597" class="">objects</h3><ul id="32189b0c-7f90-4d92-b189-954257630252" class="bulleted-list"><li style="list-style-type:disc">made from a class — the “blueprint”; an <strong>instance</strong> of a class</li></ul><ul id="d84bf3c3-6ce9-4dcf-b2c4-5f48391ad1af" class="bulleted-list"><li style="list-style-type:disc">characteristics<ul id="9de76f6d-91c4-4682-bcff-4fce6f811657" class="bulleted-list"><li style="list-style-type:circle">identity: has a designated chunk of memory</li></ul><ul id="dfe05c9b-cc2c-4ccd-ad1a-81b44acbdcc5" class="bulleted-list"><li style="list-style-type:circle">state: contains values</li></ul><ul id="cdb53178-0682-41cd-9e08-1dd80cd5d0fc" class="bulleted-list"><li style="list-style-type:circle">behavior: allows the objects to do things by running its methods</li></ul></li></ul><ul id="c578dfbd-cf0c-42d6-9797-bb58d60ea3a8" class="bulleted-list"><li style="list-style-type:disc"><strong>analogy: </strong><em>cookie cutters and cookies</em><ul id="e7da63d5-5785-4def-b271-f42274a1a10b" class="bulleted-list"><li style="list-style-type:circle">memory: cookie dough</li></ul><ul id="33f9cba8-6168-45d5-bf89-c04f5e257b25" class="bulleted-list"><li style="list-style-type:circle">class: cookie cutter</li></ul><ul id="48d6564a-f87e-49f6-9647-26f405b2bf58" class="bulleted-list"><li style="list-style-type:circle">objects: cookies</li></ul></li></ul><ul id="8d90baaf-b69f-436c-8ced-4e2f43bca9a6" class="bulleted-list"><li style="list-style-type:disc"><strong>real life comparisons</strong><ul id="b1a7eae5-1e76-47d4-89b3-2736e26e4f7f" class="bulleted-list"><li style="list-style-type:circle"><span style="border-bottom:0.05em solid">identity</span>: name, type of physical object</li></ul><ul id="28477453-2924-4c3f-9033-b3fd964eaa08" class="bulleted-list"><li style="list-style-type:circle"><span style="border-bottom:0.05em solid">characteristics</span>: qualities</li></ul><ul id="ee748876-f965-4d7d-9272-3e5925eca149" class="bulleted-list"><li style="list-style-type:circle"><span style="border-bottom:0.05em solid">behavior</span>: what can be done to it what it can do</li></ul></li></ul><hr id="97cc77b2-0b0b-4164-a595-8b2e6a411be6"><p id="8d9c62d5-3d98-4785-80ee-6548e3a54914" class="">Now back to our Hedgehog class, let’s let it have some characteristics and behaviors. </p><pre id="7a5a928b-16d8-4f2d-b0d2-6a7a10eb5238" class="code"><code>public class Hedgehog {
-              private String name;
-              private int age;
-              private boolean isBalled;
-            
-              public void ball(){
-                isBalled = true;
-              }
-              public void unball(){
-                isBalled = false;
-              }
-              public void roll(){
-                if (isBalled){
-                  System.out.println("*rolls away*");
-                } else {
-                  System.out.println("not ball can't roll :(") 
-                }
-              }
-            }</code></pre><hr id="52a1ade6-cc6c-40f3-8de6-4ce5269bed52"><ul id="841d1d05-6a36-4407-b5ba-c825ad4a41af" class="bulleted-list"><li style="list-style-type:disc"><strong>encapsulation</strong><ul id="25083cc0-8bcf-4516-931b-3a369b437124" class="bulleted-list"><li style="list-style-type:circle">using public and private to variables and methods for security</li></ul><ul id="82cd673f-1d9a-4a59-a897-886d96b4a9f5" class="bulleted-list"><li style="list-style-type:circle">public: can be used inside and outside the class</li></ul><ul id="0b49fc4c-ea2e-452d-ae37-f9e62f001a80" class="bulleted-list"><li style="list-style-type:circle">private: can only be used inside the class</li></ul><ul id="4981ccae-da24-4431-9038-4aaac6f61074" class="bulleted-list"><li style="list-style-type:circle">normally, variables are set as private and methods are set as public in order for variables to be incorrectly altered. however, helper methods, methods only used in other methods are usually private.</li></ul><hr id="8c26a0d9-337b-4e46-a1ea-4305bfc480c3"><p id="e2bb41ef-7808-40df-85ab-3c7993232d07" class="">This is why the methods and variables in our Hedgehog class are private or public!</p><hr id="2ccf6f86-9658-4560-b0c2-86cdbac5297d"></li></ul><ul id="0e599c65-c543-46c3-b965-6b73e2fc71b5" class="bulleted-list"><li style="list-style-type:disc"><strong>get and set methods</strong><ul id="c20c7402-a4d8-43c6-84fc-3d5832857b18" class="bulleted-list"><li style="list-style-type:circle">mutator method/set method: can modify an object and its data</li></ul><ul id="038860e4-a6ce-4add-94a7-81cb53a51ac6" class="bulleted-list"><li style="list-style-type:circle">access methods/get methods: accesses content without changing and returns the value from the content</li></ul><hr id="d3b71a87-e86b-4910-a2cb-78c2a9109550"><p id="4a08a815-866f-41ef-b237-6c255742a324" class="">Since we won’t be able to edit our variables since they are private, we will need to use get and set methods!</p><pre id="cc92a2ab-3696-4c44-bc74-7eaec32572df" class="code"><code>public class Hedgehog {
-              private String name;
-              private int age;
-              private boolean isBalled;
-            
-              public void ball(){
-                isBalled = true;
-              }
-              public void unball(){
-                isBalled = false;
-              }
-              public void roll(){
-                if (isBalled){
-                  System.out.println("*rolls away*");
-                } else {
-                  System.out.println("not ball can't roll :(") 
-                }
-              }
-              public int getAge(){
-                return age;
-              }
-              public String getName(){
-                return name;
-              }
-              public boolean getIsBalled(){
-                return isBalled();
-              }
-              public void setAge(int newAge){
-                age = newAge;
-              }
-              public void getName(String newName){
-                name = newName;
-              }
-            }</code></pre></li></ul><h3 id="5d66d7e8-a3fb-49c3-bc9b-56638c4fe7e9" class=""><strong>constructor</strong></h3><ul id="f639f14f-94d6-47ad-b9a5-6f56393961dc" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">description of a possible object; run when an object is created</span></li></ul><ul id="f1bccd38-895a-41a1-a893-7cc2169350ba" class="bulleted-list"><li style="list-style-type:disc">used with <code>new</code> operator to create the new object</li></ul><ul id="9fde7a35-87e0-4af3-b0bb-31c9702132a4" class="bulleted-list"><li style="list-style-type:disc">has the same name as the class</li></ul><ul id="3502fc9b-5b33-48d2-afbe-996c4c73546d" class="bulleted-list"><li style="list-style-type:disc">often used with parameters to be stored in the data part of the object is constructed — gives the object starting values</li></ul><hr id="6f3b678a-9fcf-493b-b037-ac05f8d91862"><p id="cc49d1f2-de0d-4944-a0cf-0e17e583cd26" class="">Now back to our <code>Hedgehog</code> class, let’s create a constructor that can help personalize each of our <code>Hedgehog</code> objects.</p><pre id="0c5aec82-592f-4309-bc83-08b83fdab0a6" class="code"><code>public class Hedgehog {
-              private String name;
-              private int age;
-              private boolean isBalled;
-            
-              public Hedgehog (String nm, int a){
-                name = nm; 
-                age = a;
-                isBalled = false;
-              } 
-            
-              public void ball(){
-                isBalled = true;
-              }
-              public void unball(){
-                isBalled = false;
-              }
-              public void roll(){
-                if (isBalled){
-                  System.out.println("*rolls away*");
-                } else {
-                  System.out.println("not ball can't roll :(") 
-                }
-              }
-              public int getAge(){
-                return age;
-              }
-              public String getName(){
-                return name;
-              }
-              public boolean getIsBalled(){
-                return isBalled();
-              }
-              public void setAge(int newAge){
-                age = newAge;
-              }
-              public void getName(String newName){
-                name = newName;
-              }
-            }</code></pre><h3 id="a8e54e6e-8df8-49c1-9b55-5b511a576810" class=""><strong>static methods</strong></h3><ul id="1020b749-e49a-4c12-954e-1a045bebc0e8" class="bulleted-list"><li style="list-style-type:disc">not part of the object it creates therefore it can be executed without an object being created </li></ul><h3 id="b6bfee7e-9370-48e2-85a1-2c89f58c1291" class=""><strong>dot notation</strong></h3><ul id="c97ee911-4e73-455b-9b00-9236ee5b8dc9" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">how variables and methods of an object (called members) can be accessed</span> </li></ul><hr id="c546571c-4c61-45eb-be3e-cadc43090cba"><p id="58083b15-830b-4592-9d43-2b99a3d3dc05" class="">Now that we have a class, let’s try making an instance of our Hedgehog class and run some of its methods.</p><h3 id="fac851f9-b8a7-4430-9070-eae7c43f51fa" class="">UML</h3><ul id="3e52273d-dde3-40e2-99a1-a79bb2205ef1" class="bulleted-list"><li style="list-style-type:disc">used to show the structure of a class</li></ul><ul id="885562a1-e8bf-43f3-aecc-4f1a17e2893a" class="bulleted-list"><li style="list-style-type:disc">format:<table id="54965f11-41fd-4013-93a0-50f4766e194f" class="simple-table"><tbody><tr id="159b4f31-7c7a-4145-8845-992dde03f5f5"><td id="BY=p" class="" style="width:461px">name of a class</td></tr><tr id="62207e1d-564a-44d1-8053-5b10110297cd"><td id="BY=p" class="" style="width:461px">+/- attributes/variables : datatype</td></tr><tr id="b7734a64-c44c-493f-af53-a80865b8f972"><td id="BY=p" class="" style="width:461px">+- methods (parameter name: parameter datatype, …) : return_datatype</td></tr></tbody></table></li></ul><hr id="ff128bd0-1b3b-4abb-8e51-daaef6d466e0"><p id="fbeb7b87-2ba7-412d-8db1-a00d5181679c" class="">Let’s make a UML for our wonderful Hedgehog class!</p><table id="ce202e24-bcf2-41e1-b54f-646ca09fb2dd" class="simple-table"><tbody><tr id="0d1f545c-4ec3-4c0b-9104-67f5a1060dc2"><td id="]i@t" class="" style="width:418.40000915527344px"><strong>Hedgehog</strong></td></tr><tr id="9872f174-f3e6-486f-a6ab-b8d5555d4b46"><td id="]i@t" class="" style="width:418.40000915527344px">-name : String
-            -age : int
-            -isBalled : boolean</td></tr><tr id="9369e038-f374-43f9-a88f-50315b6a8c13"><td id="]i@t" class="" style="width:418.40000915527344px">+Hedgehog(String, int)
-            +ball() : void
-            +unball() : void
-            +roll() : void
-            +getAge() : int
-            +getName() : String
-            +getIsBalled() : boolean
-            +setAge(newAge: int) : void
-            +setName(newName: String) : void</td></tr></tbody></table></div></article>
+}</code></pre><p id="885536b7-ae5e-411f-88e1-e166705a2baf" class="">Wonderful! Now we have a “blueprint” for Hedgehogs.  </p><h3 id="99cd912d-23ff-4adf-9328-0ba8902cc597" class="">objects</h3><ul id="32189b0c-7f90-4d92-b189-954257630252" class="bulleted-list"><li style="list-style-type:disc">made from a class — the “blueprint”; an <strong>instance</strong> of a class</li></ul><ul id="d84bf3c3-6ce9-4dcf-b2c4-5f48391ad1af" class="bulleted-list"><li style="list-style-type:disc">characteristics<ul id="9de76f6d-91c4-4682-bcff-4fce6f811657" class="bulleted-list"><li style="list-style-type:circle">identity: has a designated chunk of memory</li></ul><ul id="dfe05c9b-cc2c-4ccd-ad1a-81b44acbdcc5" class="bulleted-list"><li style="list-style-type:circle">state: contains values</li></ul><ul id="cdb53178-0682-41cd-9e08-1dd80cd5d0fc" class="bulleted-list"><li style="list-style-type:circle">behavior: allows the objects to do things by running its methods</li></ul></li></ul><ul id="c578dfbd-cf0c-42d6-9797-bb58d60ea3a8" class="bulleted-list"><li style="list-style-type:disc"><strong>analogy: </strong><em>cookie cutters and cookies</em><ul id="e7da63d5-5785-4def-b271-f42274a1a10b" class="bulleted-list"><li style="list-style-type:circle">memory: cookie dough</li></ul><ul id="33f9cba8-6168-45d5-bf89-c04f5e257b25" class="bulleted-list"><li style="list-style-type:circle">class: cookie cutter</li></ul><ul id="48d6564a-f87e-49f6-9647-26f405b2bf58" class="bulleted-list"><li style="list-style-type:circle">objects: cookies</li></ul></li></ul><ul id="8d90baaf-b69f-436c-8ced-4e2f43bca9a6" class="bulleted-list"><li style="list-style-type:disc"><strong>real life comparisons</strong><ul id="b1a7eae5-1e76-47d4-89b3-2736e26e4f7f" class="bulleted-list"><li style="list-style-type:circle"><span style="border-bottom:0.05em solid">identity</span>: name, type of physical object</li></ul><ul id="28477453-2924-4c3f-9033-b3fd964eaa08" class="bulleted-list"><li style="list-style-type:circle"><span style="border-bottom:0.05em solid">characteristics</span>: qualities</li></ul><ul id="ee748876-f965-4d7d-9272-3e5925eca149" class="bulleted-list"><li style="list-style-type:circle"><span style="border-bottom:0.05em solid">behavior</span>: what can be done to it what it can do</li></ul></li></ul><hr id="97cc77b2-0b0b-4164-a595-8b2e6a411be6"><p id="8d9c62d5-3d98-4785-80ee-6548e3a54914" class="">Now back to our Hedgehog class, let’s let it have some characteristics and behaviors. </p><pre id="7a5a928b-16d8-4f2d-b0d2-6a7a10eb5238" class="code"><code class="language-java">public class Hedgehog {
+  private String name;
+  private int age;
+  private boolean isBalled;
 
-          </div>
+  public void ball(){
+    isBalled = true;
+  }
+  public void unball(){
+    isBalled = false;
+  }
+  public void roll(){
+    if (isBalled){
+      System.out.println("*rolls away*");
+    } else {
+      System.out.println("not ball can't roll :(") 
+    }
+  }
+}</code></pre><hr id="52a1ade6-cc6c-40f3-8de6-4ce5269bed52"><ul id="841d1d05-6a36-4407-b5ba-c825ad4a41af" class="bulleted-list"><li style="list-style-type:disc"><strong>encapsulation</strong><ul id="25083cc0-8bcf-4516-931b-3a369b437124" class="bulleted-list"><li style="list-style-type:circle">using public and private to variables and methods for security</li></ul><ul id="82cd673f-1d9a-4a59-a897-886d96b4a9f5" class="bulleted-list"><li style="list-style-type:circle">public: can be used inside and outside the class</li></ul><ul id="0b49fc4c-ea2e-452d-ae37-f9e62f001a80" class="bulleted-list"><li style="list-style-type:circle">private: can only be used inside the class</li></ul><ul id="4981ccae-da24-4431-9038-4aaac6f61074" class="bulleted-list"><li style="list-style-type:circle">normally, variables are set as private and methods are set as public in order for variables to be incorrectly altered. however, helper methods, methods only used in other methods are usually private.</li></ul><hr id="8c26a0d9-337b-4e46-a1ea-4305bfc480c3"><p id="e2bb41ef-7808-40df-85ab-3c7993232d07" class="">This is why the methods and variables in our Hedgehog class are private or public!</p><hr id="2ccf6f86-9658-4560-b0c2-86cdbac5297d"></li></ul><ul id="0e599c65-c543-46c3-b965-6b73e2fc71b5" class="bulleted-list"><li style="list-style-type:disc"><strong>get and set methods</strong><ul id="c20c7402-a4d8-43c6-84fc-3d5832857b18" class="bulleted-list"><li style="list-style-type:circle">mutator method/set method: can modify an object and its data</li></ul><ul id="038860e4-a6ce-4add-94a7-81cb53a51ac6" class="bulleted-list"><li style="list-style-type:circle">access methods/get methods: accesses content without changing and returns the value from the content</li></ul><hr id="d3b71a87-e86b-4910-a2cb-78c2a9109550"><p id="4a08a815-866f-41ef-b237-6c255742a324" class="">Since we won’t be able to edit our variables since they are private, we will need to use get and set methods!</p><pre id="cc92a2ab-3696-4c44-bc74-7eaec32572df" class="code"><code class="language-java">public class Hedgehog {
+  private String name;
+  private int age;
+  private boolean isBalled;
+
+  public void ball(){
+    isBalled = true;
+  }
+  public void unball(){
+    isBalled = false;
+  }
+  public void roll(){
+    if (isBalled){
+      System.out.println("*rolls away*");
+    } else {
+      System.out.println("not ball can't roll :(") 
+    }
+  }
+  public int getAge(){
+    return age;
+  }
+  public String getName(){
+    return name;
+  }
+  public boolean getIsBalled(){
+    return isBalled();
+  }
+  public void setAge(int newAge){
+    age = newAge;
+  }
+  public void getName(String newName){
+    name = newName;
+  }
+}</code></pre></li></ul><h3 id="5d66d7e8-a3fb-49c3-bc9b-56638c4fe7e9" class=""><strong>constructor</strong></h3><ul id="f639f14f-94d6-47ad-b9a5-6f56393961dc" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">description of a possible object; run when an object is created</span></li></ul><ul id="f1bccd38-895a-41a1-a893-7cc2169350ba" class="bulleted-list"><li style="list-style-type:disc">used with <code class="language-java">new</code> operator to create the new object</li></ul><ul id="9fde7a35-87e0-4af3-b0bb-31c9702132a4" class="bulleted-list"><li style="list-style-type:disc">has the same name as the class</li></ul><ul id="3502fc9b-5b33-48d2-afbe-996c4c73546d" class="bulleted-list"><li style="list-style-type:disc">often used with parameters to be stored in the data part of the object is constructed — gives the object starting values</li></ul><hr id="6f3b678a-9fcf-493b-b037-ac05f8d91862"><p id="cc49d1f2-de0d-4944-a0cf-0e17e583cd26" class="">Now back to our <code class="language-java">Hedgehog</code> class, let’s create a constructor that can help personalize each of our <code class="language-java">Hedgehog</code> objects.</p><pre id="0c5aec82-592f-4309-bc83-08b83fdab0a6" class="code"><code class="language-java">public class Hedgehog {
+  private String name;
+  private int age;
+  private boolean isBalled;
+
+  public Hedgehog (String nm, int a){
+    name = nm; 
+    age = a;
+    isBalled = false;
+  } 
+
+  public void ball(){
+    isBalled = true;
+  }
+  public void unball(){
+    isBalled = false;
+  }
+  public void roll(){
+    if (isBalled){
+      System.out.println("*rolls away*");
+    } else {
+      System.out.println("not ball can't roll :(") 
+    }
+  }
+  public int getAge(){
+    return age;
+  }
+  public String getName(){
+    return name;
+  }
+  public boolean getIsBalled(){
+    return isBalled();
+  }
+  public void setAge(int newAge){
+    age = newAge;
+  }
+  public void getName(String newName){
+    name = newName;
+  }
+}</code></pre><h3 id="a8e54e6e-8df8-49c1-9b55-5b511a576810" class=""><strong>static methods</strong></h3><ul id="1020b749-e49a-4c12-954e-1a045bebc0e8" class="bulleted-list"><li style="list-style-type:disc">not part of the object it creates therefore it can be executed without an object being created </li></ul><h3 id="b6bfee7e-9370-48e2-85a1-2c89f58c1291" class=""><strong>dot notation</strong></h3><ul id="c97ee911-4e73-455b-9b00-9236ee5b8dc9" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">how variables and methods of an object (called members) can be accessed</span> </li></ul><hr id="c546571c-4c61-45eb-be3e-cadc43090cba"><p id="58083b15-830b-4592-9d43-2b99a3d3dc05" class="">Now that we have a class, let’s try making an instance of our Hedgehog class and run some of its methods.</p><h3 id="fac851f9-b8a7-4430-9070-eae7c43f51fa" class="">UML</h3><ul id="3e52273d-dde3-40e2-99a1-a79bb2205ef1" class="bulleted-list"><li style="list-style-type:disc">used to show the structure of a class</li></ul><ul id="885562a1-e8bf-43f3-aecc-4f1a17e2893a" class="bulleted-list"><li style="list-style-type:disc">format:<table id="54965f11-41fd-4013-93a0-50f4766e194f" class="simple-table"><tbody><tr id="159b4f31-7c7a-4145-8845-992dde03f5f5"><td id="BY=p" class="" style="width:461px">name of a class</td></tr><tr id="62207e1d-564a-44d1-8053-5b10110297cd"><td id="BY=p" class="" style="width:461px">+/- attributes/variables : datatype</td></tr><tr id="b7734a64-c44c-493f-af53-a80865b8f972"><td id="BY=p" class="" style="width:461px">+- methods (parameter name: parameter datatype, …) : return_datatype</td></tr></tbody></table></li></ul><hr id="ff128bd0-1b3b-4abb-8e51-daaef6d466e0"><p id="fbeb7b87-2ba7-412d-8db1-a00d5181679c" class="">Let’s make a UML for our wonderful Hedgehog class!</p><table id="ce202e24-bcf2-41e1-b54f-646ca09fb2dd" class="simple-table"><tbody><tr id="0d1f545c-4ec3-4c0b-9104-67f5a1060dc2"><td id="]i@t" class="" style="width:418.40000915527344px"><strong>Hedgehog</strong></td></tr><tr id="9872f174-f3e6-486f-a6ab-b8d5555d4b46"><td id="]i@t" class="" style="width:418.40000915527344px">-name : String
+-age : int
+-isBalled : boolean</td></tr><tr id="9369e038-f374-43f9-a88f-50315b6a8c13"><td id="]i@t" class="" style="width:418.40000915527344px">+Hedgehog(String, int)
++ball() : void
++unball() : void
++roll() : void
++getAge() : int
++getName() : String
++getIsBalled() : boolean
++setAge(newAge: int) : void
++setName(newName: String) : void</td></tr></tbody></table></div></article>
+
+</div>
         </div>
       </div>
     </div>
