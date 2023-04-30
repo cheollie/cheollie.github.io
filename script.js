@@ -2,6 +2,32 @@
 if (window.innerWidth < 400) {
     alert("why ur screen so small ??? ? ? ? ?")
 }
+
+/* clipboard javascript credits: https://www.roboleary.net/2022/01/13/copy-code-to-clipboard-blog.html */
+const copyButtonLabel = "copy code";
+let blocks = document.querySelectorAll("pre");
+
+blocks.forEach((block) => {
+  if (navigator.clipboard) {
+    let button = document.createElement("button");
+    button.innerText = copyButtonLabel;
+    block.insertBefore(button,block.firstChild);
+    button.addEventListener("click", async () => {
+      await copyCode(block, button);
+    });
+  }
+});
+
+async function copyCode(block, button) {
+  let code = block.querySelector("code");
+  let text = code.innerText;
+  await navigator.clipboard.writeText(text);
+  button.innerText = "code copied";
+  setTimeout(() => {
+    button.innerText = copyButtonLabel;
+  }, 700);
+}
+
 /* window.onblur = function () {
   alert('u switched tabs 😱');
 } */
@@ -290,4 +316,4 @@ if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
         }
 }
 
-var easter_egg = new Konami(function() {document.getElementById("kek").style.display = "block"; var audio = new Audio('hmm.mp3'); audio.play();setTimeout(function(){document.getElementById("kek").style.display="none";}, 8000); });
+var easter_egg = new Konami(function() {document.getElementById("kek").style.display = "block"; var audio = new Audio('https://cdn.discordapp.com/attachments/759867023885860934/1102111686376312832/hmm.mp3'); audio.play();setTimeout(function(){document.getElementById("kek").style.display="none";}, 8000); });

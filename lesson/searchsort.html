@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css" rel="stylesheet">
   <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
@@ -24,9 +25,13 @@
   <meta content="#fde6a4" data-react-helmet="true" name="theme-color" />
   <meta property="og:url" content="https://cheollie.github.io">
   <meta property="og:image" content="https://avatars.githubusercontent.com/u/80985676?v=4">
+  <link href="https://unpkg.com/prismjs@1.29.0/themes/prism.css" rel="stylesheet" />
 </head>
 
+
 <body>
+    <script src="https://unpkg.com/prismjs@1.29.0/components/prism-core.min.js"></script>
+	<script src="https://unpkg.com/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
 
   <main id="random" class="main">
     <div class="content">
@@ -36,139 +41,63 @@
         <hr style="margin-bottom:15px; height:1px; background:black; border: none;">
         <div class="scrolly-body">
 
-          <div style="line-height: 11px;">
-            <article id="ad5b78b5-8bbc-474a-8513-7d65aed4d16a" class="page sans">
-              <div class="page-body">
-                <h3 id="c6682648-d16c-48b2-860f-6d96576ef6ed" class=""><strong>class</strong>: </h3>
-                <ul id="61678d80-bf26-48e0-af30-2497e8d0ccf4" class="bulleted-list">
-                  <li style="list-style-type:disc"><span style="border-bottom:0.05em solid">a description of a kind of
-                      object; “blueprint”</span></li>
-                </ul>
-                <h3 id="885536b7-ae5e-411f-88e1-e166705a2baf" class="">objects</h3>
-                <ul id="32189b0c-7f90-4d92-b189-954257630252" class="bulleted-list">
-                  <li style="list-style-type:disc">made from a class — the “blueprint”; an <strong>instance</strong> of
-                    a class</li>
-                </ul>
-                <ul id="d84bf3c3-6ce9-4dcf-b2c4-5f48391ad1af" class="bulleted-list">
-                  <li style="list-style-type:disc; line-height:20px">characteristics<ul id="9de76f6d-91c4-4682-bcff-4fce6f811657"
-                      class="bulleted-list">
-                      <li style="list-style-type:circle">identity: has a designated chunk of memory</li>
-                    </ul>
-                    <ul id="dfe05c9b-cc2c-4ccd-ad1a-81b44acbdcc5" class="bulleted-list">
-                      <li style="list-style-type:circle">state: contains values</li>
-                    </ul>
-                    <ul id="cdb53178-0682-41cd-9e08-1dd80cd5d0fc" class="bulleted-list">
-                      <li style="list-style-type:circle">behavior: allows the objects to do things by running its
-                        methods</li>
-                    </ul>
-                  </li>
-                </ul>
-                <ul id="c578dfbd-cf0c-42d6-9797-bb58d60ea3a8" class="bulleted-list">
-                  <li style="list-style-type:disc; line-height:20px"><strong>analogy: </strong><em>cookie cutters and cookies</em>
-                    <ul id="e7da63d5-5785-4def-b271-f42274a1a10b" class="bulleted-list">
-                      <li style="list-style-type:circle">memory: cookie doe</li>
-                    </ul>
-                    <ul id="33f9cba8-6168-45d5-bf89-c04f5e257b25" class="bulleted-list">
-                      <li style="list-style-type:circle">class: cookie cutter</li>
-                    </ul>
-                    <ul id="48d6564a-f87e-49f6-9647-26f405b2bf58" class="bulleted-list">
-                      <li style="list-style-type:circle">objects: cookies</li>
-                    </ul>
-                  </li>
-                </ul>
-                <ul id="8d90baaf-b69f-436c-8ced-4e2f43bca9a6" class="bulleted-list">
-                  <li style="list-style-type:disc; line-height:20px"><strong>real life comparisons</strong>
-                    <ul id="b1a7eae5-1e76-47d4-89b3-2736e26e4f7f" class="bulleted-list">
-                      <li style="list-style-type:circle"><span style="border-bottom:0.05em solid">identity</span>: name,
-                        type of physical object</li>
-                    </ul>
-                    <ul id="28477453-2924-4c3f-9033-b3fd964eaa08" class="bulleted-list">
-                      <li style="list-style-type:circle"><span
-                          style="border-bottom:0.05em solid">characteristics</span>: qualities</li>
-                    </ul>
-                    <ul id="ee748876-f965-4d7d-9272-3e5925eca149" class="bulleted-list">
-                      <li style="list-style-type:circle"><span style="border-bottom:0.05em solid">behavior</span>: what
-                        can be done to it what it can do</li>
-                    </ul>
-                  </li>
-                </ul>
-                <h3 id="a8e54e6e-8df8-49c1-9b55-5b511a576810" class=""><strong>static methods</strong></h3>
-                <ul id="1020b749-e49a-4c12-954e-1a045bebc0e8" class="bulleted-list">
-                  <li style="list-style-type:disc">not part of the object it creates therefore it can be executed
-                    without an object being created </li>
-                </ul>
-                <h3 id="8e06e6ad-3954-4765-afe0-743ead895040" class=""><strong>constructor</strong></h3>
-                <ul id="9d6bbf10-36bc-4201-adf9-709be120fdec" class="bulleted-list">
-                  <li style="list-style-type:disc"><span style="border-bottom:0.05em solid">description of a possible
-                      object; run when an object is created</span></li>
-                </ul>
-                <ul id="e39fd414-77e3-42e8-a79e-2a43d58a4bfc" class="bulleted-list">
-                  <li style="list-style-type:disc">used with <code>new</code> operator to create the new object</li>
-                </ul>
-                <ul id="c8c12dab-eb22-4f57-8f69-232bbc4f3e29" class="bulleted-list">
-                  <li style="list-style-type:disc">has the same name as the class</li>
-                </ul>
-                <ul id="2ad28e3b-7d82-4123-968e-466c0fa57e3a" class="bulleted-list">
-                  <li style="list-style-type:disc">often used with parameters to be stored in the data part of the
-                    object is constructed — gives the object starting values</li>
-                </ul>
-                <h3 id="b6bfee7e-9370-48e2-85a1-2c89f58c1291" class=""><strong>dot notation</strong></h3>
-                <ul id="c97ee911-4e73-455b-9b00-9236ee5b8dc9" class="bulleted-list">
-                  <li style="list-style-type:disc"><span style="border-bottom:0.05em solid">how variables and methods of
-                      an object (called members) can be accessed</span> </li>
-                </ul>
-                <p id="1668a525-f9c4-4837-ad6c-b1959b35178f" class="">
-                </p>
-                <h3 id="fac851f9-b8a7-4430-9070-eae7c43f51fa" class="">UML</h3>
-                <ul id="3e52273d-dde3-40e2-99a1-a79bb2205ef1" class="bulleted-list">
-                  <li style="list-style-type:disc">used to show the structure of a class</li>
-                </ul>
-                <ul id="885562a1-e8bf-43f3-aecc-4f1a17e2893a" class="bulleted-list">
-                  <li style="list-style-type:disc; line-height:20px">format:<table id="54965f11-41fd-4013-93a0-50f4766e194f"
-                      class="simple-table">
-                      <tbody>
-                        <tr id="159b4f31-7c7a-4145-8845-992dde03f5f5">
-                          <td id="BY=p" class="" style="width:461px">name of a class</td>
-                        </tr>
-                        <tr id="62207e1d-564a-44d1-8053-5b10110297cd">
-                          <td id="BY=p" class="" style="width:461px">+/- attributes/variables : datatype</td>
-                        </tr>
-                        <tr id="b7734a64-c44c-493f-af53-a80865b8f972">
-                          <td id="BY=p" class="" style="width:461px">+- methods (parameter name: parameter datatype, …)
-                            : return_datatype</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </li>
-                </ul>
-                <ul id="ff128bd0-1b3b-4abb-8e51-daaef6d466e0" class="bulleted-list">
-                  <li style="list-style-type:disc">example:</li>
-                </ul>
-                <p id="af43e9bb-0c3f-4f43-8077-2272363db7a7" class="">
-                </p>
-                <h3 id="52a1ade6-cc6c-40f3-8de6-4ce5269bed52" class="">Encapsulation (+Access Modifiers)</h3>
-                <ul id="25083cc0-8bcf-4516-931b-3a369b437124" class="bulleted-list">
-                  <li style="list-style-type:disc">using public and private to variables and methods for security</li>
-                </ul>
-                <ul id="82cd673f-1d9a-4a59-a897-886d96b4a9f5" class="bulleted-list">
-                  <li style="list-style-type:disc">public: can be used inside and outside the class</li>
-                </ul>
-                <ul id="0b49fc4c-ea2e-452d-ae37-f9e62f001a80" class="bulleted-list">
-                  <li style="list-style-type:disc">private: can only be used inside the class</li>
-                </ul>
-                <ul id="4981ccae-da24-4431-9038-4aaac6f61074" class="bulleted-list">
-                  <li style="list-style-type:disc">normally, variables are set as private and methods are set as public
-                    in order for variables to be incorrectly altered</li>
-                </ul>
-                <hr id="4075ecaa-12bd-4b91-bdef-d4615a7a9d96">
-                <p id="688df6ec-832c-4816-aa2b-a0010ed2b88d" class="">
-                </p>
-                </details>
-                </li>
-                </ul>
-              </div>
-            </article>
-
+          <div style="">
+            <article  class="page sans"><div class="page-body"><h3 >overview </h3><p >Searching and sorting are two fundamental parts of computer science. Searching is the process of finding a particular item or element in a collection of data, and sorting is the process of arranging the elements in a particular order, such as ascending or descending order.</p><h2 >searching (java)</h2><h3 >what is it?</h3><p >Searching, or searching algorithms, are used to find an element within any data structure, most commonly, arrays. Searching algorithms are made to make the process faster and more time and memory efficient.</p><h3 >how? + examples</h3><p >There are multiple ways to search in Java. Two searching algorithms that will be covered in this tutorial are sequential search and binary search.</p><p ><strong>Sequential Search</strong></p><p >The naive way to search is sequential search. Sequential search loops through and checks every element in the array whether or not it’s equal to the desired element.</p><pre  class="code"><code class="language-java">int search(int arr[], int x){
+              int N = arr.length;
+              for (int i = 0; i &lt; N; i++) {
+                  if (arr[i] == x)
+                      return i;
+              }
+              return -1;
+          }</code></pre><p >This has a time complexity of <span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>N</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(N)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mclose">)</span></span></span></span></span><span>&#xFEFF;</span></span> and space complexity of <span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></span><span>&#xFEFF;</span></span>. This is not that great.</p><figure  class="image"><a href="https://media.geeksforgeeks.org/wp-content/cdn-uploads/Linear-Search.png"><img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/Linear-Search.png"></a></figure><p ><strong>Binary Search</strong></p><p >Binary Search is a more efficient and more commonly used way to search. It can be done iteratively and recursively where the array to be searched from must be sorted. The way this algorithm works is that it gets the middle element of the array and compares whether it is greater, lower, or equal to the target, then taking the middle element of the half the target is in and comparing with its middle number as well. This continues until the element is found, or is narrowed down to a subarray of length 1 (where lowest and highest number of the subarray are equal). </p><pre  class="code"><code class="language-java">int search(int arr[], int x){
+              int low = 0, high = arr.length - 1;
+              while (low &lt;= high) {
+                  int mid = low + (high - low) / 2;
+                  if (arr[mid] == x)
+                      return mid;
+                  if (arr[mid] &lt; x)
+                      low = mid + 1;
+                  else
+                      high = mid - 1;
+              }
+              return -1; //not found
+          }</code></pre><p >This has a time complexity of <span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>log</mi><mo>⁡</mo><mi>N</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(\log N)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mclose">)</span></span></span></span></span><span>&#xFEFF;</span></span> and space complexity of <span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></span><span>&#xFEFF;</span></span>. This is pretty good.</p><figure  class="image"><a href="https://media.geeksforgeeks.org/wp-content/uploads/20220309171621/BinarySearch.png"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20220309171621/BinarySearch.png"></a></figure><h3 >in class applications + analysis + approach</h3><p ><strong>Sequential Search</strong></p><p >This was used in the MaCSBook assignment. I used the built-in sequential search with the <code class="language-java">indexOf()</code> method. I used indexOf() to find the position of the student with the given student name. Since classNames, classNumbers, and classAverage are parallel arrays, the student’s information in the other arrays will also be in that index.</p><pre  class="code"><code class="language-java">//code simplified and modified for tutorial
+          public void viewStudentData(String studentID) {
+              int idxName = classNames.indexOf(studentID);
+              // error trapping omitted 
+              System.out.println("------ "+classNames.get(i)+"'s Data -------------------------");
+              System.out.println("Student Name: " + classNames.get(i));
+              System.out.println("Student Number: " + classNumbers.get(i));
+              System.out.println("Student Average Mark: " + classAvgs.get(i) + "%");
+              System.out.println("-------------------------------------------------");
+          } </code></pre><p ><strong>Binary Search</strong></p><p >Since I have not used binary search yet in class,  I will use something for the DMOJ problem, <a href="https://dmoj.ca/problem/seed2"><i>The Cosmic Era P2 - Uneven Sand</i></a>, a classic binary search problem. Since I originally wrote it in Python, this is rewritten in Java.</p><p >In short, it is an interactive problem where it’s like a guessing game. You are trying to guess what the target is, given whether the number you guess is greater or lower than the target. Using binary search will find the target in the shortest number of guesses. So that was my approach, since I was already familiar with binary search. For “analysis”, see comments in code. The version using a while loop instead of recursion.</p><pre  class="code code-wrap"><code class="language-java">public static void main(String[] args) throws IOException {
+              int low = 1; //lowest number
+              int high = (int)2e9; //this is the maximum number
+              while (low &lt;= high) {
+                int mid = low + (high - low)/2; //finds middle number
+                System.out.println(mid); //sends guess
+                String s = br.readLine(); //gets feedback
+                if (s.equals("OK"))
+                  break;
+                else if (s.equals("FLOATS"))
+                  high = mid - 1;
+                else if (s.equals("SINKS"))
+                  low = mid + 1;
+              }
+            }</code></pre><h3 >real life applications + impact</h3><p >(using binary search is usually preferred over linear search as it is more efficient)</p><ul  class="bulleted-list"><li style="list-style-type:disc">whenever you need to search for something</li></ul><ul  class="bulleted-list"><li style="list-style-type:disc">used in algorithms used in machine learning (training neural networks, finding optimal values)</li></ul><ul  class="bulleted-list"><li style="list-style-type:disc">used in algorithms in competitive programming (since speed is essential)</li></ul><ul  class="bulleted-list"><li style="list-style-type:disc">used in algorithms for computer graphics (ray tracing, texture mapping)</li></ul><ul  class="bulleted-list"><li style="list-style-type:disc">searching for an entry in a database</li></ul><h3 >common mistakes </h3><p ><strong>Sequential Search</strong></p><ul  class="bulleted-list"><li style="list-style-type:disc">using it for large datasets as it will be slow</li></ul><p ><strong>Binary Search</strong></p><ul  class="bulleted-list"><li style="list-style-type:disc">not sorting the array</li></ul><ul  class="bulleted-list"><li style="list-style-type:disc">mixing up the conditions and indices — ie. <code class="language-java">low = mid+1</code> (correct) vs <code class="language-java">low = mid</code> vs <code class="language-java">low = mid-1</code></li></ul><ul  class="bulleted-list"><li style="list-style-type:disc">integer overflow when calculating for mid — <code class="language-java">int mid = low + (high-low)/2</code> would bypass any potential integer overflowing</li></ul><p >
+          </p><h2 >sorting</h2><h3 >what is it?</h3><p >Sorting, or sorting algorithms, are used to rearrange a data structure, most commonly an arrays according to comparison operators which will decide precedence and the general order.</p><h3 >how? + examples</h3><p >There are multiple ways to sort data. Two sorting algorithms we will discuss are bubble sort and radix sort.</p><p ><strong>Bubble Sort</strong></p><p >Basically you iterate through the entire array and swap elements that are not in the right precedence. That repeats until it’s in order.</p><pre  class="code"><code class="language-java">void sort(int arr[]){
+              int N = arr.length;
+              for (int i = 0; i &lt; N - 1; i++)
+                  for (int j = 0; j &lt; N - i - 1; j++)
+                      if (arr[j] &gt; arr[j + 1]) {
+                          int temp = arr[j];
+                          arr[j] = arr[j + 1];
+                          arr[j + 1] = temp;
+                      }
+          }</code></pre><p >This has a time complexity of <span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><msup><mi>N</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(N^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span><span>&#xFEFF;</span></span> and a space complexity of <span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></span><span>&#xFEFF;</span></span>.</p><figure  class="image"><a href="https://i.stack.imgur.com/XNbE0.gif"><img src="https://i.stack.imgur.com/XNbE0.gif"></a></figure><p ><strong>Radix Sort</strong></p><p >See our group’s wonderful presentation on Radix Sort, including original code, and Joshua’s epic video. </p><p ><iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTHft7GaIzjwtRDPLmT51VJPQ3BVRCpextVblaWVHo1SMRso-KbQBLMfGZWlPPUrpZK4IeNma4qn5_q/embed?start=false&loop=false&delayms=10000" frameborder="0" width="480" height="299" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe></p><h3 >in class applications + analysis + approach </h3><p >In MaCSBook, we had to sort the student information. </p><h3 >real life applications + impact</h3><p ><strong>Bubble Sort</strong></p><ul  class="bulleted-list"><li style="list-style-type:disc">great for learning</li></ul><ul  class="bulleted-list"><li style="list-style-type:disc">fixing small errors/almost sorted items (graphics)</li></ul><ul  class="bulleted-list"><li style="list-style-type:disc">problems where swaps are necessary </li></ul><p ><strong>Radix Sort</strong></p><ul  class="bulleted-list"><li style="list-style-type:disc">relating to numbers, digits, comparing index/character by index/character</li></ul><h3 >common mistakes  </h3><p ><strong>Bubble Sort</strong></p><ul  class="bulleted-list"><li style="list-style-type:disc">not using a temporary variable when swapping so the value of the element gets overwritten and gets lost </li></ul><p ><strong>Radix Sort</strong></p><ul  class="bulleted-list"><li style="list-style-type:disc">using the wrong indices or sizes when creating and accessing the prefix sum array</li></ul><p >
+          </p><hr ><h3 >sources:</h3><ul  class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.geeksforgeeks.org/binary-search/">https://www.geeksforgeeks.org/binary-search/</a></li></ul><ul  class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.geeksforgeeks.org/linear-search/">https://www.geeksforgeeks.org/linear-search/</a></li></ul><ul  class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.geeksforgeeks.org/bubble-sort/">https://www.geeksforgeeks.org/bubble-sort/</a></li></ul><p >
+          </p><p >
+          </p></div></article>
           </div>
         </div>
       </div>
@@ -192,7 +121,7 @@
     </div>
   </nav>
 
-  <script src="script.js"></script>
+  <script src="../script.js"></script>
 </body>
 
 </html>
