@@ -56,9 +56,6 @@ code {
 img {
   display: block;
   margin: 0 auto;
-  max-width: 100%;
-  height: auto;
-  width: auto;
 }
 
 article {
@@ -556,3 +553,9 @@ pre button:hover {
   transform: translate(-0.1em, -0.1em);
 }
 
+/* LESSONS ------------------------------------ */
+.image {
+  max-width: 100%;
+  height: auto;
+  width: auto;
+}
