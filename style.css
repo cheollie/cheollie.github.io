@@ -401,3 +401,19 @@ border-radius: 4px; width: 12rem; padding: 10px;
     cursor: pointer;
   }
 }
+.scrolly-container{
+  margin: 30px 0;
+  overflow: auto;
+  height: calc(100%-160px);
+  height: -moz-calc(100% - 160px);
+  height: -webkit-calc(100% - 160px);
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.img-row{
+  display: flex;
+}
+.img-row img{
+  width: 50%;
+  flex: 1;
+}
