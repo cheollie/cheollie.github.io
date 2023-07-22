@@ -245,24 +245,28 @@ img{
 /* HOME PAGE ------------------------------------ */
 .home-content.content{
   position: absolute;
-  display: table;
-  padding-right: 200px;
-  padding-left: 200px;
-  margin: 0 auto;
+  padding-right: 0px;
+  padding-left: 0px;
+  margin: auto 0;
   height: 100%;
-  width: calc(100%-400px);
-  width: -moz-calc(100% - 400px);
-  width: -webkit-calc(100% - 400px);
-  text-align: center;
+  width: 100%;
+  align-items: center;
 }
 .home-content-vc{
-  padding: 50px 0;
+  position: absolute;
+  top: 30%;
+  width: 30%;
+  padding: 0 0 0 80px;
+}
+.duck{
+  min-height: 100%;
+  min-width: 100%;
 }
 .home-title{
   font-size: 29px;
   margin: 10px 0;
   background-color: #fde6a4;
-  padding: 5px;
+  padding: 15px;
   border-radius: 5px;
   border: solid black 1px;
   font-weight: 600;
@@ -344,6 +348,7 @@ p .random-body{
 border: 1px solid black;
 border-radius: 4px; width: 12rem; padding: 10px;
   display: inline-block;
+  vertical-align: top
 }
 .card h2{
   font-size: 16px;
