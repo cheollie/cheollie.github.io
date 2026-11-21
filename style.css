@@ -422,3 +422,55 @@ border-radius: 4px; width: 12rem; padding: 10px;
   width: 50%;
   flex: 1;
 }
+
+/* SMALL, HANDMADE SITE UPDATES */
+.scroll-page{overflow-x:hidden;overflow-y:auto;height:auto;min-height:100vh}
+.scroll-page #navbar{position:sticky;top:0;z-index:20}
+.scroll-page .main{position:relative;top:auto;height:auto;min-height:calc(100vh - 100px);display:block}
+.scroll-page .content{position:relative;display:block;box-sizing:border-box;width:min(1120px,100%);height:auto;padding:42px clamp(24px,7vw,92px) 72px;margin:0 auto}
+.scroll-page .content-vc{display:block;padding:0}
+.eyebrow,.project-kicker{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#837756;margin:0 0 10px}
+.section-title{font-size:25px;margin:0 0 18px}
+.about-intro{display:grid;grid-template-columns:minmax(0,1fr) 285px;gap:42px;align-items:center}
+.about-intro .title,.projects-page .title{font-size:clamp(32px,5vw,48px);margin:0 0 16px}
+.about-section{padding:55px 0 5px;max-width:900px}
+.timeline{border-left:2px solid #fde6a4;margin:22px 0 0 5px}
+.timeline article{display:grid;grid-template-columns:150px 1fr;gap:20px;padding:0 0 24px 22px;position:relative}
+.timeline article:before{content:"";position:absolute;left:-7px;top:5px;width:12px;height:12px;background:#fde6a4;border:1px solid #000;border-radius:50%}
+.timeline-date{font-size:13px;color:#837756;padding-top:3px}
+.timeline h3{font-size:18px;margin:0 0 5px}.timeline p{font-size:16px;line-height:1.55;margin:0}
+.achievement-list{list-style:none;padding:0;margin:20px 0 22px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.achievement-list li{display:flex;gap:12px;align-items:flex-start;padding:14px;background:#fff9e7;border:1px solid #eadba7;border-radius:5px}
+.achievement-list li>span{color:#a88321;font-size:18px}.achievement-list b{display:block;font-size:15px}.achievement-list small{display:block;font-size:13px;line-height:1.4;margin-top:4px;color:#645b45}
+.resume-link{display:inline-block;border:1px solid #000;background:#fde6a4;border-radius:4px;padding:12px 17px;font-weight:600;transition:transform .18s,box-shadow .18s}
+.resume-link:hover{transform:translate(-2px,-2px);box-shadow:3px 3px #000}
+.contact-section{border-top:1px solid #e6d9b5;margin-top:58px;padding-top:28px}
+.contact-row{display:flex;flex-wrap:wrap;gap:0;border:1px solid #d8c78f;border-radius:5px;overflow:hidden;background:#fffaf0}
+.contact-row a{flex:1 1 110px;padding:14px 16px;display:flex;justify-content:space-between;gap:8px;border-right:1px solid #e8ddb9;font-size:15px}
+.contact-row a:last-child{border-right:0}.contact-row a:hover{background:#fde6a4}.contact-row span{color:#8c742e}
+.contact-note{font-size:14px;color:#837756;margin-top:16px}
+.record-player{background:#fff8e5;padding:13px;border:1px solid #c8b779;border-radius:7px;box-shadow:4px 4px 0 #eadba7;transform:rotate(1deg)}
+.turntable{height:176px;position:relative;background:linear-gradient(135deg,#f6e8bd,#fffdf6);border:1px solid #d5c58f;border-radius:4px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.record-disc{width:142px;height:142px;border-radius:50%;background:repeating-radial-gradient(circle,#222 0 2px,#292929 3px 5px,#171717 6px 7px);display:grid;place-items:center;animation:vinyl-spin 8s linear infinite}
+.record-disc span{width:40px;height:40px;border-radius:50%;background:#fde6a4;border:1px solid #111;display:grid;place-items:center;font-size:17px}
+.tonearm{position:absolute;right:35px;top:22px;width:68px;height:6px;background:#a98d4d;border:1px solid #4e442c;border-radius:5px;transform:rotate(35deg);transform-origin:right center}
+.player-label{position:absolute;left:10px;bottom:8px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#776b4d}
+.spotify-preview{display:block;margin:12px 0 3px;border:0;border-radius:5px}
+.vinyl-stack{height:47px;position:relative;display:flex;align-items:center;padding-left:66px;font-size:13px;margin-top:6px}
+.vinyl{position:absolute;left:0;width:45px;height:45px;border-radius:50%;background:repeating-radial-gradient(circle,#252525 0 2px,#333 3px 4px);transition:transform .2s}
+.vinyl-two{left:9px;background:repeating-radial-gradient(circle,#352c3e 0 2px,#51445d 3px 4px)}.vinyl-three{left:18px;background:repeating-radial-gradient(circle,#3b3024 0 2px,#594532 3px 4px)}
+.vinyl-stack:hover .vinyl-one{transform:translateY(-7px) rotate(-12deg)}.vinyl-stack:hover .vinyl-two{transform:translateY(-3px) rotate(9deg)}.vinyl-stack:hover .vinyl-three{transform:translateY(2px) rotate(16deg)}
+.project-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:16px;margin:26px 0}
+.project-card.card{box-sizing:border-box;width:auto;min-height:205px;padding:18px;background:#fffdf7;border:1px solid #d8c78f;border-radius:5px;box-shadow:2px 2px 0 #f1e4b8;transition:transform .18s,box-shadow .18s}
+.project-card:hover{transform:translateY(-4px) rotate(-.3deg);box-shadow:5px 6px 0 #f1e4b8}
+.project-card h2{font-size:19px;margin:6px 0 10px}.project-card p:not(.project-kicker){font-size:15px;line-height:1.5;margin:0 0 14px}
+.project-card .project-kicker{font-size:10px;margin:0;color:#837756}.project-note{font-size:14px;color:#706343}
+.past-projects{margin:32px 0;background:#fff9e8;border:1px solid #d8c78f;border-radius:5px;padding:17px}
+.past-projects summary{cursor:pointer;font-weight:600;list-style:none}.past-projects summary::-webkit-details-marker{display:none}
+.past-projects summary:after{content:"＋";float:right}.past-projects[open] summary:after{content:"−"}
+.past-projects summary span{font-weight:400;color:#837756;font-size:13px;margin-left:8px}
+.past-card.card{min-height:180px}.contact-teaser{margin:32px 0 0;padding-top:10px;border-top:1px dashed #d8c78f}
+.duck-float{display:inline-block;animation:duck-bob 2.8s ease-in-out infinite}
+@keyframes vinyl-spin{to{transform:rotate(360deg)}}@keyframes duck-bob{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-6px) rotate(5deg)}}
+@media(max-width:760px){.about-intro{grid-template-columns:1fr}.record-player{max-width:340px;margin:12px auto}.timeline article{grid-template-columns:1fr;gap:5px;padding-bottom:20px}.achievement-list{grid-template-columns:1fr}.about-section{padding-top:40px}.contact-row a{border-bottom:1px solid #e8ddb9}.contact-row a:nth-child(2n){border-right:0}}
+@media(prefers-reduced-motion:reduce){.duck-float,.record-disc{animation:none!important}.project-card,.vinyl,.resume-link{transition:none!important}}
