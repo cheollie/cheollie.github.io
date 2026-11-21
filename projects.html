@@ -1,7 +1,66 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Projects — Chelsea Wong</title><meta name="description" content="Selected software, research, and biomedical design projects by Chelsea Wong."><meta name="theme-color" content="#fbf8f0"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&family=Caveat:wght@500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"><link rel="icon" href="icons/favicon-32x32.png"></head><body><header class="top"><a class="brand" href="index.html"><b>✳</b> cheollie</a><nav><a  href="index.html">Home</a><a  href="about.html">About</a><a class="on" href="projects.html">Projects</a><a  href="music.html">Music corner</a><a  href="contact.html">Say hi</a></nav></header><main class="wrap page"><p class="eyebrow">Selected work · 2022—now</p><h1>Things made<br><em>with a reason.</em></h1><p class="intro">A mix of product engineering, biomedical design, research, and hackathon experiments. Some are polished; some taught me what to build next.</p><div class="projects">
-<article id="translate" class="project wide"><div class="project-art pa"><small>TRANSLATE / 70+ LANGUAGES</small><span>hello</span><b>hola!</b><i>✳</i></div><div><small>PRODUCT · OPENAI / 2026</small><h2>ChatGPT Translate</h2><p>Led the first version of a multimodal translation experience, then expanded it across live conversations, speech, files, and camera input.</p><div class="tags"><span>multimodal</span><span>streaming UX</span><span>product</span></div><a href="https://chatgpt.com/translate" target="_blank" rel="noreferrer">Explore product ↗</a></div></article>
-<article id="dorri" class="project"><div class="project-art pb"><small>REMEMBER WHAT MATTERS</small><span>met at the<br>design review</span><b>follow up ♡</b></div><div><small>PERSONAL PROJECT · IN PROGRESS</small><h2>Dorri</h2><p>A voice-first personal CRM for the details that make relationships feel personal.</p><div class="tags"><span>voice capture</span><span>personal CRM</span></div><a href="https://dorri.land" target="_blank" rel="noreferrer">Visit Dorri ↗</a></div></article>
-<article class="project"><div class="project-art pc"><small>CAMERA × BIOLOGY</small><b>◉</b><span>pH</span></div><div><small>BIOMEDICAL DESIGN · JHU</small><h2>PeriAlert</h2><p>A camera-based concept for monitoring peri-implant inflammation using image features to estimate pH.</p><div class="tags"><span>OpenCV</span><span>medical design</span></div></div></article>
-<article class="project"><div class="project-art pd"><small>SHARED-SPACE SIDEKICK</small><b>✦</b><span>counter scan</span></div><div><small>HACK THE NORTH · 2024</small><h2>CleanCue</h2><p>A playful camera helper for shared spaces that spots clutter, hazards, and forgotten food.</p><div class="tags"><span>computer vision</span><span>prototype</span></div><a href="https://github.com/cheollie/htn" target="_blank" rel="noreferrer">View on GitHub ↗</a></div></article>
-<article class="project"><div class="project-art pe"><small>ACCESSIBILITY × MEDIA</small><span>👋<br>captions</span></div><div><small>JAMHACKS · 2024</small><h2>Signematic</h2><p>Sign-language interpretation captions for digital media, designed to make online content more accessible.</p><div class="tags"><span>accessibility</span><span>computer vision</span></div><a href="https://github.com/fiona-cai/Signematic" target="_blank" rel="noreferrer">View project ↗</a></div></article>
-<article class="project"><div class="project-art pf"><small>SCHOOL, IN ONE PLACE</small><span>clubs</span><b>events</b><i>people</i></div><div><small>PRODUCT · TEAM LEAD</small><h2>Project Metropolis</h2><p>A school operations app and website built with a 30+ person team, used by more than 1,300 students.</p><div class="tags"><span>Django</span><span>React Native</span><span>leadership</span></div><a href="https://github.com/wlmac/metropolis" target="_blank" rel="noreferrer">View project ↗</a></div></article></div><div class="project-tail"><p>More experiments and weekend builds live in the GitHub garden.</p><a class="button" href="https://github.com/cheollie">More on GitHub ↗</a></div></main><footer class="footer wrap"><a class="brand" href="index.html">✳ cheollie</a><span>Made with curiosity in Baltimore & everywhere.</span><a href="archive.html">Old site</a></footer></body></html>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>cheollie | projects</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+  <link rel="manifest" href="icons/site.webmanifest">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="cheollie 🌻">
+  <meta property="og:title" content="cheollie | projects">
+  <meta property="og:description" content="some projects ig?">
+  <meta content="#fde6a4" data-react-helmet="true" name="theme-color" />
+  <meta property="og:url" content="https://cheollie.github.io">
+  <meta property="og:image" content="https://avatars.githubusercontent.com/u/80985676?v=4">
+</head>
+
+<body>
+
+  <main id="about" class="main">
+    <div class="content">
+      <div class="content-vc"><h1 class="title">projects:</h1>
+<p class="body">A few things I’ve built through work, research, and hackathons. More projects live on <a class="links" href="https://github.com/cheollie">GitHub</a> and <a class="links" href="https://devpost.com/cheollie">Devpost</a>.</p>
+<div class="scrolly-body">
+<div class="card"><h2>ChatGPT Translate</h2><p>Built and expanded a multimodal translation experience across voice, files, camera input, and live conversations at OpenAI.</p><a class="links" href="https://chatgpt.com/translate">product</a></div>
+<div class="card"><h2>Dorri</h2><p>A voice-first personal CRM for remembering the details that make relationships feel personal.</p><a class="links" href="https://dorri.land">website</a></div>
+<div class="card"><h2>PeriAlert</h2><p>A biomedical design project exploring camera-based detection of peri-implant inflammation using color features and pH estimation.</p></div>
+<div class="card"><h2>Spatial multi-omics</h2><p>Research workflows exploring spatial RNA and ATAC data in the Chitra Lab at Johns Hopkins.</p></div>
+<div class="card"><h2>Project Metropolis</h2><p>A school operations app built with a student team and used by more than 1,300 students.</p></div>
+</div>
+</div>
+    </div>
+  </main>
+
+  <img id="kek" style="display:none"
+    src="https://media.discordapp.net/attachments/816411423844466760/886395353224605737/acatwalk.gif" alt="">
+  <!-- KEK -->
+
+  <nav id="navbar">
+    <nav id="navbar">
+      <div id="subnavbarleft">
+        <a class="navbar-title-text" href="index.html"><span class="semibold" style="font-size:27px;">🌻 <b>::</b> </span><span
+            class="selected heavybold">cheollie</span></a>
+      </div>
+      <div id="subnavbarright">
+        <a class="navbar-subtitle-text nav-underline" href="about.html">about</a>
+        <a class="navbar-subtitle-text nav-underline" href="projects.html">projects</a>
+        <a class="navbar-subtitle-text nav-underline" href="contact.html">contact</a>
+        <a class="navbar-subtitle-text nav-underline" href="music.html">music</a>
+      </div>
+    </nav>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
