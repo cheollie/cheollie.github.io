@@ -1,1 +1,1 @@
-document.querySelectorAll("nav a").forEach(a=>a.addEventListener("click",()=>document.body.classList.remove("menu-open")));
+document.querySelectorAll('[data-modal]').forEach(t=>t.addEventListener('click',e=>e.preventDefault()));
