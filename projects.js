@@ -24,18 +24,19 @@
     return m ? Number(m[2] ? (m[2].length === 2 ? '20' + m[2] : m[2]) : m[1]) : 0;
   };
   const newestFirst = list => [...list].sort((a,b) => yearValue(b) - yearValue(a));
-  const featured = projects.filter(p => p.featured);
+  const selected = () => projects.filter(p => p.display ? p.display.selectedViews.includes(view) : p.featured);
+  const inView = p => p.display ? p.display.views.includes(view) : !p.archiveOnly;
   function shelf(id, title, subtitle, items, large = false) {
-    items = newestFirst(items.filter(p => !p.archiveOnly));
+    items = newestFirst(items.filter(inView));
     if (!items.length) return '';
     return `<section class="portfolio-shelf"><div class="shelf-heading"><div><h2>${title}</h2><p>${subtitle}</p></div><div class="shelf-tools"><button class="view-shelf" data-filter="${id}">view all ↗</button><button data-scroll="-1" aria-label="Scroll ${title} left">←</button><button data-scroll="1" aria-label="Scroll ${title} right">→</button></div></div><div class="portfolio-row ${large ? 'featured' : ''}">${items.map(card).join('')}</div></section>`;
   }
   function filterItems(key) {
-    if (key === 'selected') return featured;
+    if (key === 'selected') return selected();
     if (key === 'personal') return projects.filter(p => p.group === 'personal' || (p.group === 'motion' && p.eng));
-    if (key === 'selected-design') return projects.filter(p => ['medibase','metropolis','speachu'].includes(p.id));
+    if (key === 'selected-design') return projects.filter(p => p.display ? p.display.selectedViews.includes('design') : ['medibase','metropolis','speachu'].includes(p.id));
     if (key === 'built') return projects.filter(p => p.eng && !p.featured && !['identity','art','competitions'].includes(p.group));
-    if (key === 'creative') return projects.filter(p => ['identity','merch','art','motion','spaces'].includes(p.group));
+    if (key === 'creative') return projects.filter(p => ['identity','editorial','merch','art','motion','spaces'].includes(p.group));
     if (key === 'competition') return projects.filter(p => p.id === 'lyonctf' || p.group === 'competitions');
     if (key === 'interfaces') return projects.filter(p => p.design && ['hackathon','community','coursework'].includes(p.group));
     return projects.filter(p => p.group === key || p.sections?.includes(key));
@@ -44,7 +45,7 @@
     document.querySelectorAll('[data-view]').forEach(a => a.setAttribute('aria-current', a.dataset.view === view ? 'page' : 'false'));
     document.querySelector('#work-count').textContent = projects.filter(p => !p.hiddenFromAll).length;
     if (view === 'all') { renderAll(); return; }
-    let output = shelf('selected', 'selected work', 'A few places to start.', featured, true);
+    let output = shelf('selected', 'selected work', 'A few places to start.', selected(), true);
     if (view === 'overview') {
       output += shelf('interfaces','interfaces & interactions','From a first screen to a working experience.',filterItems('interfaces'));
       output += shelf('built','things I’ve built','Experiments, side quests, and ideas out in the world.',filterItems('built'));
@@ -64,6 +65,8 @@
       output += shelf('community','clubs & community','Software made for the people around me.',filterItems('community'));
       output += shelf('coursework','coursework & research','Learning by building.',filterItems('coursework'));
     }
+    const remaining=projects.filter(p=>p.display && inView(p) && !p.hiddenFromAll && !output.includes(`data-project="${p.id}"`));
+    output += shelf('other','more work','More from this view.',remaining);
     catalog.innerHTML = output;
   }
   function renderAll(preset = '') {
