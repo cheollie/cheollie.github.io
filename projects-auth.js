@@ -48,7 +48,7 @@
     window.PORTFOLIO_PROJECTS=data.map(assets);
     const script=document.createElement('script');script.src='projects.js';
     script.onerror=()=>{tabs.hidden=true;gate('Couldn’t open the collection. Please refresh and try again.');};
-    script.onload=()=>{if(!session)return;const button=document.createElement('button');button.type='button';button.className='portfolio-lock';button.textContent='lock portfolio';button.addEventListener('click',()=>{save(null);location.reload();});document.querySelector('.portfolio-intro').append(button);};
+    script.onload=()=>{if(!session)return;const button=document.createElement('button');button.type='button';button.className='portfolio-lock';button.setAttribute('aria-label','Lock private projects');button.title='Lock private projects';button.innerHTML='<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M12 14v3"/></svg>';button.addEventListener('click',()=>{save(null);location.reload();});document.querySelector('.portfolio-intro .title').append(button);};
     document.body.append(script);
     if(!session && Number(res.headers.get('X-Portfolio-Locked-Count'))>0) gate('',true);
     tabs.hidden=false;
