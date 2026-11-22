@@ -822,10 +822,4 @@ body h1,body h2,body h3{font-weight:620}
 .landing-summary li{padding:1px 0}
 @media(max-width:800px){.landing-summary{font-size:14px;line-height:1.3;margin:10px 0}.landing-summary li{padding:1px 0}}
 
-/* The goose itself is the pointer, with its beak as the click hotspot. */
-@media (pointer:fine) and (min-width:761px) and (prefers-reduced-motion:no-preference){
-  html.goose-cursor-active,html.goose-cursor-active *{cursor:none!important}
-}
-#goose-cursor[hidden]{display:none}
-
 .company-marker-hubspot{background:#fff;overflow:hidden}.company-marker-hubspot .company-icon{width:32px;height:32px;max-width:none}
