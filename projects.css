@@ -21,3 +21,17 @@
 
 .portfolio-intro{max-width:none}.portfolio-intro .title{display:flex;align-items:center;justify-content:space-between;gap:16px}.portfolio-intro .heading-highlight{min-width:0}.portfolio-lede{max-width:760px}.portfolio-intro .portfolio-lock{display:grid;place-items:center;flex:0 0 36px;width:36px;height:36px;margin:0;padding:0;border:0;border-radius:50%;background:transparent;color:#746d5d;cursor:pointer}.portfolio-intro .portfolio-lock:hover{background:#fff4d3;color:#191912}.portfolio-lock:focus-visible{outline:2px solid #a9790c;outline-offset:3px}
 
+/* Compact all-work collection. */
+.catalog-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:24px 16px}
+.catalog-grid .work-media{padding:8px}
+.catalog-grid .work-context{font-size:10px;margin:10px 0 5px}
+.catalog-grid .work-title{font-size:15px;line-height:1.3}
+.catalog-grid .work-description{font-size:12px;line-height:1.45;margin:6px 0 8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.catalog-grid .work-tags{margin:8px 0;gap:4px}
+.catalog-grid .artifact-links{font-size:11px;gap:8px;margin-top:8px}
+.catalog-grid .text-preview{padding:10px;gap:8px}
+.catalog-grid .text-preview strong{font-size:20px}
+.catalog-grid .text-preview small{font-size:11px}
+@media(min-width:1500px){.catalog-grid{grid-template-columns:repeat(5,minmax(0,1fr))}}
+@media(max-width:900px){.catalog-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:600px){.catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 12px}.catalog-grid .work-media{padding:5px}.catalog-grid .work-title{font-size:14px}.catalog-grid .text-preview strong{font-size:17px}}
