@@ -10,7 +10,7 @@
   try { session = sessionStorage.getItem(sessionKey); } catch {}
   const save = value => { session=value; try { if(value) sessionStorage.setItem(sessionKey,value); else sessionStorage.removeItem(sessionKey); } catch {} };
   function gate(message='') {
-    catalog.innerHTML = `<form class="portfolio-gate"><h2>A closer look</h2><p>Enter the portfolio password to explore the collection.</p><label for="portfolio-password">Password</label><div class="portfolio-password-row"><input id="portfolio-password" name="password" type="password" autocomplete="current-password" required maxlength="512"><button type="submit">view portfolio →</button></div><p role="status" class="portfolio-auth-status"></p></form>`;
+    catalog.innerHTML = `<form class="portfolio-gate"><div class="portfolio-password-row"><input id="portfolio-password" aria-label="Portfolio password" placeholder="Password" name="password" type="password" autocomplete="current-password" required maxlength="512"><button type="submit">view portfolio →</button></div><p role="status" class="portfolio-auth-status"></p></form>`;
     const form = catalog.querySelector('form');
     form.querySelector('[role="status"]').textContent = message;
     form.addEventListener('submit',async e => {

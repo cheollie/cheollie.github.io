@@ -15,4 +15,6 @@
 
 .work-tags .award-tag{background:#fff0bd;color:#6d510d;border:1px solid #e6cd78;font-weight:500;line-height:1.35}
 
-[hidden]{display:none!important}.portfolio-gate{max-width:480px;margin:3rem 0 6rem}.portfolio-gate label{display:block;margin:1.5rem 0 .5rem}.portfolio-password-row{display:flex;gap:.65rem;flex-wrap:wrap}.portfolio-password-row input{min-width:0;flex:1;padding:.8rem;border:1px solid #b9ac8f;border-radius:6px;font:inherit}.portfolio-password-row button,.portfolio-lock{padding:.7rem 1rem;background:#fff0bd;border:1px solid #c9ad60;border-radius:6px;font:inherit;cursor:pointer}.portfolio-password-row button:disabled{opacity:.6;cursor:wait}.portfolio-auth-status{min-height:1.5em}.portfolio-lock{font-size:.8rem;margin-top:1rem}
+[hidden]{display:none!important}.portfolio-gate{max-width:480px;margin:3rem 0 6rem}.portfolio-password-row{display:flex;gap:.65rem;align-items:stretch}.portfolio-password-row input{width:0;min-width:0;flex:1;padding:.8rem;border:1px solid #b9ac8f;border-radius:6px;font:inherit}.portfolio-password-row button,.portfolio-lock{padding:.7rem 1rem;background:#fff0bd;border:1px solid #c9ad60;border-radius:6px;font:inherit;cursor:pointer}.portfolio-password-row button:disabled{opacity:.6;cursor:wait}.portfolio-auth-status{min-height:1.5em}.portfolio-lock{font-size:.8rem;margin-top:1rem}
+
+.portfolio-password-row button{white-space:nowrap}
