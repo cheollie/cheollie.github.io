@@ -422,3 +422,12 @@ border-radius: 4px; width: 12rem; padding: 10px;
   width: 50%;
   flex: 1;
 }
+
+/* Archive navigation and readable long-form pages. */
+body{overflow-x:hidden;overflow-y:auto}
+.main{height:calc(100vh - 100px);height:calc(100dvh - 100px)}
+.scrolly-body{overflow:auto;max-height:calc(100dvh - 240px)}
+a.clicky-container{display:block;color:inherit;text-decoration:none;padding:12px;border-bottom:1px solid #ddd}
+a.clicky-container:hover,a.clicky-container:focus-visible{background:#fff4c8}
+.container-title{font-size:19px;margin:0 0 4px}.container-subtitle{font-size:15px;margin:0}
+@media(max-width:800px){#navbar{height:auto;min-height:100px}#subnavbarright{display:flex;flex-wrap:wrap;justify-content:center;gap:3px;padding:4px 8px 12px}.navbar-subtitle-text{font-size:15px;margin:3px}.main{top:140px;height:calc(100dvh - 140px)}.scrolly-body{max-height:calc(100dvh - 280px)}}
