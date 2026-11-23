@@ -27,6 +27,7 @@ for (const [name, url] of Object.entries(scenes)) {
   // Start downloading the data while the runtime module is being fetched.
   html = html.replace('</head>', `<link rel="preload" href="./${name}.bin?v=${revision}" as="fetch" crossorigin><style>.spline-watermark{display:none!important}</style></head>`);
   await writeFile(new URL(`../scenes/${name}.bin`, import.meta.url), bytes);
+  html = html.split('\n').map(line => line.trimEnd()).join('\n');
   await writeFile(new URL(`../scenes/${name}.html`, import.meta.url), html);
   // Change URLs with the scene so repeat visitors cannot reuse stale scene bytes.
   const pageUrl = new URL(name === 'home' ? '../index.html' : '../blog.html', import.meta.url);
