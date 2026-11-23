@@ -2,6 +2,17 @@
   const cleanRoutes={'/index.html':'/','/about.html':'/about','/projects.html':'/projects/','/blog.html':'/blog'};
   if(cleanRoutes[location.pathname])history.replaceState(history.state,'',cleanRoutes[location.pathname]+location.search+location.hash);
 
+  function glowBrand(event) {
+    const link = event.target.closest?.('.navbar-title-text');
+    const flower = link?.querySelector('.brand-sunflower');
+    if (!flower) return;
+    flower.classList.remove('sunflower-glow');
+    void flower.offsetWidth;
+    flower.classList.add('sunflower-glow');
+    setTimeout(() => flower.classList.remove('sunflower-glow'), 750);
+  }
+  document.addEventListener('pointerdown', glowBrand);
+  document.addEventListener('keydown', event => {if(event.key==='Enter' || event.key===' ')glowBrand(event);});
   const musicButton = document.getElementById('headphone-toggle');
   const musicBubble = document.getElementById('song-bubble');
   const timsButton = document.getElementById('tims-toggle');

@@ -4,3 +4,5 @@
 
 
 .name-label{gap:12px;flex-wrap:wrap}.name-label select{max-width:100%}
+
+#side-spacing{border:0;border-top:1px solid #e9e6da;padding:8px 0 0;margin:18px 0 0}#side-spacing legend{font-size:12px;color:#777565;padding:0 8px 0 0}#side-spacing .range-label{margin-top:10px}#brand-spacing{margin-bottom:8px}

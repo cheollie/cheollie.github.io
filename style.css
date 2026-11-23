@@ -865,21 +865,45 @@ body.about-page .song-bubble{position:fixed;top:0;bottom:auto;left:16px;right:au
 
 .spotify-frame{position:relative;height:85px;overflow:hidden;border-radius:10px}.song-bubble .spotify-frame iframe{position:absolute;left:0;top:0;width:calc(100% * 152 / 85);height:152px;transform:scale(.5592105263);transform-origin:top left}
 
-/* Chronology has its own rail; brand marks sit independently beside each role. */
-.about-page .timeline:before{left:4px;top:14px;bottom:22px;width:1px;background:#d8cfba}
-.about-page .timeline article{position:relative;grid-template-columns:18px 100px 36px minmax(0,1fr);gap:10px 14px;padding:0 0 28px}
-.about-page .timeline article:before{content:"";position:absolute;left:0;top:9px;width:9px;height:9px;box-sizing:border-box;border:2px solid #fff;background:#ad9d77;border-radius:50%;z-index:2}
-.about-page .timeline-date{grid-column:2;grid-row:1;margin:0;padding:3px 0 0}
-.about-page .company-marker{grid-column:3;grid-row:1;display:flex;align-items:center;justify-content:center;width:36px;height:36px;margin:0;transform:none;border:0;border-radius:0;background:none;overflow:visible;box-shadow:none}
+/* Dates sit outside the chronology rail, with logos beside the role heading. */
+.about-page .timeline:before{left:118px;top:14px;bottom:22px;width:1px;background:#d8cfba}
+.about-page .timeline article{position:relative;grid-template-columns:100px 18px minmax(0,1fr);gap:10px 14px;padding:0 0 28px}
+.about-page .timeline article:before{content:"";position:absolute;left:114px;top:9px;width:9px;height:9px;box-sizing:border-box;border:2px solid #fff;background:#ad9d77;border-radius:50%;z-index:2}
+.about-page .timeline-date{grid-column:1;grid-row:1;margin:0;padding:3px 0 0}
+.about-page .timeline article>.employment-details{grid-column:3;grid-row:1;min-width:0}
+.employment-heading{display:flex;align-items:flex-start;gap:14px}
+.employment-heading h3{flex:1;min-width:0;margin:0;padding-top:2px}
+.about-page .company-marker{display:flex;align-items:center;justify-content:center;flex:0 0 36px;width:36px;height:36px;margin:0;transform:none;border:0;border-radius:0;background:none;overflow:visible;box-shadow:none}
 .about-page .company-marker .company-icon{width:28px;height:28px;border-radius:0;flex:none}
 .about-page .company-marker-hubspot .company-icon{width:44px;height:44px}
-.about-page .timeline article>div{grid-column:4;grid-row:1;min-width:0}
+.about-page .employment-details>p{margin:4px 0 0 50px}
 @media(max-width:560px){
- .about-page .timeline article{grid-template-columns:18px 32px minmax(0,1fr);gap:8px 10px;padding-bottom:26px}
- .about-page .timeline-date{grid-column:2 / -1;grid-row:1;padding-top:0}
- .about-page .company-marker{grid-column:2;grid-row:2;width:32px;height:32px}
- .about-page .timeline article>div{grid-column:3;grid-row:2}
- .about-page .timeline article:before{top:6px}
+ .about-page .timeline article{grid-template-columns:76px 12px minmax(0,1fr);gap:8px 10px;padding-bottom:26px}
+ .about-page .timeline:before{left:90px}
+ .about-page .timeline article:before{left:86px}
+ .about-page .timeline-date{padding-top:3px}
+ .employment-heading{gap:10px}
+ .about-page .company-marker{flex-basis:28px;width:28px;height:32px}
+ .about-page .company-marker .company-icon{width:25px;height:25px}
+ .about-page .company-marker-hubspot .company-icon{width:40px;height:40px}
+ .about-page .employment-details>p{margin:8px 0 0}
 }
 
 #employment{scroll-margin-top:120px}
+/* Shared 36px header row: center logos, dots, dates, and the title's first line. */
+.about-page .timeline:before{top:18px}
+.about-page .timeline article:before{top:13.5px}
+.about-page .timeline-date{box-sizing:border-box;min-height:36px;line-height:24px;padding:6px 0 0}
+.about-page .employment-heading h3{line-height:24px;padding:6px 0 0;margin:0}
+.about-page .company-marker{height:36px}
+@media(max-width:560px){.about-page .timeline-date{font-size:12px;white-space:nowrap}}
+
+/* The same sunflower as the pointer's bloom, with restrained brand feedback. */
+.brand-sunflower{display:inline-grid;place-items:center;position:relative;width:1em;height:1em;vertical-align:middle;isolation:isolate;flex:none}
+.brand-sunflower img{display:block;width:100%;height:100%;margin:0;object-fit:contain;transition:transform .55s cubic-bezier(.2,.7,.2,1);transform-origin:center}
+.navbar-title-text:hover .brand-sunflower img,.navbar-title-text:focus-visible .brand-sunflower img{transform:rotate(45deg)}
+.brand-sunflower:after{content:"";position:absolute;inset:-12px;z-index:-1;pointer-events:none;border-radius:50%;background:radial-gradient(circle,#ffe66e99 0%,#ffd43b55 42%,transparent 72%);opacity:0}
+.brand-sunflower.sunflower-glow:after{animation:brand-sunflower-glow .75s ease-out}
+.navbar-title-text:active .brand-sunflower:after{opacity:1}
+@keyframes brand-sunflower-glow{0%{opacity:0;transform:scale(.5)}25%{opacity:1;transform:scale(1.1)}100%{opacity:0;transform:scale(1.65)}}
+@media(prefers-reduced-motion:reduce){.brand-sunflower img{transition:none}.navbar-title-text:hover .brand-sunflower img,.navbar-title-text:focus-visible .brand-sunflower img{transform:none}.brand-sunflower.sunflower-glow:after{animation:none;opacity:.7}}

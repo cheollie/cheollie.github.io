@@ -15,6 +15,8 @@
   let originalBrand;
   const nameChoice = document.getElementById('name-choice');
   const linksAlignment = document.getElementById('links-alignment');
+  const spacingControls=['side-top','side-name-gap','side-link-gap','brand-gap'].map(id=>document.getElementById(id));
+  const [sideTop,sideNameGap,sideLinkGap,brandGap]=spacingControls;
 
   function render() {
     if (!style) return;
@@ -24,6 +26,10 @@
     document.getElementById('original').textContent = original ? 'back to experiment' : 'compare original';
     for (const button of document.querySelectorAll('[data-mode]')) button.setAttribute('aria-pressed', String(!original && button.dataset.mode === mode));
     tint.disabled = original;
+    document.getElementById('side-spacing').hidden=original || mode!=='side';
+    document.getElementById('brand-spacing').hidden=original || nameChoice.value!=='chelsea-w-flower';
+    for(const control of spacingControls){control.disabled=original;document.getElementById(control.id+'-value').value=control.value+'px';}
+    sideNameGap.disabled=original || nameChoice.value==='none';
     for (const control of [navBackground, navColor, pageBackground]) control.disabled = original;
     document.getElementById('custom-nav-label').hidden = navBackground.value !== 'custom';
     nameChoice.disabled = original;
@@ -38,9 +44,9 @@
       brand.replaceChildren();
       if (withFlower) {
         const flower = brand.ownerDocument.createElement('span');
-        flower.textContent = '🌻';
+        flower.innerHTML = '<img src="/icons/sunflower.svg" alt="">';
         flower.setAttribute('aria-hidden', 'true');
-        flower.className = 'name-flower';
+        flower.className = 'name-flower brand-sunflower';
         brand.append(flower);
       }
       if (withFlower && label) {
@@ -67,9 +73,9 @@
       .nav-preview #navbar:has(.navbar-title-text[hidden]){justify-content:${mode === 'side' ? 'flex-start' : linksAlignment.value === 'center' ? 'center' : 'flex-end'}}
       .nav-preview #navbar:has(.navbar-title-text[hidden]) #subnavbarright{margin-top:0;align-items:${mode === 'side' ? 'flex-start' : 'center'};justify-content:${mode === 'side' ? 'flex-start' : 'center'};text-align:${mode === 'side' ? 'left' : 'center'}}
       .nav-preview #navbar .navbar-title-text[hidden]{display:none}
-      .nav-preview .navbar-title-text{display:inline-flex;align-items:center;gap:9px;font-weight:850}
+      .nav-preview #navbar .navbar-title-text{display:inline-flex;align-items:center;gap:${Number(brandGap.value)}px;font-weight:850}
       .nav-preview .name-dot{font-size:16px;font-weight:400;color:#8b8779}
-      .nav-preview .name-flower{font-family:"Apple Color Emoji","Segoe UI Emoji",sans-serif;font-size:24px;line-height:1;color:currentColor}
+      .nav-preview #navbar .name-flower{display:inline-grid;place-items:center;flex:none;width:26px;height:26px;line-height:1}
       .nav-preview #navbar{box-sizing:border-box;position:fixed;z-index:30;display:flex;align-items:center;justify-content:space-between;height:${h}px;padding:0 34px;background:${navFill};box-shadow:none;border:0;transition:none}
       .nav-preview #subnavbarleft,.nav-preview #subnavbarright{display:flex;align-items:center;padding:0}
       .nav-preview #subnavbarright{gap:28px}
@@ -90,10 +96,10 @@
         @media(max-width:800px){.nav-preview #navbar{gap:18px}.nav-preview #navbar #subnavbarleft:after{margin-left:${nameDivider.value === 'line' ? '18px' : '0'}}}
       `,
       side: `
-        .nav-preview #navbar{top:42px;left:38px;bottom:38px;width:155px;height:auto;padding:14px;flex-direction:column;align-items:flex-start;justify-content:flex-start;border-radius:12px}
-        .nav-preview #subnavbarright{flex-direction:column;align-items:flex-start;text-align:left;gap:10px;margin-top:58px}
-        .home-page .home-content-vc{left:220px;padding-left:0;max-width:calc(100% - 250px)}
-        @media(max-width:800px){.nav-preview #navbar{left:12px;top:24px;bottom:auto;width:110px;padding:8px}.nav-preview #subnavbarright{margin-top:24px;gap:6px}.home-page .home-content-vc{left:140px;top:120px;transform:none;width:calc(100% - 150px);max-width:none;padding:0 10px}.home-page .home-title{font-size:22px}.home-page .landing-summary{font-size:13px}}
+        .nav-preview #navbar{top:${Number(sideTop.value)}px;left:38px;bottom:38px;width:216px;height:auto;padding:14px;flex-direction:column;align-items:flex-start;justify-content:flex-start;border-radius:12px}
+        .nav-preview #subnavbarright{flex-direction:column;align-items:flex-start;text-align:left;gap:${Number(sideLinkGap.value)}px;margin-top:${Number(sideNameGap.value)}px}
+        .home-page .home-content-vc{left:280px;padding-left:0;max-width:calc(100% - 310px)}
+        @media(max-width:800px){.nav-preview #navbar{left:12px;top:${Number(sideTop.value)}px;bottom:auto;width:180px;padding:8px}.nav-preview #navbar .navbar-title-text{font-size:16px;gap:${Math.min(Number(brandGap.value),16)}px}.nav-preview #subnavbarright{margin-top:${Number(sideNameGap.value)}px;gap:${Number(sideLinkGap.value)}px}.home-page .home-content-vc{left:210px;top:120px;transform:none;width:calc(100% - 220px);max-width:none;padding:0 10px}.home-page .home-title{font-size:22px}.home-page .landing-summary{font-size:13px}}
       `,
       float: `
         .nav-preview #navbar{left:50%;transform:translateX(-50%);width:min(520px,calc(100% - 32px));background:${navFill};top:${position.value === 'top' ? '24px' : 'auto'};bottom:${position.value === 'bottom' ? '24px' : 'auto'};border-radius:18px;padding:0 24px;border:1px solid rgba(145,126,61,.13);box-shadow:0 5px 20px rgba(76,62,14,.08)}
@@ -102,7 +108,7 @@
     };
     const scrollLayout = `
       .scroll-page.nav-preview{padding-top:${mode === 'float' ? h + 48 : mode === 'side' ? 24 : h + 16}px;box-sizing:border-box}
-      ${mode === 'side' ? '.scroll-page.nav-preview{padding-left:190px}@media(max-width:800px){.scroll-page.nav-preview{padding-left:130px}}' : ''}
+      ${mode === 'side' ? '.scroll-page.nav-preview{padding-left:250px}@media(max-width:800px){.scroll-page.nav-preview{padding-left:200px}}' : ''}
       .nav-preview #navbar .navbar-subtitle-text[aria-current=page]{text-decoration:underline;text-decoration-color:#9a8544;text-underline-offset:5px}
     `;
     const pageFills = {
@@ -112,16 +118,17 @@
     const pageFill = pageFills[pageBackground.value];
     const pageStyle = pageFill ? `body.nav-preview{background:${pageFill};background-attachment:fixed}` : '';
     const contentMargins = mode === 'side' ? `
-      .nav-preview{--preview-gutter:clamp(24px,6vw,80px);--preview-rail:${mode === 'side' ? '190px' : '0px'}}
+      .nav-preview{--preview-gutter:clamp(24px,6vw,80px);--preview-rail:${mode === 'side' ? '250px' : '0px'}}
       .blog-page.nav-preview .home-content-vc{box-sizing:border-box;left:max(calc(var(--preview-rail) + var(--preview-gutter)),calc((100vw - var(--preview-rail) - 1200px)/2 + var(--preview-rail) + var(--preview-gutter)));padding:0;width:min(420px,calc((100vw - var(--preview-rail)) * .45));max-width:none}
       @media(max-width:800px){
-        .nav-preview{--preview-rail:${mode === 'side' ? '130px' : '0px'}}
+        .nav-preview{--preview-rail:${mode === 'side' ? '200px' : '0px'}}
         .blog-page.nav-preview .home-content-vc{width:calc(100% - var(--preview-rail) - 2 * var(--preview-gutter));max-width:560px}
       }
     ` : '';
     style.textContent = common + variants[mode] + scrollLayout + pageStyle + contentMargins;
     const url = new URL(location.href);
     url.searchParams.set('nav', mode);
+    for(const control of spacingControls)url.searchParams.set(control.id,control.value);
     url.searchParams.set('name', nameChoice.value);
     url.searchParams.set('align', linksAlignment.value);
     url.searchParams.set('divider', nameDivider.value);
@@ -141,6 +148,7 @@
     });
   }
   tint.addEventListener('input', render);
+  for(const control of spacingControls)control.addEventListener('input',render);
   position.addEventListener('change', render);
   for (const control of [navBackground, navColor, pageBackground]) control.addEventListener('input', render);
   nameChoice.addEventListener('change', render);
@@ -161,6 +169,7 @@
     event.currentTarget.textContent = settings.hidden ? 'show' : 'hide';
   });
   const params = new URLSearchParams(location.search);
+  for(const control of spacingControls){const value=params.get(control.id);if(value!==null && Number.isFinite(Number(value)))control.value=String(Math.max(Number(control.min),Math.min(Number(control.max),Number(value))));}
   if (['none','line'].includes(params.get('divider'))) nameDivider.value = params.get('divider');
   if (['right', 'center'].includes(params.get('align'))) linksAlignment.value = params.get('align');
   for (const [control, key] of [[navBackground,'navbg'],[pageBackground,'pagebg']]) {
