@@ -27,7 +27,7 @@
     for (const button of document.querySelectorAll('[data-mode]')) button.setAttribute('aria-pressed', String(!original && button.dataset.mode === mode));
     tint.disabled = original;
     document.getElementById('side-spacing').hidden=original || mode!=='side';
-    document.getElementById('brand-spacing').hidden=original || nameChoice.value!=='chelsea-w-flower';
+    document.getElementById('brand-spacing').hidden=original || !['chelsea-w-flower','cw-flower'].includes(nameChoice.value);
     for(const control of spacingControls){control.disabled=original;document.getElementById(control.id+'-value').value=control.value+'px';}
     sideNameGap.disabled=original || nameChoice.value==='none';
     for (const control of [navBackground, navColor, pageBackground]) control.disabled = original;
@@ -40,7 +40,7 @@
     if (original || nameChoice.value === 'original') brand.innerHTML = originalBrand;
     else {
       const withFlower = nameChoice.value.endsWith('-flower') || nameChoice.value === 'sunflower';
-      const label = nameChoice.value === 'sunflower' ? '' : nameChoice.value === 'cw' ? 'cw' : nameChoice.value.startsWith('chelsea-w') ? 'chelsea w' : 'chelsea';
+      const label = nameChoice.value === 'sunflower' ? '' : nameChoice.value.startsWith('cw') ? 'cw' : nameChoice.value.startsWith('chelsea-w') ? 'chelsea w' : 'chelsea';
       brand.replaceChildren();
       if (withFlower) {
         const flower = brand.ownerDocument.createElement('span');
