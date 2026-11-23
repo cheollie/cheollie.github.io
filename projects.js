@@ -10,6 +10,11 @@
   let returnFocus;
   let filterView = view;
   const esc = value => String(value || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  function description(p) {
+    const link=p.descriptionLink;
+    const text=esc(p.description);
+    return link?.text && /^https:\/\//i.test(link.url || '') ? text.replace(esc(link.text),`<a href="${esc(link.url)}" target="_blank" rel="noopener noreferrer">${esc(link.text)}</a>`) : text;
+  }
   const artifacts = p => `<div class="artifact-links">${Object.entries(p.links).map(([label, href]) => `<a href="${esc(href)}" target="_blank" rel="noopener noreferrer">${esc(label)} ↗</a>`).join('')}</div>`;
   const tags = p => `<div class="work-tags">${p.tags.slice(0,3).map(t => `<span>${esc(t)}</span>`).join('')}${(p.awards || []).map(a => `<span class="award-tag" title="${esc(a.detail)}" aria-label="Award: ${esc(a.label)}">🏆 ${esc(a.label)}</span>`).join('')}</div>`;
   function media(p) {
@@ -18,7 +23,7 @@
     return `<span class="text-preview"><small>${esc(p.context)}</small><strong>${esc(p.title)}</strong><small>project details ↗</small></span>`;
   }
   function card(p) {
-    return `<article class="work-card"><button class="work-media" data-project="${p.id}" aria-label="Explore ${esc(p.title)}">${media(p)}</button><p class="work-context">${esc(p.context)} <span class="work-year">· ${esc(p.yearLabel || 'c. 2022–23')}</span></p><button class="work-title" data-project="${p.id}">${esc(p.title)}</button><p class="work-description">${esc(p.description)}</p>${tags(p)}${artifacts(p)}</article>`;
+    return `<article class="work-card"><button class="work-media" data-project="${p.id}" aria-label="Explore ${esc(p.title)}">${media(p)}</button><p class="work-context">${esc(p.context)} <span class="work-year">· ${esc(p.yearLabel || 'c. 2022–23')}</span></p><button class="work-title" data-project="${p.id}">${esc(p.title)}</button><p class="work-description">${description(p)}</p>${tags(p)}${artifacts(p)}</article>`;
   }
   const yearValue = p => {
     const m = String(p.yearLabel || '').match(/(20\d{2})(?:[–-](\d{4}|\d{2}))?/);
@@ -152,7 +157,7 @@
     const gallery = projectGallery(p);
     const scenes = (p.embeds || []).map(scene => `<section class="project-scene"><h3>${esc(scene.title)}</h3><iframe src="${esc(scene.url)}" title="${esc(scene.title)}" loading="lazy" allow="fullscreen" referrerpolicy="strict-origin-when-cross-origin"></iframe></section>`).join('');
     const related = (p.relatedWork || []).filter(item => projects.some(project => project.id === item.id));
-    return `<div class="panel-body"><p class="work-context">${esc(p.context)} <span class="work-year">· ${esc(p.yearLabel || '')}</span></p><h2 id="panel-title">${esc(p.title)}</h2><p class="panel-description">${esc(p.description)}</p>${tags(p)}${artifacts(p)}${scenes}${gallery}${p.role ? `<h3>my contribution</h3><p>${esc(p.role)}</p>` : ''}${p.detail ? `<h3>about the project</h3><p>${esc(p.detail)}</p>` : ''}${p.technologies?.length ? `<h3>built with</h3><p>${p.technologies.map(esc).join(' · ')}</p>` : ''}${p.references && !p.postGalleries ? `<h3>published posts</h3><div class="artifact-links">${Object.entries(p.references).map(([label,url]) => `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)} ↗</a>`).join('')}</div>` : ''}${related.length ? `<h3>related work</h3><div class="artifact-links">${related.map(item => `<button data-project="${esc(item.id)}">${esc(item.label)} ↗</button>`).join('')}</div>` : ''}${!fullPage ? `<a class="panel-case-link" href="?view=${view}&case=${p.id}">open project page ↗</a>` : ''}</div>`;
+    return `<div class="panel-body"><p class="work-context">${esc(p.context)} <span class="work-year">· ${esc(p.yearLabel || '')}</span></p><h2 id="panel-title">${esc(p.title)}</h2><p class="panel-description">${description(p)}</p>${tags(p)}${artifacts(p)}${scenes}${gallery}${p.role ? `<h3>my contribution</h3><p>${esc(p.role)}</p>` : ''}${p.detail ? `<h3>about the project</h3><p>${esc(p.detail)}</p>` : ''}${p.technologies?.length ? `<h3>built with</h3><p>${p.technologies.map(esc).join(' · ')}</p>` : ''}${p.references && !p.postGalleries ? `<h3>published posts</h3><div class="artifact-links">${Object.entries(p.references).map(([label,url]) => `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)} ↗</a>`).join('')}</div>` : ''}${related.length ? `<h3>related work</h3><div class="artifact-links">${related.map(item => `<button data-project="${esc(item.id)}">${esc(item.label)} ↗</button>`).join('')}</div>` : ''}${!fullPage ? `<a class="panel-case-link" href="?view=${view}&case=${p.id}">open project page ↗</a>` : ''}</div>`;
   }
   function openProject(id, updateURL = true) {
     let p = projects.find(p => p.id === id); if (!p) return;
