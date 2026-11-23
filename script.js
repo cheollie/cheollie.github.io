@@ -2,6 +2,33 @@
   const cleanRoutes={'/index.html':'/','/about.html':'/about','/projects.html':'/projects/','/blog.html':'/blog'};
   if(cleanRoutes[location.pathname])history.replaceState(history.state,'',cleanRoutes[location.pathname]+location.search+location.hash);
 
+  // Warm only the scene someone is navigating toward; never run a hidden 3D canvas.
+  const splinePages = {
+    '/': 'https://my.spline.design/molang3dcopy-6388b49305715f4102a92675ed558214/',
+    '/blog': 'https://my.spline.design/untitled-503644d4f46411fed859a224cdb4b3bc/?v=2'
+  };
+  const warmedScenes = new Set();
+  const currentScene = document.querySelector('iframe.duck');
+  if (currentScene) warmedScenes.add(currentScene.src);
+  function warmSpline(event) {
+    if (window.navigator?.connection?.saveData) return;
+    const anchor = event.target.closest?.('#navbar a');
+    if (!anchor) return;
+    const target = new URL(anchor.href, location.href);
+    if (target.origin !== location.origin) return;
+    const scene = splinePages[target.pathname.replace(/\/$/, '') || '/'];
+    if (!scene || warmedScenes.has(scene)) return;
+    warmedScenes.add(scene);
+    if (!document.head.querySelector('link[rel="preconnect"][href="https://my.spline.design"]')) {
+      const connect = document.createElement('link');
+      connect.rel = 'preconnect';connect.href = 'https://my.spline.design';document.head.append(connect);
+    }
+    const hint = document.createElement('link');
+    hint.rel = 'prefetch';hint.as = 'document';hint.href = scene;document.head.append(hint);
+  }
+  document.addEventListener('pointerover', warmSpline);
+  document.addEventListener('focusin', warmSpline);
+
   function glowBrand(event) {
     const link = event.target.closest?.('.navbar-title-text');
     const flower = link?.querySelector('.brand-sunflower');
