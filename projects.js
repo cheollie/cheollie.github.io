@@ -88,13 +88,13 @@
     catalog.querySelectorAll('input,select').forEach(el => el.addEventListener('input',update));
     update();
   }
-  function figures(images, title, labels = []) {
-    return images.map((src,i) => `<figure><button data-enlarge="${esc(src)}" data-alt="${esc(title)} — image ${i+1}" aria-label="Enlarge ${esc(title)} image ${i+1}"><img src="${esc(src)}" alt="${esc(title)} — image ${i+1}" loading="lazy"></button>${labels[i] ? `<figcaption>${esc(labels[i])}</figcaption>` : ''}</figure>`).join('');
+  function figures(images, title, labels = [], themes = []) {
+    return images.map((src,i) => `<figure><button ${themes[i] ? `data-image-theme="${themes[i] === 'dark' ? 'dark' : 'light'}"` : ''} data-enlarge="${esc(src)}" data-alt="${esc(title)} — image ${i+1}" aria-label="Enlarge ${esc(title)} image ${i+1}"><img src="${esc(src)}" alt="${esc(title)} — image ${i+1}" loading="lazy"></button>${labels[i] ? `<figcaption>${esc(labels[i])}</figcaption>` : ''}</figure>`).join('');
   }
   function detail(p, fullPage = false) {
     const gallery = p.postGalleries?.length
       ? p.postGalleries.map(post => `<section class="post-gallery"><h3>${esc(post.title)}</h3><a class="panel-case-link" href="${esc(post.url)}" target="_blank" rel="noopener noreferrer">view published post ↗</a><div class="panel-gallery">${figures(post.images,post.title)}</div></section>`).join('') + `<section class="additional-campaign"><h3>more campaign work</h3><div class="panel-gallery">${figures(p.images,p.title,p.imageLabels)}</div></section>`
-      : `<div class="panel-gallery">${figures(p.images,p.title,p.imageLabels)}${p.video ? `<video controls playsinline preload="none" poster="${esc(p.images[0] || '')}" src="${esc(p.video)}"></video>` : ''}</div>`;
+      : `<div class="panel-gallery">${figures(p.images,p.title,p.imageLabels,p.imageThemes)}${p.video ? `<video controls playsinline preload="none" poster="${esc(p.images[0] || '')}" src="${esc(p.video)}"></video>` : ''}</div>`;
     const scenes = (p.embeds || []).map(scene => `<section class="project-scene"><h3>${esc(scene.title)}</h3><iframe src="${esc(scene.url)}" title="${esc(scene.title)}" loading="lazy" allow="fullscreen" referrerpolicy="strict-origin-when-cross-origin"></iframe></section>`).join('');
     return `<div class="panel-body"><p class="work-context">${esc(p.context)} <span class="work-year">· ${esc(p.yearLabel || '')}</span></p><h2 id="panel-title">${esc(p.title)}</h2><p class="panel-description">${esc(p.description)}</p>${tags(p)}${artifacts(p)}${scenes}${gallery}${p.role ? `<h3>my contribution</h3><p>${esc(p.role)}</p>` : ''}${p.detail ? `<h3>about the project</h3><p>${esc(p.detail)}</p>` : ''}${p.technologies?.length ? `<h3>built with</h3><p>${p.technologies.map(esc).join(' · ')}</p>` : ''}${p.references && !p.postGalleries ? `<h3>published posts</h3><div class="artifact-links">${Object.entries(p.references).map(([label,url]) => `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)} ↗</a>`).join('')}</div>` : ''}${!fullPage ? `<a class="panel-case-link" href="?view=${view}&case=${p.id}">open project page ↗</a>` : ''}</div>`;
   }
@@ -128,7 +128,7 @@
   },true);
   document.addEventListener('click',e => {
     const project=e.target.closest('[data-project]'); if(project) openProject(project.dataset.project);
-    const zoom=e.target.closest('[data-enlarge]'); if(zoom) {document.querySelector('#full-image').src=zoom.dataset.enlarge;document.querySelector('#full-image').alt=zoom.dataset.alt;viewer.showModal();}
+    const zoom=e.target.closest('[data-enlarge]'); if(zoom) {document.querySelector('#full-image').src=zoom.dataset.enlarge;document.querySelector('#full-image').alt=zoom.dataset.alt;viewer.dataset.theme=zoom.dataset.imageTheme || '';viewer.showModal();}
     const scroll=e.target.closest('[data-scroll]'); if(scroll) scroll.closest('.portfolio-shelf').querySelector('.portfolio-row').scrollBy({left:Number(scroll.dataset.scroll)*500,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
     const quick=e.target.closest('[data-quick-tag]'); if(quick) {const select=document.querySelector('#tag-filter');select.value=quick.dataset.quickTag;select.dispatchEvent(new Event('input'));}
     const filter=e.target.closest('[data-filter]'); if(filter) {view='all';const url=new URL(location.href);url.search='?view=all';history.pushState({},'',url);renderView();renderAll(filter.dataset.filter);}
