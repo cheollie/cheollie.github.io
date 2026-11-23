@@ -2,32 +2,80 @@
   const cleanRoutes={'/index.html':'/','/about.html':'/about','/projects.html':'/projects/','/blog.html':'/blog'};
   if(cleanRoutes[location.pathname])history.replaceState(history.state,'',cleanRoutes[location.pathname]+location.search+location.hash);
 
-  // Warm only the scene someone is navigating toward; never run a hidden 3D canvas.
-  const splinePages = {
-    '/': 'https://my.spline.design/molang3dcopy-6388b49305715f4102a92675ed558214/',
-    '/blog': 'https://my.spline.design/untitled-503644d4f46411fed859a224cdb4b3bc/?v=2'
-  };
+  // Preload the actual runtime and scene data, without running hidden 3D canvases.
+  const splinePages = { '/': 'home', '/blog': 'blog' };
   const warmedScenes = new Set();
   const currentScene = document.querySelector('iframe.duck');
-  if (currentScene) warmedScenes.add(currentScene.src);
+  function markSceneReady() {
+    currentScene?.parentElement.classList.add('scene-ready');
+    const loader = currentScene?.parentElement.querySelector('.scene-loader');
+    if (loader) loader.hidden = true;
+  }
+  if (currentScene) {
+    window.addEventListener('message', event => {
+      if (event.origin === location.origin && event.source === currentScene.contentWindow &&
+          event.data?.type === 'duck-scene-ready') markSceneReady();
+    });
+    // A cached iframe may finish before this script installs the message listener.
+    function checkSceneReady() {
+      if (currentScene.contentDocument?.documentElement.dataset.sceneReady === 'true') markSceneReady();
+    }
+    currentScene.addEventListener('load', checkSceneReady);
+    checkSceneReady();
+  }
+  function addHint(rel, href, as) {
+    if (document.head.querySelector(`link[rel="${rel}"][href="${href}"]`)) return;
+    const hint = document.createElement('link');
+    hint.rel = rel;
+    hint.href = href;
+    if (as) hint.as = as;
+    if (rel === 'modulepreload' || as === 'fetch') hint.crossOrigin = 'anonymous';
+    document.head.append(hint);
+  }
+  let sceneManifest;
+  async function warmScene(name) {
+    if (window.navigator?.connection?.saveData || warmedScenes.has(name)) return;
+    warmedScenes.add(name);
+    try {
+      sceneManifest ??= fetch('/scenes/manifest.json', {cache: 'no-cache'}).then(response => {
+        if (!response.ok) throw new Error('Scene manifest unavailable');
+        return response.json();
+      });
+      const scene = (await sceneManifest)[name];
+      if (!scene) return;
+      if (scene.runtime) addHint('modulepreload', scene.runtime);
+      addHint('prefetch', `/scenes/${name}.html?v=${scene.revision}`, 'document');
+      addHint('prefetch', `/scenes/${name}.bin?v=${scene.revision}`, 'fetch');
+    } catch {
+      // Preloading is optional; the visible scene still loads directly.
+      warmedScenes.delete(name);
+      sceneManifest = undefined;
+    }
+  }
   function warmSpline(event) {
-    if (window.navigator?.connection?.saveData) return;
     const anchor = event.target.closest?.('#navbar a');
     if (!anchor) return;
     const target = new URL(anchor.href, location.href);
     if (target.origin !== location.origin) return;
-    const scene = splinePages[target.pathname.replace(/\/$/, '') || '/'];
-    if (!scene || warmedScenes.has(scene)) return;
-    warmedScenes.add(scene);
-    if (!document.head.querySelector('link[rel="preconnect"][href="https://my.spline.design"]')) {
-      const connect = document.createElement('link');
-      connect.rel = 'preconnect';connect.href = 'https://my.spline.design';document.head.append(connect);
-    }
-    const hint = document.createElement('link');
-    hint.rel = 'prefetch';hint.as = 'document';hint.href = scene;document.head.append(hint);
+    const name = splinePages[target.pathname.replace(/\/$/, '') || '/'];
+    if (name) warmScene(name);
   }
   document.addEventListener('pointerover', warmSpline);
   document.addEventListener('focusin', warmSpline);
+  // Give visitors a head start before they even hover a navigation link.
+  function warmOtherScenes() {
+    const current = splinePages[location.pathname.replace(/\/$/, '') || '/'];
+    Object.values(splinePages).filter(name => name !== current).forEach(warmScene);
+  }
+  if ('requestIdleCallback' in window) window.requestIdleCallback(warmOtherScenes, {timeout: 2000});
+  else setTimeout(warmOtherScenes, 1000);
+
+  function updateNavFade() {
+    document.documentElement.classList.toggle('nav-scrolled', window.scrollY > 8);
+  }
+  window.addEventListener('scroll', updateNavFade, {passive: true});
+  window.addEventListener('pageshow', updateNavFade);
+  updateNavFade();
 
   function glowBrand(event) {
     const link = event.target.closest?.('.navbar-title-text');

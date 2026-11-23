@@ -1,0 +1,10 @@
+{
+  "home": {
+    "revision": "d889ad8ac91f",
+    "runtime": "https://cdn.spline.design/@splinetool/runtime@2.0.213/build/runtime.js"
+  },
+  "blog": {
+    "revision": "50d543ddc1c1",
+    "runtime": "https://cdn.spline.design/@splinetool/runtime@2.0.211/build/runtime.js"
+  }
+}

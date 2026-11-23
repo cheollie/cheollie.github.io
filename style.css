@@ -934,3 +934,26 @@ body:not(.nav-preview) #navbar a:focus-visible{outline:2px solid #837756;outline
 @media(max-width:800px){body:not(.nav-preview) #navbar{padding:0 22px}body:not(.nav-preview) #subnavbarright{gap:18px}body:not(.nav-preview) #navbar .navbar-subtitle-text{font-size:14px}.home-page:not(.nav-preview) .home-content-vc{top:120px;transform:none}}
 @media(max-width:420px){body:not(.nav-preview) #navbar{padding:0 16px}body:not(.nav-preview) #subnavbarright{gap:14px}}
 
+
+/* Three ducks take turns hopping below the loading message. */
+.home-page .scene-live{opacity:0;pointer-events:none;transition:opacity .2s ease}
+.home-page .scene-ready .scene-live{opacity:1;pointer-events:auto}
+.scene-loader{position:absolute;left:70%;top:50%;transform:translate(-50%,-50%);display:grid;grid-template-columns:repeat(3,40px);justify-content:center;gap:12px 8px;color:#837756;font-size:12px;letter-spacing:.02em;pointer-events:none}
+.scene-loader .scene-loader-text{grid-column:1 / -1;grid-row:2;color:#837756;font-size:11px;white-space:nowrap;text-align:center}
+.loading-duck-jumper{display:block;grid-row:1;width:40px;height:36px;animation:loading-duck-hop 1.8s ease-in-out infinite}
+.loading-duck-jumper:nth-child(2){animation-delay:.6s}
+.loading-duck-jumper:nth-child(3){animation-delay:1.2s}
+.loading-duck-jumper img{display:block;width:40px;height:36px}
+.scene-loader[hidden]{display:none}
+@keyframes loading-duck-hop{0%,33.333%,100%{transform:translateY(0)}16.667%{transform:translateY(-12px)}}
+/* Keep text behind the corner links from competing with navigation. */
+body:not(.nav-preview) #navbar{isolation:isolate}
+body:not(.nav-preview) #navbar:before{content:"";position:absolute;z-index:-1;left:0;right:0;top:-16px;height:125px;background:linear-gradient(to bottom,#fff 0%,#fffffff5 45%,#ffffffb3 70%,#ffffff00 100%);opacity:0;transition:opacity .2s ease;pointer-events:none}
+html.nav-scrolled body:not(.nav-preview) #navbar:before{opacity:1}
+@media(max-width:800px){.scene-loader{left:50%;top:60%}}
+@media(prefers-reduced-motion:reduce){.loading-duck-jumper{animation:none}.home-page .scene-live,body:not(.nav-preview) #navbar:before{transition:none}}
+
+/* A soft wash of each scene's color behind the loading ducks. */
+.scene-loader{isolation:isolate}
+.scene-loader:before{content:"";position:absolute;z-index:-1;left:50%;top:50%;width:340px;height:280px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(ellipse,#fde6a480 0%,#fde6a440 35%,#fde6a400 72%);pointer-events:none}
+.blog-page .scene-loader:before{background:radial-gradient(ellipse,#b9e0ff99 0%,#b9e0ff4d 35%,#b9e0ff00 72%)}
