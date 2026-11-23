@@ -25,7 +25,7 @@
     document.getElementById('position-label').hidden = mode !== 'float' || original;
     document.getElementById('original').setAttribute('aria-pressed', String(original));
     document.getElementById('original').textContent = original ? 'back to experiment' : 'compare original';
-    for (const button of document.querySelectorAll('[data-mode]')) button.setAttribute('aria-pressed', String(!original && button.dataset.mode === mode));
+    for (const button of document.querySelectorAll('[data-mode]')) button.setAttribute('aria-pressed', String(button.dataset.mode === 'original' ? original : !original && button.dataset.mode === mode));
     tint.disabled = original;
     document.getElementById('side-spacing').hidden=original || mode!=='side';
     document.getElementById('brand-spacing').hidden=original || !['chelsea-w-flower','cw-flower'].includes(nameChoice.value);
@@ -61,7 +61,7 @@
       }
     }
     brand.setAttribute('aria-label', 'Home');
-    if (original) { style.textContent = ''; return; }
+    if (original) { style.textContent = ''; const url=new URL(location.href);url.searchParams.set('nav','original');history.replaceState(null,'',url);return; }
     const h = 64;
     const solid = {white:'#fffdfb', cream:'#fff6da', sage:'#edf1e8', custom:navColor.value};
     const hex = solid[navBackground.value] || solid.white;
@@ -147,6 +147,7 @@
   }
   for (const button of document.querySelectorAll('[data-mode]')) {
     button.addEventListener('click', () => {
+      if(button.dataset.mode==='original'){original=true;render();return;}
       mode = button.dataset.mode;
       original = false;
       tint.value = defaults[mode];
@@ -189,7 +190,8 @@
   const requestedName = ({'chelsea-flower':'chelsea-w-flower'}[params.get('name')] || params.get('name'));
   if ([...nameChoice.options].some(option => option.value === requestedName)) nameChoice.value = requestedName;
   const requested = new URLSearchParams(location.search).get('nav');
-  if (Object.hasOwn(defaults, requested)) mode = requested;
+  if (requested==='original') original=true;
+  else if (Object.hasOwn(defaults, requested)) mode = requested;
   tint.value = defaults[mode];
   frame.addEventListener('load', () => {
     const doc = frame.contentDocument;
@@ -204,7 +206,7 @@
     style = doc.createElement('style');
     doc.head.append(style);
     brand = doc.querySelector('.navbar-title-text');
-    originalBrand = brand.innerHTML;
+    originalBrand = '<span class="semibold" style="font-size:27px;"><span class="brand-sunflower" aria-hidden="true"><img src="/icons/sunflower.svg" alt=""></span> <b>::</b> </span><span class="heavybold">cheollie</span>';
     // Keep navigation inside the experiment while allowing modified-click to open real pages.
     doc.addEventListener('click', event => {
       const link = event.target.closest('a');

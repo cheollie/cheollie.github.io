@@ -918,3 +918,18 @@ body.about-page .song-bubble[hidden],.about-page .tims-tooltip[hidden]{display:b
 @media(prefers-reduced-motion:reduce){.about-page .tims-button,.about-page .headphone-button,body.about-page .song-bubble,.about-page .tims-tooltip{transition:none}.about-page .tims-button:hover,.about-page .tims-button:focus-visible,.about-page .headphone-button:hover,.about-page .headphone-button:focus-visible{transform:none}body.about-page .song-bubble[hidden],.about-page .tims-tooltip[hidden]{scale:1;transition:none}}
 
 
+
+/* Chosen navigation: corner links and a sunflower-only home mark.
+   Playground frames retain the old base styles for the original preset. */
+body:not(.nav-preview) #navbar{box-sizing:border-box;position:fixed;left:0;top:16px;z-index:30;display:flex;align-items:center;justify-content:space-between;width:100%;height:64px;padding:0 34px;background:transparent;border:0;box-shadow:none}
+body:not(.nav-preview) #subnavbarleft,body:not(.nav-preview) #subnavbarright{display:flex;align-items:center;padding:0}
+body:not(.nav-preview) #subnavbarright{gap:28px}
+body:not(.nav-preview) #navbar .navbar-title-text{display:inline-flex;align-items:center;font-size:22px;white-space:nowrap}
+body:not(.nav-preview) #navbar .navbar-subtitle-text{font-size:16px;padding:12px 0;margin:0;background-image:none;text-underline-offset:5px;text-decoration-thickness:1px}
+body:not(.nav-preview) #navbar .navbar-subtitle-text:hover{background-image:none;text-decoration:underline}
+body:not(.nav-preview) #navbar a:focus-visible{outline:2px solid #837756;outline-offset:5px}
+.scroll-page:not(.nav-preview){padding-top:80px;box-sizing:border-box}
+.home-page:not(.nav-preview) .main{top:0;height:100dvh;width:100%}
+.home-page:not(.nav-preview) .home-content-vc{top:50%;transform:translateY(-50%)}
+@media(max-width:800px){body:not(.nav-preview) #navbar{padding:0 22px}body:not(.nav-preview) #subnavbarright{gap:18px}body:not(.nav-preview) #navbar .navbar-subtitle-text{font-size:14px}.home-page:not(.nav-preview) .home-content-vc{top:120px;transform:none}}
+@media(max-width:420px){body:not(.nav-preview) #navbar{padding:0 16px}body:not(.nav-preview) #subnavbarright{gap:14px}}
