@@ -14,6 +14,7 @@
   let brand;
   let originalBrand;
   const nameChoice = document.getElementById('name-choice');
+  const flowerOrder = document.getElementById('flower-order');
   const linksAlignment = document.getElementById('links-alignment');
   const spacingControls=['side-top','side-name-gap','side-link-gap','brand-gap'].map(id=>document.getElementById(id));
   const [sideTop,sideNameGap,sideLinkGap,brandGap]=spacingControls;
@@ -33,6 +34,7 @@
     for (const control of [navBackground, navColor, pageBackground]) control.disabled = original;
     document.getElementById('custom-nav-label').hidden = navBackground.value !== 'custom';
     nameChoice.disabled = original;
+    flowerOrder.disabled = original;
     document.getElementById('divider-label').hidden = original || mode !== 'center' || nameChoice.value === 'none';
     document.getElementById('alignment-label').hidden = original || nameChoice.value !== 'none' || mode === 'side' || mode === 'center';
     linksAlignment.disabled = original;
@@ -54,6 +56,9 @@
         dot.textContent = '·';dot.className = 'name-dot';dot.setAttribute('aria-hidden', 'true');brand.append(dot);
       }
       brand.append(brand.ownerDocument.createTextNode(label));
+      if (withFlower && label && flowerOrder.value === 'after') {
+        brand.append(brand.querySelector('.name-dot'), brand.querySelector('.name-flower'));
+      }
     }
     brand.setAttribute('aria-label', 'Home');
     if (original) { style.textContent = ''; return; }
@@ -130,6 +135,7 @@
     url.searchParams.set('nav', mode);
     for(const control of spacingControls)url.searchParams.set(control.id,control.value);
     url.searchParams.set('name', nameChoice.value);
+    url.searchParams.set('flower-order', flowerOrder.value);
     url.searchParams.set('align', linksAlignment.value);
     url.searchParams.set('divider', nameDivider.value);
     url.searchParams.set('navbg', navBackground.value);
@@ -152,6 +158,7 @@
   position.addEventListener('change', render);
   for (const control of [navBackground, navColor, pageBackground]) control.addEventListener('input', render);
   nameChoice.addEventListener('change', render);
+  flowerOrder.addEventListener('change', render);
   linksAlignment.addEventListener('change', render);
   nameDivider.addEventListener('change', render);
   const pageChoice = document.getElementById('page-choice');
@@ -169,6 +176,7 @@
     event.currentTarget.textContent = settings.hidden ? 'show' : 'hide';
   });
   const params = new URLSearchParams(location.search);
+  if (['before','after'].includes(params.get('flower-order'))) flowerOrder.value = params.get('flower-order');
   for(const control of spacingControls){const value=params.get(control.id);if(value!==null && Number.isFinite(Number(value)))control.value=String(Math.max(Number(control.min),Math.min(Number(control.max),Number(value))));}
   if (['none','line'].includes(params.get('divider'))) nameDivider.value = params.get('divider');
   if (['right', 'center'].includes(params.get('align'))) linksAlignment.value = params.get('align');
