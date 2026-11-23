@@ -1,4 +1,7 @@
 (function () {
+  const cleanRoutes={'/index.html':'/','/about.html':'/about','/projects.html':'/projects/','/blog.html':'/blog'};
+  if(cleanRoutes[location.pathname])history.replaceState(history.state,'',cleanRoutes[location.pathname]+location.search+location.hash);
+
   const musicButton = document.getElementById('headphone-toggle');
   const musicBubble = document.getElementById('song-bubble');
   const timsButton = document.getElementById('tims-toggle');
@@ -29,7 +32,35 @@
     });
   }
 
-  wirePopover(musicButton, musicBubble, true);
+  if (musicButton && musicBubble) {
+    let timer, pinned = false;
+    // Position outside the zoomed photo container so viewport bounds stay exact.
+    document.body.append(musicBubble);
+    function positionSong() {
+      const anchor = musicButton.getBoundingClientRect();
+      const navbarBottom = document.querySelector('#navbar')?.getBoundingClientRect().bottom || 0;
+      const topBound = Math.max(12, navbarBottom + 10);
+      musicBubble.style.maxHeight = Math.max(80, innerHeight - topBound - 12) + 'px';
+      const rect = musicBubble.getBoundingClientRect();
+      musicBubble.style.left = Math.max(16, Math.min(anchor.right - rect.width, innerWidth - rect.width - 16)) + 'px';
+      musicBubble.style.top = Math.max(topBound, Math.min(anchor.top - rect.height - 12, innerHeight - rect.height - 12)) + 'px';
+    }
+    function showSong() {clearTimeout(timer);musicBubble.hidden=false;musicButton.setAttribute('aria-expanded','true');positionSong();}
+    function hideSong() {clearTimeout(timer);musicBubble.hidden=true;musicButton.setAttribute('aria-expanded','false');}
+    function scheduleHide() {clearTimeout(timer);timer=setTimeout(()=>{if(!pinned && !musicButton.matches(':hover') && !musicBubble.matches(':hover') && document.activeElement!==musicButton && !musicBubble.contains(document.activeElement))hideSong();},180);}
+    musicButton.addEventListener('mouseenter',showSong);
+    musicButton.addEventListener('focus',showSong);
+    musicButton.addEventListener('mouseleave',scheduleHide);
+    musicButton.addEventListener('blur',scheduleHide);
+    musicBubble.addEventListener('mouseenter',()=>clearTimeout(timer));
+    musicBubble.addEventListener('mouseleave',scheduleHide);
+    musicBubble.addEventListener('focusout',scheduleHide);
+    musicButton.addEventListener('click',()=>{pinned=!pinned;if(pinned)showSong();else hideSong();});
+    document.addEventListener('click',e=>{if(!musicButton.contains(e.target) && !musicBubble.contains(e.target)){pinned=false;hideSong();}});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape' && !musicBubble.hidden){pinned=false;musicButton.focus();hideSong();}});
+    addEventListener('resize',()=>{if(!musicBubble.hidden)positionSong();});
+    addEventListener('scroll',()=>{if(!musicBubble.hidden)positionSong();},{passive:true,capture:true});
+  }
   if (timsButton && timsTip) {
     let hideTimer;
     function showTimsFact() {
@@ -60,8 +91,7 @@
 
   const finePointer = matchMedia('(pointer:fine)').matches;
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const landingPage = document.body.classList.contains('home-page');
-  if (!finePointer || reducedMotion || landingPage) return;
+  if (!finePointer || reducedMotion) return;
 
   const cursor = document.createElement('div');
   cursor.id = 'goose-cursor';

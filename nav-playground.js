@@ -5,6 +5,7 @@
   const navColor = document.getElementById('nav-color');
   const pageBackground = document.getElementById('page-background');
   const position = document.getElementById('position');
+  const cleanPage = path => ({'index.html':'/','about.html':'/about','projects.html':'/projects/','blog.html':'/blog','/index.html':'/','/about.html':'/about','/projects.html':'/projects/','/blog.html':'/blog'}[path] || path);
   const defaults = { side: 0, bare: 0, float: 88, center: 0 };
   const nameDivider = document.getElementById('name-divider');
   let mode = 'bare';
@@ -144,7 +145,7 @@
   nameDivider.addEventListener('change', render);
   const pageChoice = document.getElementById('page-choice');
   pageChoice.addEventListener('change', () => { frame.src = pageChoice.value; });
-  const requestedPage = new URLSearchParams(location.search).get('page');
+  const requestedPage = cleanPage(new URLSearchParams(location.search).get('page'));
   if ([...pageChoice.options].some(option => option.value === requestedPage)) {
     pageChoice.value = requestedPage;
     frame.src = requestedPage;
@@ -174,10 +175,11 @@
     const doc = frame.contentDocument;
     if (!doc || !doc.querySelector('.navbar-title-text')) return;
     doc.body.classList.add('nav-preview');
-    const currentPage = new URL(doc.URL).pathname.split('/').pop() || 'index.html';
+    const pageURL = new URL(doc.URL);
+    const currentPage = cleanPage(pageURL.pathname)+(pageURL.hash==='#employment'?'#employment':'');
     if ([...pageChoice.options].some(option => option.value === currentPage)) pageChoice.value = currentPage;
     for (const link of doc.querySelectorAll('#navbar a')) {
-      if (new URL(link.href).pathname === new URL(doc.URL).pathname) link.setAttribute('aria-current', 'page');
+      if (cleanPage(new URL(link.href).pathname) === cleanPage(new URL(doc.URL).pathname)) link.setAttribute('aria-current', 'page');
     }
     style = doc.createElement('style');
     doc.head.append(style);

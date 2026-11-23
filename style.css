@@ -852,3 +852,34 @@ body h1,body h2,body h3{font-weight:620}
 .compact-page-content{zoom:.9;width:calc(100% / .9)}
 #navbar .navbar-title-text,#navbar .navbar-subtitle-text{display:inline-block;zoom:.9}
 
+
+/* Give the about content balanced margins and let sections fill the available width. */
+.about-page .content{width:100%;max-width:1240px}.about-page .about-section{max-width:none}
+.about-page .song-bubble{top:auto;bottom:calc(100% + 12px);right:0;left:auto;transform:none;border-radius:15px}
+
+.about-page .compact-page-content{width:auto}
+
+/* Keep the compact player inside the viewport, above its headphone trigger. */
+body.about-page .song-bubble{position:fixed;top:0;bottom:auto;left:16px;right:auto;width:min(270px,calc(100vw - 32px));box-sizing:border-box;padding:8px;overflow:auto;transform:none;z-index:20}
+@media(max-width:560px){.about-page .timeline-date{margin-left:0;padding-left:0}}
+
+.spotify-frame{position:relative;height:85px;overflow:hidden;border-radius:10px}.song-bubble .spotify-frame iframe{position:absolute;left:0;top:0;width:calc(100% * 152 / 85);height:152px;transform:scale(.5592105263);transform-origin:top left}
+
+/* Chronology has its own rail; brand marks sit independently beside each role. */
+.about-page .timeline:before{left:4px;top:14px;bottom:22px;width:1px;background:#d8cfba}
+.about-page .timeline article{position:relative;grid-template-columns:18px 100px 36px minmax(0,1fr);gap:10px 14px;padding:0 0 28px}
+.about-page .timeline article:before{content:"";position:absolute;left:0;top:9px;width:9px;height:9px;box-sizing:border-box;border:2px solid #fff;background:#ad9d77;border-radius:50%;z-index:2}
+.about-page .timeline-date{grid-column:2;grid-row:1;margin:0;padding:3px 0 0}
+.about-page .company-marker{grid-column:3;grid-row:1;display:flex;align-items:center;justify-content:center;width:36px;height:36px;margin:0;transform:none;border:0;border-radius:0;background:none;overflow:visible;box-shadow:none}
+.about-page .company-marker .company-icon{width:28px;height:28px;border-radius:0;flex:none}
+.about-page .company-marker-hubspot .company-icon{width:44px;height:44px}
+.about-page .timeline article>div{grid-column:4;grid-row:1;min-width:0}
+@media(max-width:560px){
+ .about-page .timeline article{grid-template-columns:18px 32px minmax(0,1fr);gap:8px 10px;padding-bottom:26px}
+ .about-page .timeline-date{grid-column:2 / -1;grid-row:1;padding-top:0}
+ .about-page .company-marker{grid-column:2;grid-row:2;width:32px;height:32px}
+ .about-page .timeline article>div{grid-column:3;grid-row:2}
+ .about-page .timeline article:before{top:6px}
+}
+
+#employment{scroll-margin-top:120px}

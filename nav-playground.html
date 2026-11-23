@@ -8,16 +8,17 @@
   <link rel="stylesheet" href="nav-playground.css">
 </head>
 <body>
-  <iframe id="preview" src="index.html" title="Live site navigation preview"></iframe>
+  <iframe id="preview" src="/" title="Live site navigation preview"></iframe>
   <aside class="controls" aria-label="Navigation playground">
     <div class="panel-heading"><h1>customize</h1><button id="collapse" aria-expanded="true" aria-controls="settings">hide</button></div>
     <div id="settings">
       <label class="position-label" for="page-choice">preview page
         <select id="page-choice">
-          <option value="index.html">home</option>
-          <option value="about.html">about</option>
-          <option value="projects.html">projects</option>
-          <option value="blog.html">blog</option>
+          <option value="/">home</option>
+          <option value="/about">about</option>
+          <option value="/about#employment">about · employment timeline</option>
+          <option value="/projects/">projects</option>
+          <option value="/blog">blog</option>
         </select>
       </label>
       <div class="presets" role="group" aria-label="Navigation style">
@@ -66,7 +67,7 @@
           <option value="wash">color wash</option>
         </select>
       </label>
-      <div class="panel-footer"><button id="original" aria-pressed="false">compare original</button><a href="index.html" target="_blank" rel="noopener">open current site</a></div>
+      <div class="panel-footer"><button id="original" aria-pressed="false">compare original</button><a href="/" target="_blank" rel="noopener">open current site</a></div>
     </div>
   </aside>
   <script src="nav-playground.js"></script>
