@@ -52,7 +52,7 @@
       const navbarBottom = document.querySelector('#navbar')?.getBoundingClientRect().bottom || 0;
       const topBound = Math.max(12, navbarBottom + 10);
       musicBubble.style.maxHeight = Math.max(80, innerHeight - topBound - 12) + 'px';
-      const rect = musicBubble.getBoundingClientRect();
+      const rect = {width:musicBubble.offsetWidth,height:musicBubble.offsetHeight};
       musicBubble.style.left = Math.max(16, Math.min(anchor.right - rect.width, innerWidth - rect.width - 16)) + 'px';
       musicBubble.style.top = Math.max(topBound, Math.min(anchor.top - rect.height - 12, innerHeight - rect.height - 12)) + 'px';
     }

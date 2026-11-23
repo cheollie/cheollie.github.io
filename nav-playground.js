@@ -178,7 +178,7 @@
   for (const [control, key] of [[navColor,'navcolor']]) {
     if (/^#[0-9a-f]{6}$/i.test(params.get(key))) control.value = params.get(key);
   }
-  const requestedName = ({'chelsea':'chelsea-w','chelsea-flower':'chelsea-w-flower'}[params.get('name')] || params.get('name'));
+  const requestedName = ({'chelsea-flower':'chelsea-w-flower'}[params.get('name')] || params.get('name'));
   if ([...nameChoice.options].some(option => option.value === requestedName)) nameChoice.value = requestedName;
   const requested = new URLSearchParams(location.search).get('nav');
   if (Object.hasOwn(defaults, requested)) mode = requested;

@@ -907,3 +907,12 @@ body.about-page .song-bubble{position:fixed;top:0;bottom:auto;left:16px;right:au
 .navbar-title-text:active .brand-sunflower:after{opacity:1}
 @keyframes brand-sunflower-glow{0%{opacity:0;transform:scale(.5)}25%{opacity:1;transform:scale(1.1)}100%{opacity:0;transform:scale(1.65)}}
 @media(prefers-reduced-motion:reduce){.brand-sunflower img{transition:none}.navbar-title-text:hover .brand-sunflower img,.navbar-title-text:focus-visible .brand-sunflower img{transform:none}.brand-sunflower.sunflower-glow:after{animation:none;opacity:.7}}
+/* Smooth memento feedback and reversible popover entrance/exit motion. */
+.about-page .tims-button,.about-page .headphone-button{transition:transform 260ms cubic-bezier(.2,.7,.2,1),color 220ms ease}
+.about-page .tims-button:hover,.about-page .tims-button:focus-visible{transform:translateY(-2px) rotate(-3deg) scale(1.05)}
+.about-page .headphone-button:hover,.about-page .headphone-button:focus-visible{transform:translateY(-2px) rotate(0) scale(1.05)}
+body.about-page .song-bubble,.about-page .tims-tooltip{opacity:1;scale:1;visibility:visible;transition:opacity 200ms ease,scale 260ms cubic-bezier(.2,.7,.2,1),visibility 0s}
+body.about-page .song-bubble{transform-origin:bottom right}
+.about-page .tims-tooltip{transform-origin:26px top}
+body.about-page .song-bubble[hidden],.about-page .tims-tooltip[hidden]{display:block;opacity:0;scale:.94;visibility:hidden;pointer-events:none;transition:opacity 180ms ease,scale 220ms ease,visibility 0s 220ms}
+@media(prefers-reduced-motion:reduce){.about-page .tims-button,.about-page .headphone-button,body.about-page .song-bubble,.about-page .tims-tooltip{transition:none}.about-page .tims-button:hover,.about-page .tims-button:focus-visible,.about-page .headphone-button:hover,.about-page .headphone-button:focus-visible{transform:none}body.about-page .song-bubble[hidden],.about-page .tims-tooltip[hidden]{scale:1;transition:none}}
