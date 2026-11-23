@@ -43,6 +43,10 @@
         flower.className = 'name-flower';
         brand.append(flower);
       }
+      if (withFlower && label) {
+        const dot = brand.ownerDocument.createElement('span');
+        dot.textContent = '·';dot.className = 'name-dot';dot.setAttribute('aria-hidden', 'true');brand.append(dot);
+      }
       brand.append(brand.ownerDocument.createTextNode(label));
     }
     brand.setAttribute('aria-label', 'Home');
@@ -64,6 +68,7 @@
       .nav-preview #navbar:has(.navbar-title-text[hidden]) #subnavbarright{margin-top:0;align-items:${mode === 'side' ? 'flex-start' : 'center'};justify-content:${mode === 'side' ? 'flex-start' : 'center'};text-align:${mode === 'side' ? 'left' : 'center'}}
       .nav-preview #navbar .navbar-title-text[hidden]{display:none}
       .nav-preview .navbar-title-text{display:inline-flex;align-items:center;gap:9px;font-weight:850}
+      .nav-preview .name-dot{font-size:16px;font-weight:400;color:#8b8779}
       .nav-preview .name-flower{font-family:"Apple Color Emoji","Segoe UI Emoji",sans-serif;font-size:24px;line-height:1;color:currentColor}
       .nav-preview #navbar{box-sizing:border-box;position:fixed;z-index:30;display:flex;align-items:center;justify-content:space-between;height:${h}px;padding:0 34px;background:${navFill};box-shadow:none;border:0;transition:none}
       .nav-preview #subnavbarleft,.nav-preview #subnavbarright{display:flex;align-items:center;padding:0}
@@ -164,7 +169,7 @@
   for (const [control, key] of [[navColor,'navcolor']]) {
     if (/^#[0-9a-f]{6}$/i.test(params.get(key))) control.value = params.get(key);
   }
-  const requestedName = new URLSearchParams(location.search).get('name');
+  const requestedName = ({'chelsea':'chelsea-w','chelsea-flower':'chelsea-w-flower'}[params.get('name')] || params.get('name'));
   if ([...nameChoice.options].some(option => option.value === requestedName)) nameChoice.value = requestedName;
   const requested = new URLSearchParams(location.search).get('nav');
   if (Object.hasOwn(defaults, requested)) mode = requested;
