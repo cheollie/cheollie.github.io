@@ -106,16 +106,14 @@
     };
     const pageFill = pageFills[pageBackground.value];
     const pageStyle = pageFill ? `body.nav-preview{background:${pageFill};background-attachment:fixed}` : '';
-    const contentMargins = `
+    const contentMargins = mode === 'side' ? `
       .nav-preview{--preview-gutter:clamp(24px,6vw,80px);--preview-rail:${mode === 'side' ? '190px' : '0px'}}
-      .scroll-page.nav-preview .content,.scroll-page.nav-preview .portfolio-main{box-sizing:border-box;width:min(1200px,100%);max-width:1200px;margin:0 auto;padding:44px var(--preview-gutter) 72px}
-      .scroll-page.nav-preview .content-vc{padding:0}
       .blog-page.nav-preview .home-content-vc{box-sizing:border-box;left:max(calc(var(--preview-rail) + var(--preview-gutter)),calc((100vw - var(--preview-rail) - 1200px)/2 + var(--preview-rail) + var(--preview-gutter)));padding:0;width:min(420px,calc((100vw - var(--preview-rail)) * .45));max-width:none}
       @media(max-width:800px){
         .nav-preview{--preview-rail:${mode === 'side' ? '130px' : '0px'}}
         .blog-page.nav-preview .home-content-vc{width:calc(100% - var(--preview-rail) - 2 * var(--preview-gutter));max-width:560px}
       }
-    `;
+    ` : '';
     style.textContent = common + variants[mode] + scrollLayout + pageStyle + contentMargins;
     const url = new URL(location.href);
     url.searchParams.set('nav', mode);
@@ -197,3 +195,4 @@
     render();
   });
 })();
+
