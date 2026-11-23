@@ -75,7 +75,7 @@
       .nav-preview #navbar .navbar-title-text[hidden]{display:none}
       .nav-preview #navbar .navbar-title-text{display:inline-flex;align-items:center;gap:${Number(brandGap.value)}px;font-weight:850}
       .nav-preview .name-dot{font-size:16px;font-weight:400;color:#8b8779}
-      .nav-preview #navbar .name-flower{display:inline-grid;place-items:center;flex:none;width:26px;height:26px;line-height:1}
+      .nav-preview #navbar .name-flower{display:inline-grid;place-items:center;flex:none;width:36px;height:36px;line-height:1}
       .nav-preview #navbar{box-sizing:border-box;position:fixed;z-index:30;display:flex;align-items:center;justify-content:space-between;height:${h}px;padding:0 34px;background:${navFill};box-shadow:none;border:0;transition:none}
       .nav-preview #subnavbarleft,.nav-preview #subnavbarright{display:flex;align-items:center;padding:0}
       .nav-preview #subnavbarright{gap:28px}
@@ -96,7 +96,7 @@
         @media(max-width:800px){.nav-preview #navbar{gap:18px}.nav-preview #navbar #subnavbarleft:after{margin-left:${nameDivider.value === 'line' ? '18px' : '0'}}}
       `,
       side: `
-        .nav-preview #navbar{top:${Number(sideTop.value)}px;left:38px;bottom:38px;width:216px;height:auto;padding:14px;flex-direction:column;align-items:flex-start;justify-content:flex-start;border-radius:12px}
+        .nav-preview #navbar{top:${Number(sideTop.value)}px;left:38px;bottom:38px;width:228px;height:auto;padding:14px;flex-direction:column;align-items:flex-start;justify-content:flex-start;border-radius:12px}
         .nav-preview #subnavbarright{flex-direction:column;align-items:flex-start;text-align:left;gap:${Number(sideLinkGap.value)}px;margin-top:${Number(sideNameGap.value)}px}
         .home-page .home-content-vc{left:280px;padding-left:0;max-width:calc(100% - 310px)}
         @media(max-width:800px){.nav-preview #navbar{left:12px;top:${Number(sideTop.value)}px;bottom:auto;width:180px;padding:8px}.nav-preview #navbar .navbar-title-text{font-size:16px;gap:${Math.min(Number(brandGap.value),16)}px}.nav-preview #subnavbarright{margin-top:${Number(sideNameGap.value)}px;gap:${Number(sideLinkGap.value)}px}.home-page .home-content-vc{left:210px;top:120px;transform:none;width:calc(100% - 220px);max-width:none;padding:0 10px}.home-page .home-title{font-size:22px}.home-page .landing-summary{font-size:13px}}
@@ -209,4 +209,5 @@
     render();
   });
 })();
+
 
