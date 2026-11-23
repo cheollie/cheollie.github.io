@@ -849,7 +849,7 @@ body h1,body h2,body h3{font-weight:620}
 @media(max-width:760px){.tims-memento{left:-13px}}
 
 /* Scale inner content like browser zoom while outer containers retain their margins. */
-.compact-page-content{zoom:.9;width:calc(100% / .9)}
+.compact-page-content{zoom:.9;width:auto;min-width:0}
 #navbar .navbar-title-text,#navbar .navbar-subtitle-text{display:inline-block;zoom:.9}
 
 
@@ -933,3 +933,4 @@ body:not(.nav-preview) #navbar a:focus-visible{outline:2px solid #837756;outline
 .home-page:not(.nav-preview) .home-content-vc{top:50%;transform:translateY(-50%)}
 @media(max-width:800px){body:not(.nav-preview) #navbar{padding:0 22px}body:not(.nav-preview) #subnavbarright{gap:18px}body:not(.nav-preview) #navbar .navbar-subtitle-text{font-size:14px}.home-page:not(.nav-preview) .home-content-vc{top:120px;transform:none}}
 @media(max-width:420px){body:not(.nav-preview) #navbar{padding:0 16px}body:not(.nav-preview) #subnavbarright{gap:14px}}
+
