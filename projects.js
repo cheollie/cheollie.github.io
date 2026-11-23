@@ -95,21 +95,61 @@
     catalog.querySelectorAll('input,select').forEach(el => el.addEventListener('input',update));
     update();
   }
-  function figures(images, title, labels = [], themes = []) {
-    return images.map((src,i) => `<figure><button ${themes[i] ? `data-image-theme="${themes[i] === 'dark' ? 'dark' : 'light'}"` : ''} data-enlarge="${esc(src)}" data-alt="${esc(title)} — image ${i+1}" aria-label="Enlarge ${esc(title)} image ${i+1}"><img src="${esc(src)}" alt="${esc(title)} — image ${i+1}" loading="lazy"></button>${labels[i] ? `<figcaption>${esc(labels[i])}</figcaption>` : ''}</figure>`).join('');
+  const galleries = new Map();
+  const galleryCache = new Map();
+  let nextGallery = 0;
+  let activeGallery, imageIndex = 0;
+  function registerGallery(items, title) {
+    const key = JSON.stringify([title,items]);
+    if (galleryCache.has(key)) return galleryCache.get(key);
+    const id = String(++nextGallery);
+    galleries.set(id,{items,title});galleryCache.set(key,id);
+    return id;
+  }
+  function bento(id) {
+    const group = galleries.get(id);
+    if (!group?.items.length) return '';
+    const count = group.items.length;
+    return `<div class="photo-bento" data-count="${Math.min(count,5)}">${group.items.slice(0,5).map((item,i) => `<button class="bento-tile" data-gallery="${id}" data-image-index="${i}" data-enlarge="${esc(item.src)}" ${item.theme ? `data-image-theme="${esc(item.theme)}"` : ''} aria-label="${i === 4 && count > 5 ? `View all ${count} images` : `View ${esc(item.caption)}`}><img src="${esc(item.src)}" alt="${esc(item.caption)}" loading="lazy" decoding="async">${i === 4 && count > 5 ? `<span class="bento-more">view all ${count}<span>+${count-5} more</span></span>` : ''}</button>`).join('')}</div><button class="gallery-open" data-gallery="${id}" data-image-index="0">${count === 1 ? 'view image' : `view all ${count} images`} ↗</button>`;
+  }
+  function projectGallery(p) {
+    const parts = p.collectionSections || (p.postGalleries?.length ? [...p.postGalleries.map(post => ({...post,links:{'published post':post.url}})),{title:'More campaign work',images:p.images,imageLabels:p.imageLabels}] : [{title:p.title,images:p.images,imageLabels:p.imageLabels,imageThemes:p.imageThemes}]);
+    const buckets = parts.map(part => ({...part,items:(part.images || []).filter(src => p.images.includes(src) || p.postGalleries?.some(post => post.images.includes(src))).map(src => {
+      const i=part.images.indexOf(src),label=part.imageLabels?.[i];
+      return {src,caption:label && !/^Project gallery$|gallery \d+/i.test(label) ? `${part.title} · ${label}` : `${part.title} · image ${i+1}`,theme:part.imageThemes?.[i] || ''};
+    })}));
+    const extra = p.images.filter(src => !buckets.some(bucket => bucket.items.some(item => item.src === src)));
+    if(extra.length) buckets.push({title:'More work',items:extra.map((src,i)=>({src,caption:`${p.title} · image ${i+1}`,theme:''}))});
+    const all=[...new Map(buckets.flatMap(part=>part.items).map(item=>[item.src,item])).values()];
+    const allId=registerGallery(all,p.title);
+    const tabs=buckets.filter(part=>part.items.length).map(part=>({id:registerGallery(part.items,part.title),title:part.title,links:part.links}));
+    const videos=[...new Set([p.video,...parts.map(part=>part.video)].filter(Boolean))];
+    return `<section class="project-photos" aria-label="Project gallery">${tabs.length>1 ? `<div class="photo-tabs" role="group" aria-label="Photo categories"><button data-photo-tab="${allId}" aria-pressed="true">all <span>${all.length}</span></button>${tabs.map(tab=>`<button data-photo-tab="${tab.id}" aria-pressed="false">${esc(tab.title)}</button>`).join('')}</div>` : ''}<div class="photo-preview">${bento(allId)}</div>${tabs.some(tab=>Object.keys(tab.links || {}).length) ? `<div class="artifact-links">${tabs.map(tab=>Object.entries(tab.links || {}).map(([label,url])=>`<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(tab.title)} · ${esc(label)} ↗</a>`).join('')).join('')}</div>` : ''}${videos.map(src=>`<video class="gallery-video" controls playsinline preload="none" src="${esc(src)}"></video>`).join('')}</section>`;
+  }
+  function showImage(index) {
+    const group=galleries.get(activeGallery);if(!group?.items.length)return;
+    imageIndex=(index+group.items.length)%group.items.length;
+    const item=group.items[imageIndex],img=document.querySelector('#full-image');
+    viewer.classList.remove('is-zoomed');viewer.dataset.theme=item.theme;
+    document.querySelector('#gallery-zoom').setAttribute('aria-pressed','false');
+    img.src=item.src;img.alt=item.caption;
+    document.querySelector('#gallery-caption').textContent=item.caption;
+    document.querySelector('#gallery-count').textContent=`${imageIndex+1} / ${group.items.length}`;
+    for(const button of viewer.querySelectorAll('[data-thumb]'))button.setAttribute('aria-current',String(Number(button.dataset.thumb)===imageIndex));
+    viewer.querySelector(`[data-thumb="${imageIndex}"]`)?.scrollIntoView?.({block:'nearest',inline:'nearest'});
+    document.querySelector('#gallery-prev').disabled=group.items.length<2;
+    document.querySelector('#gallery-next').disabled=group.items.length<2;
+  }
+  function openGallery(id,index) {
+    const group=galleries.get(id);if(!group?.items.length)return;
+    activeGallery=id;
+    document.querySelector('#gallery-thumbnails').innerHTML=group.items.map((item,i)=>`<button data-thumb="${i}" aria-label="Image ${i+1}: ${esc(item.caption)}" data-image-theme="${esc(item.theme)}"><img src="${esc(item.src)}" alt="" loading="lazy"></button>`).join('');
+    if(!viewer.open)viewer.showModal();
+    showImage(index);
+    document.querySelector('#close-image').focus();
   }
   function detail(p, fullPage = false) {
-    const collection = p.collectionSections?.map((part,i) => {
-      const images = (part.images || []).filter(src => p.images.includes(src));
-      const labels = images.map(src => part.imageLabels?.[(part.images || []).indexOf(src)] || '');
-      return `<section class="collection-section" id="collection-${esc(p.id)}-${i}"><h3>${esc(part.title)}</h3>${part.description ? `<p>${esc(part.description)}</p>` : ''}${artifacts({links:part.links || {}})}<div class="panel-gallery">${figures(images,part.title,labels,part.imageThemes)}${part.video ? `<video controls playsinline preload="none" src="${esc(part.video)}"></video>` : ''}</div></section>`;
-    }).join('');
-    const extraImages = p.collectionSections ? p.images.filter(src => !p.collectionSections.some(part => part.images?.includes(src))) : [];
-    const gallery = collection
-      ? `<nav class="collection-nav" aria-label="Project collections">${p.collectionSections.map((part,i) => `<a href="#collection-${esc(p.id)}-${i}">${esc(part.title)}</a>`).join('')}</nav>${collection}${extraImages.length ? `<section class="collection-section"><h3>more work</h3><div class="panel-gallery">${figures(extraImages,p.title)}</div></section>` : ''}`
-      : p.postGalleries?.length
-      ? p.postGalleries.map(post => `<section class="post-gallery"><h3>${esc(post.title)}</h3><a class="panel-case-link" href="${esc(post.url)}" target="_blank" rel="noopener noreferrer">view published post ↗</a><div class="panel-gallery">${figures(post.images,post.title)}</div></section>`).join('') + `<section class="additional-campaign"><h3>more campaign work</h3><div class="panel-gallery">${figures(p.images,p.title,p.imageLabels)}</div></section>`
-      : `<div class="panel-gallery">${figures(p.images,p.title,p.imageLabels,p.imageThemes)}${p.video ? `<video controls playsinline preload="none" poster="${esc(p.images[0] || '')}" src="${esc(p.video)}"></video>` : ''}</div>`;
+    const gallery = projectGallery(p);
     const scenes = (p.embeds || []).map(scene => `<section class="project-scene"><h3>${esc(scene.title)}</h3><iframe src="${esc(scene.url)}" title="${esc(scene.title)}" loading="lazy" allow="fullscreen" referrerpolicy="strict-origin-when-cross-origin"></iframe></section>`).join('');
     const related = (p.relatedWork || []).filter(item => projects.some(project => project.id === item.id));
     return `<div class="panel-body"><p class="work-context">${esc(p.context)} <span class="work-year">· ${esc(p.yearLabel || '')}</span></p><h2 id="panel-title">${esc(p.title)}</h2><p class="panel-description">${esc(p.description)}</p>${tags(p)}${artifacts(p)}${scenes}${gallery}${p.role ? `<h3>my contribution</h3><p>${esc(p.role)}</p>` : ''}${p.detail ? `<h3>about the project</h3><p>${esc(p.detail)}</p>` : ''}${p.technologies?.length ? `<h3>built with</h3><p>${p.technologies.map(esc).join(' · ')}</p>` : ''}${p.references && !p.postGalleries ? `<h3>published posts</h3><div class="artifact-links">${Object.entries(p.references).map(([label,url]) => `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)} ↗</a>`).join('')}</div>` : ''}${related.length ? `<h3>related work</h3><div class="artifact-links">${related.map(item => `<button data-project="${esc(item.id)}">${esc(item.label)} ↗</button>`).join('')}</div>` : ''}${!fullPage ? `<a class="panel-case-link" href="?view=${view}&case=${p.id}">open project page ↗</a>` : ''}</div>`;
@@ -136,6 +176,16 @@
   panel.addEventListener('cancel',e => {e.preventDefault();closeProject();});
   panel.addEventListener('click',e => {if(e.target === panel && e.clientX < panel.getBoundingClientRect().left) closeProject();});
   document.querySelector('#close-image').addEventListener('click',() => viewer.close());
+  document.querySelector('#gallery-prev').addEventListener('click',()=>showImage(imageIndex-1));
+  document.querySelector('#gallery-next').addEventListener('click',()=>showImage(imageIndex+1));
+  document.querySelector('#gallery-zoom').addEventListener('click',()=>{const zoomed=viewer.classList.toggle('is-zoomed');document.querySelector('#gallery-zoom').setAttribute('aria-pressed',String(zoomed));});
+  document.addEventListener('keydown',e=>{if(!viewer.open)return;if(e.key==='ArrowLeft' || e.key==='ArrowRight'){e.preventDefault();showImage(imageIndex+(e.key==='ArrowLeft'?-1:1));}});
+  let touchStart;
+  const stage=document.querySelector('.gallery-stage');
+  stage.addEventListener('touchstart',e=>{touchStart=e.touches.length===1 ? {x:e.touches[0].clientX,y:e.touches[0].clientY} : null;},{passive:true});
+  stage.addEventListener('touchend',e=>{if(!touchStart || viewer.classList.contains('is-zoomed'))return;const dx=e.changedTouches[0].clientX-touchStart.x,dy=e.changedTouches[0].clientY-touchStart.y;if(Math.abs(dx)>50 && Math.abs(dx)>Math.abs(dy)*1.5)showImage(imageIndex+(dx<0?1:-1));touchStart=null;},{passive:true});
+  viewer.addEventListener('close',()=>{document.querySelector('#full-image').removeAttribute('src');document.querySelector('#gallery-thumbnails').innerHTML='';activeGallery=null;});
+
   document.addEventListener('error',e => {
     if(e.target.tagName !== 'IMG') return;
     const preview=e.target.closest('.work-media');
@@ -145,9 +195,10 @@
     }
   },true);
   document.addEventListener('click',e => {
-    const jump=e.target.closest('.collection-nav a'); if(jump) {e.preventDefault();document.getElementById(jump.getAttribute('href').slice(1))?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});return;}
+    const photoTab=e.target.closest('[data-photo-tab]'); if(photoTab) {const section=photoTab.closest('.project-photos');section.querySelectorAll('[data-photo-tab]').forEach(button=>button.setAttribute('aria-pressed',String(button===photoTab)));section.querySelector('.photo-preview').innerHTML=bento(photoTab.dataset.photoTab);return;}
     const project=e.target.closest('[data-project]'); if(project) openProject(project.dataset.project);
-    const zoom=e.target.closest('[data-enlarge]'); if(zoom) {document.querySelector('#full-image').src=zoom.dataset.enlarge;document.querySelector('#full-image').alt=zoom.dataset.alt;viewer.dataset.theme=zoom.dataset.imageTheme || '';viewer.showModal();}
+    const galleryButton=e.target.closest('[data-gallery]'); if(galleryButton) openGallery(galleryButton.dataset.gallery,Number(galleryButton.dataset.imageIndex || 0));
+    const thumb=e.target.closest('[data-thumb]'); if(thumb) showImage(Number(thumb.dataset.thumb));
     const scroll=e.target.closest('[data-scroll]'); if(scroll) scroll.closest('.portfolio-shelf').querySelector('.portfolio-row').scrollBy({left:Number(scroll.dataset.scroll)*500,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
     const quick=e.target.closest('[data-quick-tag]'); if(quick) {const select=document.querySelector('#tag-filter');select.value=quick.dataset.quickTag;select.dispatchEvent(new Event('input'));}
     const filter=e.target.closest('[data-filter]'); if(filter) {filterView=view;view='all';const url=new URL(location.href);url.search='?view=all';history.pushState({},'',url);renderView();renderAll(filter.dataset.filter);}
