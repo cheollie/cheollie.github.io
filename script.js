@@ -229,7 +229,7 @@
     bloom.style.top = event.clientY + 'px';
     const petals = Array.from({length: 12}, (_, i) =>
       `<ellipse cx="20" cy="9" rx="3.8" ry="7.5" transform="rotate(${i * 30} 20 20)"/>`).join('');
-    bloom.innerHTML = `<svg viewBox="0 0 40 40" aria-hidden="true"><g class="cursor-bloom-petals" fill="#f5bd32" stroke="#b57d19" stroke-width=".6">${petals}</g><circle cx="20" cy="20" r="9.2" fill="#63442d"/></svg>`;
+    bloom.innerHTML = `<svg viewBox="0 0 40 40" aria-hidden="true"><g class="cursor-bloom-petals" fill="#f5bd32" stroke="#b57d19" stroke-width=".6">${petals}</g><circle cx="20" cy="20" r="7.82" fill="#63442d"/></svg>`;
     document.body.append(bloom);
     setTimeout(() => bloom.remove(), 750);
   });
@@ -262,5 +262,6 @@
   }, true);
   window.addEventListener('blur', resetCursor);
 })();
+
 
 

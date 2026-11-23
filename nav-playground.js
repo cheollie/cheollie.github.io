@@ -75,7 +75,7 @@
       .nav-preview #navbar .navbar-title-text[hidden]{display:none}
       .nav-preview #navbar .navbar-title-text{display:inline-flex;align-items:center;gap:${Number(brandGap.value)}px;font-weight:850}
       .nav-preview .name-dot{font-size:16px;font-weight:400;color:#8b8779}
-      .nav-preview #navbar .name-flower{display:inline-grid;place-items:center;flex:none;width:36px;height:36px;line-height:1}
+      .nav-preview #navbar .name-flower{display:inline-grid;place-items:center;flex:none;width:32.4px;height:32.4px;line-height:1}
       .nav-preview #navbar{box-sizing:border-box;position:fixed;z-index:30;display:flex;align-items:center;justify-content:space-between;height:${h}px;padding:0 34px;background:${navFill};box-shadow:none;border:0;transition:none}
       .nav-preview #subnavbarleft,.nav-preview #subnavbarright{display:flex;align-items:center;padding:0}
       .nav-preview #subnavbarright{gap:28px}
@@ -209,5 +209,6 @@
     render();
   });
 })();
+
 
 
