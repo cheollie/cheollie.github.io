@@ -132,6 +132,12 @@
   const directionThreshold = 8;
   cursor.hidden = true;
 
+  function paintCursor() {
+    cursor.style.left = x + 'px';
+    cursor.style.top = y + 'px';
+    cursor.style.transform = `translate(-21px, -19.5px) scaleX(${pose === 'left' ? -1 : 1})`;
+  }
+
   function follow(time) {
     const elapsed = previousFrame ? Math.min(time - previousFrame, 50) : 16;
     previousFrame = time;
@@ -140,9 +146,7 @@
     const ease = 1 - Math.exp(-elapsed / 55);
     x += (targetX - x) * ease;
     y += (targetY - y) * ease;
-    cursor.style.left = x + 'px';
-    cursor.style.top = y + 'px';
-    cursor.style.transform = `translate(-21px, -19.5px) scaleX(${pose === 'left' ? -1 : 1})`;
+    paintCursor();
     const feet = footPoint.matrixTransform(gooseSvg.getScreenCTM());
     if (cursor._footX !== undefined) {
       const footDx = feet.x - cursor._footX;
@@ -179,6 +183,7 @@
   }
 
   document.addEventListener('mousemove', event => {
+    if (event.target.tagName === 'IFRAME') { resetCursor(); return; }
     pointerX = event.clientX;
     pointerY = event.clientY;
     if (directionX === undefined) {
@@ -209,6 +214,7 @@
     cursor.dataset.pose = vertical ? pose : 'side';
     footPoint.x = vertical ? 125 : 116;
     footPoint.y = vertical ? 176 : 165;
+    if (cursor.hidden) paintCursor();
     cursor.hidden = false;
     document.documentElement.classList.add('goose-cursor-active');
     if (!frame) frame = requestAnimationFrame(follow);
@@ -227,7 +233,7 @@
     document.body.append(bloom);
     setTimeout(() => bloom.remove(), 750);
   });
-  document.addEventListener('mouseleave', () => {
+  function resetCursor() {
     document.documentElement.classList.remove('goose-cursor-active');
     cursor.hidden = true;
     directionX = undefined;
@@ -240,6 +246,19 @@
     cursor._x = undefined;
     cursor._y = undefined;
     printDistance = 0;
-  });
-  window.addEventListener('blur', () => document.dispatchEvent(new MouseEvent('mouseleave')));
+    pose = 'right';
+    trailX = -34;
+    trailY = 0;
+    cursor.dataset.pose = 'side';
+  }
+  document.addEventListener('mouseleave', resetCursor);
+  // Cross-origin frames cannot share their pointer coordinates with this page.
+  // Capture boundary events, including for embeds added later in project dialogs.
+  document.addEventListener('mouseover', event => {
+    if (event.target.tagName === 'IFRAME') resetCursor();
+  }, true);
+  document.addEventListener('mouseout', event => {
+    if (event.relatedTarget?.tagName === 'IFRAME') resetCursor();
+  }, true);
+  window.addEventListener('blur', resetCursor);
 })();
