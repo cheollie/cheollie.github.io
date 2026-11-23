@@ -39,3 +39,4 @@
 .portfolio-main,.portfolio-shelf,.portfolio-row{min-width:0}.portfolio-shelf,.portfolio-row{max-width:100%}
 
 .panel-gallery button[data-image-theme]{box-sizing:border-box;padding:20px;background:#faf9fc}.panel-gallery button[data-image-theme=dark]{background:#201d29}#image-viewer[data-theme=dark] #full-image{background:#201d29}#image-viewer[data-theme=light] #full-image{background:#faf9fc}
+.collection-nav{display:flex;flex-wrap:wrap;gap:10px 18px;margin:24px 0;padding:14px 0;border-block:1px solid #e2dac7}.collection-nav a{font-size:13px;color:#76694a;text-decoration:underline;text-underline-offset:4px}.collection-section{scroll-margin-top:28px;margin:30px 0}.collection-section>h3{font-size:20px}.collection-section>p{color:#716b60}.artifact-links button{background:none;border:0;border-bottom:1px solid #c7a643;padding:0;font:inherit;color:inherit;cursor:pointer}

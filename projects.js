@@ -8,6 +8,7 @@
   const views = ['overview', 'design', 'engineering', 'all'];
   let view = views.includes(params.get('view')) ? params.get('view') : 'overview';
   let returnFocus;
+  let filterView = view;
   const esc = value => String(value || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const artifacts = p => `<div class="artifact-links">${Object.entries(p.links).map(([label, href]) => `<a href="${esc(href)}" target="_blank" rel="noopener noreferrer">${esc(label)} ↗</a>`).join('')}</div>`;
   const tags = p => `<div class="work-tags">${p.tags.slice(0,3).map(t => `<span>${esc(t)}</span>`).join('')}${(p.awards || []).map(a => `<span class="award-tag" title="${esc(a.detail)}" aria-label="Award: ${esc(a.label)}">🏆 ${esc(a.label)}</span>`).join('')}</div>`;
@@ -24,17 +25,19 @@
     return m ? Number(m[2] ? (m[2].length === 2 ? '20' + m[2] : m[2]) : m[1]) : 0;
   };
   const newestFirst = list => [...list].sort((a,b) => yearValue(b) - yearValue(a));
-  const selected = () => projects.filter(p => p.display ? p.display.selectedViews.includes(view) : p.featured);
+  const selected = (lens = view) => projects.filter(p => !p.hiddenFromAll && (p.display ? p.display.selectedViews.includes(lens) : p.featured)).sort((a,b) => (a.selectedOrder?.[lens] ?? 999) - (b.selectedOrder?.[lens] ?? 999));
   const inView = p => p.display ? p.display.views.includes(view) : !p.archiveOnly;
   function shelf(id, title, subtitle, items, large = false) {
-    items = newestFirst(items.filter(inView));
+    items = items.filter(p => !p.hiddenFromAll && inView(p));
+    if (!large) items = newestFirst(items);
     if (!items.length) return '';
     return `<section class="portfolio-shelf"><div class="shelf-heading"><div><h2>${title}</h2><p>${subtitle}</p></div><div class="shelf-tools"><button class="view-shelf" data-filter="${id}">view all ↗</button><button data-scroll="-1" aria-label="Scroll ${title} left">←</button><button data-scroll="1" aria-label="Scroll ${title} right">→</button></div></div><div class="portfolio-row ${large ? 'featured' : ''}">${items.map(card).join('')}</div></section>`;
   }
   function filterItems(key) {
-    if (key === 'selected') return selected();
+    if (key === 'selected') return selected(filterView);
+    if (projects.some(p => p.shelves?.includes(key))) return projects.filter(p => p.shelves?.includes(key));
     if (key === 'personal') return projects.filter(p => p.group === 'personal' || (p.group === 'motion' && p.eng));
-    if (key === 'selected-design') return projects.filter(p => p.display ? p.display.selectedViews.includes('design') : ['medibase','metropolis','speachu'].includes(p.id));
+    if (key === 'selected-design') return selected('design');
     if (key === 'built') return projects.filter(p => p.eng && !p.featured && !['identity','art','competitions'].includes(p.group));
     if (key === 'creative') return projects.filter(p => ['identity','editorial','merch','art','motion','spaces'].includes(p.group));
     if (key === 'competition') return projects.filter(p => p.id === 'lyonctf' || p.group === 'competitions');
@@ -47,23 +50,23 @@
     if (view === 'all') { renderAll(); return; }
     let output = shelf('selected', 'selected work', 'A few places to start.', selected(), true);
     if (view === 'overview') {
-      output += shelf('interfaces','interfaces & interactions','From a first screen to a working experience.',filterItems('interfaces'));
-      output += shelf('built','things I’ve built','Experiments, side quests, and ideas out in the world.',filterItems('built'));
-      output += shelf('creative','beyond the screen','Graphics, lettering, merch, and spaces.',filterItems('creative'));
+      output += shelf('products','products & interfaces','Interfaces, workflows, and the people they were made for.',filterItems('products'));
+      output += shelf('brands','identities & campaigns','Visual systems for organizations and communities.',filterItems('brands'));
+      output += shelf('print','print & physical objects','Editorial design, event materials, and merch.',filterItems('print'));
+      output += shelf('play','interactive & playful','Games, tools, and small worlds.',filterItems('play'));
+      output += shelf('studies','creative studies','Lettering, animation, and imagined spaces.',filterItems('studies'));
+      output += shelf('technical','research & technical experiments','Exploring ideas through software and hardware.',filterItems('technical'));
     } else if (view === 'design') {
-      output = shelf('selected-design','selected design','Interfaces with a story behind them.',filterItems('selected-design'),true);
-      output += shelf('interfaces','product & web interfaces','Hackathons, school communities, and small experiments.',filterItems('interfaces'));
-      output += shelf('identity','identity & campaigns','Posters, posts, covers, and connected visual worlds.',filterItems('identity'));
-      output += shelf('editorial','editorial & print','Covers, page layouts, and print design.',filterItems('editorial'));
-      output += shelf('merch','merch & small graphics','Things to wear, stick, and share.',filterItems('merch'));
-      output += shelf('art','art & lettering','A different kind of making.',filterItems('art'));
-      output += shelf('motion','animation & 3D','Little worlds, moving characters, and interactive scenes.',filterItems('motion'));
-      output += shelf('spaces','spaces & other explorations','Imagined rooms and places.',filterItems('spaces'));
+      output = shelf('selected-design','selected design','Product design, visual identities, and editorial work.',selected(),true);
+      output += shelf('products','products & interfaces','From Figma explorations to working experiences.',filterItems('products'));
+      output += shelf('brands','identities & campaigns','Visual systems for organizations and communities.',filterItems('brands'));
+      output += shelf('print','print & physical objects','Editorial design, event materials, and merch.',filterItems('print'));
+      output += shelf('motion','animation & 3D','Moving characters and interactive scenes.',filterItems('motion'));
+      output += shelf('studies','art & spaces','Lettering, illustration, and imagined rooms.',filterItems('studies'));
     } else {
-      output += shelf('hackathon','hackathon builds','Short timelines, teams, and plenty of experiments.',filterItems('hackathon').filter(p => p.eng));
-      output += shelf('personal','personal projects','Ideas I wanted to try for myself.',projects.filter(p => p.group === 'personal' || (p.group === 'motion' && p.eng)));
-      output += shelf('community','clubs & community','Software made for the people around me.',filterItems('community'));
-      output += shelf('coursework','coursework & research','Learning by building.',filterItems('coursework'));
+      output += shelf('hackathon-builds','hackathon builds','Short timelines, teams, and plenty of experiments.',filterItems('hackathon-builds'));
+      output += shelf('personal-community','personal & community projects','Software made for myself and the people around me.',filterItems('personal-community'));
+      output += shelf('research-coursework','coursework & research','Learning by building.',filterItems('research-coursework'));
     }
     const remaining=projects.filter(p=>p.display && inView(p) && !p.hiddenFromAll && !output.includes(`data-project="${p.id}"`));
     output += shelf('other','more work','More from this view.',remaining);
@@ -73,14 +76,18 @@
     const groups = [...new Set(projects.map(p => p.group))];
     const tagList = [...new Set(projects.flatMap(p => p.tags))].sort();
     catalog.innerHTML = `<h2 class="catalog-label">the whole collection</h2><div class="catalog-shortcuts" aria-label="Browse disciplines"><button data-quick-tag="">everything</button><button data-quick-tag="calligraphy">calligraphy</button><button data-quick-tag="architecture">architecture</button><button data-quick-tag="graphic design">graphics</button><button data-quick-tag="editorial design">editorial</button><button data-quick-tag="UI design">interfaces</button></div><div class="catalog-controls"><input type="search" id="project-search" aria-label="Search projects" placeholder="Search projects, skills, or organizations…"><select id="context-filter" aria-label="Filter by context"><option value="">all contexts</option>${groups.map(g => `<option value="${g}">${g}</option>`).join('')}</select><select id="tag-filter" aria-label="Filter by skill"><option value="">all disciplines</option>${tagList.map(t => `<option>${esc(t)}</option>`).join('')}</select><select id="artifact-filter" aria-label="Filter by artifact"><option value="">all artifacts</option><option value="Figma">Figma</option><option value="code">code</option><option value="Devpost">Devpost</option><option value="video">video</option><option value="PDF">PDF</option></select></div><p class="catalog-count" role="status" id="result-count"></p><div class="catalog-grid" id="all-grid"></div>`;
+    const categories = {products:'products & interfaces',brands:'identities & campaigns',print:'print & physical objects',play:'interactive & playful',studies:'creative studies',technical:'research & technical experiments'};
+    catalog.querySelector('.catalog-controls').insertAdjacentHTML('beforeend',`<select id="shelf-filter" aria-label="Filter by collection category"><option value="">all categories</option>${Object.entries(categories).map(([id,title]) => `<option value="${id}">${title}</option>`).join('')}</select>`);
+    if (categories[preset]) document.querySelector('#shelf-filter').value = preset;
     if (groups.includes(preset)) document.querySelector('#context-filter').value = preset;
     const update = () => {
       const q = document.querySelector('#project-search').value.toLowerCase().trim();
       const group = document.querySelector('#context-filter').value;
       const tag = document.querySelector('#tag-filter').value;
       const artifact = document.querySelector('#artifact-filter').value;
+      const category = document.querySelector('#shelf-filter').value;
       const presetItems = preset ? filterItems(preset) : projects;
-      const list = presetItems.filter(p => !p.hiddenFromAll && (!q || [p.title,p.description,p.context,p.yearLabel,...p.tags,...(p.technologies || []),...(p.sourceFiles || [])].join(' ').toLowerCase().includes(q)) && (!group || p.group === group) && (!tag || p.tags.includes(tag)) && (!artifact || (artifact === 'video' ? p.video : p.links[artifact])));
+      const list = presetItems.filter(p => !p.hiddenFromAll && (!category || p.shelves?.includes(category)) && (!q || [p.title,p.description,p.context,p.yearLabel,...p.tags,...(p.collectionSections || []).map(part => part.title),...(p.technologies || []),...(p.sourceFiles || [])].join(' ').toLowerCase().includes(q)) && (!group || p.group === group) && (!tag || p.tags.includes(tag)) && (!artifact || (artifact === 'video' ? p.video || p.collectionSections?.some(part => part.video) : p.links[artifact] || p.collectionSections?.some(part => part.links?.[artifact]))));
       catalog.querySelectorAll('[data-quick-tag]').forEach(b => b.setAttribute('aria-pressed',String(b.dataset.quickTag === tag)));
       document.querySelector('#result-count').textContent = `${list.length} ${list.length === 1 ? 'project' : 'projects'}`;
       document.querySelector('#all-grid').innerHTML = list.length ? newestFirst(list).map(card).join('') : '<p class="empty-catalog">No matches yet. <button id="reset-filters">Clear filters</button></p>';
@@ -92,14 +99,25 @@
     return images.map((src,i) => `<figure><button ${themes[i] ? `data-image-theme="${themes[i] === 'dark' ? 'dark' : 'light'}"` : ''} data-enlarge="${esc(src)}" data-alt="${esc(title)} — image ${i+1}" aria-label="Enlarge ${esc(title)} image ${i+1}"><img src="${esc(src)}" alt="${esc(title)} — image ${i+1}" loading="lazy"></button>${labels[i] ? `<figcaption>${esc(labels[i])}</figcaption>` : ''}</figure>`).join('');
   }
   function detail(p, fullPage = false) {
-    const gallery = p.postGalleries?.length
+    const collection = p.collectionSections?.map((part,i) => {
+      const images = (part.images || []).filter(src => p.images.includes(src));
+      const labels = images.map(src => part.imageLabels?.[(part.images || []).indexOf(src)] || '');
+      return `<section class="collection-section" id="collection-${esc(p.id)}-${i}"><h3>${esc(part.title)}</h3>${part.description ? `<p>${esc(part.description)}</p>` : ''}${artifacts({links:part.links || {}})}<div class="panel-gallery">${figures(images,part.title,labels,part.imageThemes)}${part.video ? `<video controls playsinline preload="none" src="${esc(part.video)}"></video>` : ''}</div></section>`;
+    }).join('');
+    const extraImages = p.collectionSections ? p.images.filter(src => !p.collectionSections.some(part => part.images?.includes(src))) : [];
+    const gallery = collection
+      ? `<nav class="collection-nav" aria-label="Project collections">${p.collectionSections.map((part,i) => `<a href="#collection-${esc(p.id)}-${i}">${esc(part.title)}</a>`).join('')}</nav>${collection}${extraImages.length ? `<section class="collection-section"><h3>more work</h3><div class="panel-gallery">${figures(extraImages,p.title)}</div></section>` : ''}`
+      : p.postGalleries?.length
       ? p.postGalleries.map(post => `<section class="post-gallery"><h3>${esc(post.title)}</h3><a class="panel-case-link" href="${esc(post.url)}" target="_blank" rel="noopener noreferrer">view published post ↗</a><div class="panel-gallery">${figures(post.images,post.title)}</div></section>`).join('') + `<section class="additional-campaign"><h3>more campaign work</h3><div class="panel-gallery">${figures(p.images,p.title,p.imageLabels)}</div></section>`
       : `<div class="panel-gallery">${figures(p.images,p.title,p.imageLabels,p.imageThemes)}${p.video ? `<video controls playsinline preload="none" poster="${esc(p.images[0] || '')}" src="${esc(p.video)}"></video>` : ''}</div>`;
     const scenes = (p.embeds || []).map(scene => `<section class="project-scene"><h3>${esc(scene.title)}</h3><iframe src="${esc(scene.url)}" title="${esc(scene.title)}" loading="lazy" allow="fullscreen" referrerpolicy="strict-origin-when-cross-origin"></iframe></section>`).join('');
-    return `<div class="panel-body"><p class="work-context">${esc(p.context)} <span class="work-year">· ${esc(p.yearLabel || '')}</span></p><h2 id="panel-title">${esc(p.title)}</h2><p class="panel-description">${esc(p.description)}</p>${tags(p)}${artifacts(p)}${scenes}${gallery}${p.role ? `<h3>my contribution</h3><p>${esc(p.role)}</p>` : ''}${p.detail ? `<h3>about the project</h3><p>${esc(p.detail)}</p>` : ''}${p.technologies?.length ? `<h3>built with</h3><p>${p.technologies.map(esc).join(' · ')}</p>` : ''}${p.references && !p.postGalleries ? `<h3>published posts</h3><div class="artifact-links">${Object.entries(p.references).map(([label,url]) => `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)} ↗</a>`).join('')}</div>` : ''}${!fullPage ? `<a class="panel-case-link" href="?view=${view}&case=${p.id}">open project page ↗</a>` : ''}</div>`;
+    const related = (p.relatedWork || []).filter(item => projects.some(project => project.id === item.id));
+    return `<div class="panel-body"><p class="work-context">${esc(p.context)} <span class="work-year">· ${esc(p.yearLabel || '')}</span></p><h2 id="panel-title">${esc(p.title)}</h2><p class="panel-description">${esc(p.description)}</p>${tags(p)}${artifacts(p)}${scenes}${gallery}${p.role ? `<h3>my contribution</h3><p>${esc(p.role)}</p>` : ''}${p.detail ? `<h3>about the project</h3><p>${esc(p.detail)}</p>` : ''}${p.technologies?.length ? `<h3>built with</h3><p>${p.technologies.map(esc).join(' · ')}</p>` : ''}${p.references && !p.postGalleries ? `<h3>published posts</h3><div class="artifact-links">${Object.entries(p.references).map(([label,url]) => `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)} ↗</a>`).join('')}</div>` : ''}${related.length ? `<h3>related work</h3><div class="artifact-links">${related.map(item => `<button data-project="${esc(item.id)}">${esc(item.label)} ↗</button>`).join('')}</div>` : ''}${!fullPage ? `<a class="panel-case-link" href="?view=${view}&case=${p.id}">open project page ↗</a>` : ''}</div>`;
   }
   function openProject(id, updateURL = true) {
-    const p = projects.find(p => p.id === id); if (!p) return;
+    let p = projects.find(p => p.id === id); if (!p) return;
+    p = projects.find(project => project.id === p.groupedInto) || p;
+    id = p.id;
     returnFocus = document.activeElement;
     document.querySelector('#panel-content').innerHTML = detail(p);
     panel.scrollTop = 0;
@@ -127,18 +145,20 @@
     }
   },true);
   document.addEventListener('click',e => {
+    const jump=e.target.closest('.collection-nav a'); if(jump) {e.preventDefault();document.getElementById(jump.getAttribute('href').slice(1))?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});return;}
     const project=e.target.closest('[data-project]'); if(project) openProject(project.dataset.project);
     const zoom=e.target.closest('[data-enlarge]'); if(zoom) {document.querySelector('#full-image').src=zoom.dataset.enlarge;document.querySelector('#full-image').alt=zoom.dataset.alt;viewer.dataset.theme=zoom.dataset.imageTheme || '';viewer.showModal();}
     const scroll=e.target.closest('[data-scroll]'); if(scroll) scroll.closest('.portfolio-shelf').querySelector('.portfolio-row').scrollBy({left:Number(scroll.dataset.scroll)*500,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
     const quick=e.target.closest('[data-quick-tag]'); if(quick) {const select=document.querySelector('#tag-filter');select.value=quick.dataset.quickTag;select.dispatchEvent(new Event('input'));}
-    const filter=e.target.closest('[data-filter]'); if(filter) {view='all';const url=new URL(location.href);url.search='?view=all';history.pushState({},'',url);renderView();renderAll(filter.dataset.filter);}
+    const filter=e.target.closest('[data-filter]'); if(filter) {filterView=view;view='all';const url=new URL(location.href);url.search='?view=all';history.pushState({},'',url);renderView();renderAll(filter.dataset.filter);}
     const tab=e.target.closest('[data-view]'); if(tab) {e.preventDefault();view=tab.dataset.view;history.pushState({},'',`?view=${view}`);renderView();}
     if(e.target.id === 'reset-filters') renderAll();
   });
   function route() {
     const query=new URLSearchParams(location.search);
     view=views.includes(query.get('view'))?query.get('view'):'overview';
-    const p=projects.find(p=>p.id===query.get('case'));
+    let p=projects.find(p=>p.id===query.get('case'));
+    p=projects.find(project=>project.id===p?.groupedInto) || p;
     document.querySelector('.portfolio-tabs').hidden=!!p;
     document.querySelector('.portfolio-intro').hidden=!!p;
     if(p){catalog.innerHTML=`<article class="case-reading"><a class="case-back" href="?view=${view}">← back to projects</a>${detail(p,true)}</article>`;document.title=`${p.title} · cheollie`;}
