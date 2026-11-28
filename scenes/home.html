@@ -107,6 +107,7 @@
 
 
 		<script type="module">
+			import { configureHomeInteractions } from './home-interactions.js?v=flowers-3';
 			import { Application } from 'https://cdn.spline.design/@splinetool/runtime@2.0.213/build/runtime.js';
 
 			const canvas = document.getElementById('canvas3d');
@@ -128,6 +129,7 @@
     const response = await fetch('./home.bin?v=d889ad8ac91f');
     if (!response.ok) throw new Error('Scene download failed');
     await app.start(Array.from(new Uint8Array(await response.arrayBuffer())));
+    configureHomeInteractions(app);
     onLoad();
     requestAnimationFrame(() => requestAnimationFrame(() => {
       document.documentElement.dataset.sceneReady = 'true';

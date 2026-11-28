@@ -19,11 +19,13 @@ for (const [name, url] of Object.entries(scenes)) {
     const response = await fetch('./${name}.bin?v=${revision}');
     if (!response.ok) throw new Error('Scene download failed');
     await app.start(Array.from(new Uint8Array(await response.arrayBuffer())));
+    ${name === 'home' ? 'configureHomeInteractions(app);' : ''}
     onLoad();
     requestAnimationFrame(() => requestAnimationFrame(() => {
       document.documentElement.dataset.sceneReady = 'true';
       parent.postMessage({ type: 'duck-scene-ready' }, location.origin);
     }));`);
+  if (name === 'home') html = html.replace("import { Application } from", "import { configureHomeInteractions } from './home-interactions.js?v=flowers-3';\nimport { Application } from");
   // Start downloading the data while the runtime module is being fetched.
   html = html.replace('</head>', `<link rel="preload" href="./${name}.bin?v=${revision}" as="fetch" crossorigin><style>.spline-watermark{display:none!important}</style></head>`);
   await writeFile(new URL(`../scenes/${name}.bin`, import.meta.url), bytes);
